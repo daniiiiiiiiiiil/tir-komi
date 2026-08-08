@@ -15,6 +15,7 @@ type WebController struct {
 type WebService interface {
 	GetMainPage() ([]byte, error)
 	GetAdminPage() ([]byte, error)
+	GetHTMLFile(filename string) ([]byte, error)
 }
 
 func NewWebController(webService WebService) *WebController {
@@ -28,6 +29,11 @@ func (c *WebController) Routes() []server.Route {
 		{
 			Path:    "/",
 			Handler: c.GetMainPage,
+		},
+		{
+			Method:  "GET",
+			Path:    "/basic_information",
+			Handler: c.GetBasicInfoPage,
 		},
 		{
 			Method:  "GET",

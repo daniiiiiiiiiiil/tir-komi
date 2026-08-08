@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Обучение на охранника в Сыктывкаре — Институт международных связей и делового сотрудничества | практика на тире «Огневой рубеж»</title>
-    <meta name="description" content="Обучение на охранника в Сыктывкаре: образование по профессии «охранник», обучение охраны и обучение на оружие проводит Институт международных связей и делового сотрудничества. Практические стрелковые занятия — на тире «Огневой рубеж», ул. Карла Маркса, 228/3. Телефон 8-8212-314060.">
+    <title>Обучение на охранника в Сыктывкаре — Институт международных связей и делового сотрудничества | практика на тире</title>
+    <meta name="description" content="Обучение на охранника в Сыктывкаре: образование по профессии «охранник», обучение охраны и обучение на оружие проводит Институт международных связей и делового сотрудничества. Практические стрелковые занятия — на тире «Институт международных связей и делового сотрудничества», ул. Карла Маркса, 228/3. Телефон 8-8212-314060.">
     <meta name="keywords" content="обучение на охранника Сыктывкар, обучение охраны Сыктывкар, Институт международных связей и делового сотрудничества, Институт международных связей и делового сотрудничества Сыктывкар, образование по профессии охранник, обучение на оружие Сыктывкар, тир Сыктывкар">
     <link rel="canonical" href="https://example.com/">
     <meta name="robots" content="index, follow">
@@ -12,7 +12,7 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ru_RU">
     <meta property="og:title" content="Обучение на охранника в Сыктывкаре — Институт международных связей и делового сотрудничества">
-    <meta property="og:description" content="Образование по профессии «охранник», обучение охраны и обучение на оружие в Сыктывкаре. Практика — на тире «Огневой рубеж».">
+    <meta property="og:description" content="Образование по профессии «охранник», обучение охраны и обучение на оружие в Сыктывкаре. Практика — на тире «Институт международных связей и делового сотрудничества».">
     <meta property="og:image" content="/assets/main.jpg">
     <meta property="og:url" content="https://example.com/">
 
@@ -64,6 +64,7 @@
 
         body{
             margin:0;
+            padding-top:70px;
             background:var(--bg-0);
             color:var(--ink);
             font-family:var(--f-body);
@@ -181,7 +182,7 @@
             border-color: var(--brass-bright);
             color: var(--brass-bright);
         }
-        
+
         .btn--sm{padding:.6em 1.1em;font-size:.78rem;}
         .btn--danger{--btn-bg:var(--danger);border-color:var(--danger);}
         .btn[disabled]{opacity:.45;pointer-events:none;}
@@ -214,128 +215,428 @@
         }
 
 
-        .site-header{
-            position:fixed;
-            inset:0 0 auto 0;
-            z-index:100;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            padding:20px 28px;
-            transition:background .35s var(--ease), padding .35s var(--ease), border-color .35s;
-            border-bottom:1px solid transparent;
+        .site-header {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 28px;
+            transition: background .35s var(--ease), padding .35s var(--ease), border-color .35s;
+            border-bottom: 1px solid transparent;
+            min-height: 70px;
+            background: rgba(14, 15, 10, .95);
+            backdrop-filter: blur(10px);
         }
-        .site-header.is-scrolled{
-            background:rgba(14,15,10,.86);
-            backdrop-filter:blur(10px);
-            padding:12px 28px;
-            border-color:var(--line);
-        }
-
-        .logo{
-            display:flex;
-            align-items:center;
-            gap:.6em;
-            font-family:var(--f-display);
-            font-size:1.35rem;
-            letter-spacing:.04em;
-            color:var(--paper);
-        }
-        .logo .logo-mark{
-            width:34px;height:34px;
-            display:grid;place-items:center;
-            border:1px solid var(--brass);
-            border-radius:50%;
-            position:relative;
-            flex:none;
-        }
-        .logo .logo-mark::before,.logo .logo-mark::after{
-            content:'';position:absolute;background:var(--brass);
-        }
-        .logo .logo-mark::before{width:16px;height:1px;top:50%;left:50%;transform:translate(-50%,-50%);}
-        .logo .logo-mark::after{width:1px;height:16px;top:50%;left:50%;transform:translate(-50%,-50%);}
-        .logo .logo-mark i{width:4px;height:4px;border-radius:50%;background:var(--brass-bright);}
-        .logo small{
-            display:block;
-            font-family:var(--f-mono);
-            font-size:.56rem;
-            letter-spacing:.18em;
-            color:var(--steel-dim);
-            text-transform:uppercase;
-            margin-top:2px;
+        .site-header.is-scrolled {
+            padding: 10px 28px;
+            border-color: var(--line);
         }
 
-        .nav-desktop{display:flex;align-items:center;gap:2.2em;}
-        .nav-desktop a{
-            font-family:var(--f-head);
-            font-size:.86rem;
-            letter-spacing:.05em;
-            text-transform:uppercase;
-            color:var(--ink-dim);
-            position:relative;
-            padding:.3em 0;
-            transition:color .25s;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: .6em;
+            font-family: var(--f-display);
+            font-size: clamp(1rem, 2.5vw, 1.35rem);
+            letter-spacing: .04em;
+            color: var(--paper);
+            flex-shrink: 0;
         }
-        .nav-desktop a::after{
-            content:'';position:absolute;left:0;right:100%;bottom:-2px;height:1px;background:var(--brass);
-            transition:right .3s var(--ease);
+        .logo .logo-mark {
+            width: clamp(28px, 4vw, 34px);
+            height: clamp(28px, 4vw, 34px);
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--brass);
+            border-radius: 50%;
+            position: relative;
+            flex: none;
         }
-        .nav-desktop a:hover{color:var(--paper);}
-        .nav-desktop a:hover::after{right:0;}
-        .nav-desktop a.is-current{color:var(--brass-bright);}
-        .nav-desktop a.is-current::after{right:0;}
+        .logo .logo-mark::before, .logo .logo-mark::after {
+            content: '';
+            position: absolute;
+            background: var(--brass);
+        }
+        .logo .logo-mark::before { width: 50%; height: 1px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .logo .logo-mark::after { width: 1px; height: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .logo .logo-mark i { width: 4px; height: 4px; border-radius: 50%; background: var(--brass-bright); }
+        .logo small {
+            display: block;
+            font-family: var(--f-mono);
+            font-size: .5rem;
+            letter-spacing: .18em;
+            color: var(--steel-dim);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
 
-        .header-cta{display:flex;align-items:center;gap:1em;}
-        .admin-link{
-            font-family:var(--f-mono);
-            font-size:.72rem;
-            letter-spacing:.1em;
-            color:var(--steel-dim);
-            display:flex;align-items:center;gap:.4em;
-            transition:color .25s;
+        /* ========== ВЫПАДАЮЩЕЕ МЕНЮ ========== */
+        .dropdown {
+            position: relative;
+            display: inline-block;
         }
-        .admin-link:hover{color:var(--brass);}
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--bg-1);
+            min-width: 260px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--line);
+            z-index: 1000;
+            padding: 8px 0;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content a {
+            color: var(--ink-dim);
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            font-family: var(--f-head);
+            font-size: .86rem;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            transition: background .2s, color .2s;
+        }
+        .dropdown-content a:hover {
+            background: var(--bg-2);
+            color: var(--paper);
+        }
+        .dropdown-content a.is-current {
+            color: var(--brass-bright);
+        }
+        .nav-desktop .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /* ================================== */
 
-        .burger{
-            display:none;
-            width:42px;height:42px;
-            border:1px solid var(--line);
-            background:transparent;
-            border-radius:var(--radius);
-            position:relative;
-            flex:none;
+        .nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.8em, 2vw, 2.2em);
         }
-        .burger span,.burger span::before,.burger span::after{
-            content:'';position:absolute;left:11px;right:11px;height:1px;background:var(--paper);transition:transform .3s var(--ease),opacity .2s;
+        .nav-desktop > a, .nav-desktop .dropdown > span {
+            font-family: var(--f-head);
+            font-size: clamp(.72rem, 1.2vw, .86rem);
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            color: var(--ink-dim);
+            position: relative;
+            padding: .3em 0;
+            transition: color .25s;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
-        .burger span{top:50%;transform:translateY(-50%);}
-        .burger span::before{top:-7px;}
-        .burger span::after{top:7px;}
-        .burger.is-open span{background:transparent;}
-        .burger.is-open span::before{top:0;transform:rotate(45deg);}
-        .burger.is-open span::after{top:0;transform:rotate(-45deg);}
+        .nav-desktop > a::after, .nav-desktop .dropdown > span::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 100%;
+            bottom: -2px;
+            height: 1px;
+            background: var(--brass);
+            transition: right .3s var(--ease);
+        }
+        .nav-desktop > a:hover, .nav-desktop .dropdown:hover > span {
+            color: var(--paper);
+        }
+        .nav-desktop > a:hover::after, .nav-desktop .dropdown:hover > span::after {
+            right: 0;
+        }
 
-        .nav-mobile{
-            position:fixed;inset:0;
-            background:var(--bg-0);
-            z-index:99;
-            display:flex;flex-direction:column;
-            justify-content:center;
-            padding:0 32px;
-            transform:translateY(-100%);
-            transition:transform .45s var(--ease);
+        .header-cta {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            flex-shrink: 0;
         }
-        .nav-mobile.is-open{transform:translateY(0);}
-        .nav-mobile a{
-            font-family:var(--f-display);
-            font-size:2.1rem;
-            color:var(--paper);
-            padding:.35em 0;
-            border-bottom:1px solid var(--line-soft);
-            text-transform:uppercase;
+        .admin-link {
+            font-family: var(--f-mono);
+            font-size: .72rem;
+            letter-spacing: .1em;
+            color: var(--steel-dim);
+            display: flex;
+            align-items: center;
+            gap: .4em;
+            transition: color .25s;
         }
-        .nav-mobile .admin-link{margin-top:1.6em;font-size:.85rem;}
+        .admin-link:hover { color: var(--brass); }
 
+        .burger {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--line);
+            background: transparent;
+            border-radius: var(--radius);
+            position: relative;
+            flex: none;
+            cursor: pointer;
+        }
+        .burger span, .burger span::before, .burger span::after {
+            content: '';
+            position: absolute;
+            left: 11px;
+            right: 11px;
+            height: 1px;
+            background: var(--paper);
+            transition: transform .3s var(--ease), opacity .2s;
+        }
+        .burger span { top: 50%; transform: translateY(-50%); }
+        .burger span::before { top: -7px; }
+        .burger span::after { top: 7px; }
+        .burger.is-open span { background: transparent; }
+        .burger.is-open span::before { top: 0; transform: rotate(45deg); }
+        .burger.is-open span::after { top: 0; transform: rotate(-45deg); }
+
+        .nav-mobile {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-0);
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 90px 24px 40px;
+            transform: translateY(-100%);
+            transition: transform .45s var(--ease);
+            overflow-y:auto;
+        }
+        .nav-mobile.is-open { transform: translateY(0); }
+        .nav-mobile > a {
+            font-family: var(--f-display);
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            color: var(--paper);
+            padding: .4em 0;
+            border-bottom: 1px solid var(--line-soft);
+            text-transform: uppercase;
+            cursor:pointer;
+            transition:color .2s;
+        }
+        .nav-mobile > a:hover {
+            color: var(--brass-bright);
+        }
+
+        .nav-mobile .has-children {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: var(--f-display);
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            color: var(--paper);
+            padding: .4em 0;
+            border-bottom: 1px solid var(--line-soft);
+            text-transform: uppercase;
+            transition: color .2s;
+        }
+        .nav-mobile .has-children:hover {
+            color: var(--brass-bright);
+        }
+        .nav-mobile .has-children .toggle-icon {
+            font-size: 1.2rem;
+            transition: transform .3s ease;
+            display: inline-block;
+            padding-left: 10px;
+            flex-shrink: 0;
+        }
+        .nav-mobile .has-children.is-open .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .mobile-submenu {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            padding: 8px 0 12px 0;
+            border-bottom: 1px solid var(--line-soft);
+            margin-bottom: 4px;
+        }
+
+        .nav-mobile.is-open .mobile-submenu.is-open {
+            display: flex;
+        }
+
+        .mobile-submenu a {
+            font-size: 0.85rem !important;
+            font-family: var(--f-head);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 6px 0 6px 16px !important;
+            border-bottom: none !important;
+            color: var(--ink-dim);
+            transition: color .2s, padding-left .2s;
+        }
+
+        .mobile-submenu a:hover,
+        .mobile-submenu a.is-current {
+            color: var(--brass-bright) !important;
+            padding-left: 24px !important;
+        }
+
+        .mobile-submenu a:first-child {
+            padding-top: 8px !important;
+        }
+
+        .mobile-submenu a:last-child {
+            padding-bottom: 4px !important;
+        }
+
+        @media (max-width: 420px) {
+            .mobile-submenu a {
+                font-size: 0.75rem !important;
+            }
+        }
+
+        @media (max-width: 900px){
+            .site-header{
+                padding: 12px 16px;
+                min-height: 64px;
+            }
+            body{
+                padding-top: 64px;
+            }
+            .logo{
+                max-width: calc(100vw - 90px);
+                font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+            }
+            .logo .logo-mark {
+                width: clamp(24px, 4vw, 30px);
+                height: clamp(24px, 4vw, 30px);
+            }
+            .nav-desktop,.header-cta{display:none;}
+            .burger{display:block;}
+            .hero-hud{display:none;}
+            .hero-desc{flex-direction:column;align-items:flex-start;}
+            .hero-inner {
+                padding: 0 16px 40px;
+            }
+            .hero h1 {
+                font-size: clamp(2rem, 6vw, 3.2rem);
+            }
+            section {
+                padding: 80px 0;
+            }
+            .section-head {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 44px;
+            }
+            .grid--3, .grid--4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+            .container {
+                padding: 0 16px;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .grid--3, .grid--4 {
+                grid-template-columns: 1fr;
+            }
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            .reviews-layout {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .hero-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .cta-strip {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .cta-strip .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .cta-strip .hero-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .institute-strip {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .map-wrap iframe {
+                height: 280px;
+            }
+            .modal-window {
+                padding: 24px 20px;
+            }
+            .nav-mobile {
+                padding: 80px 16px 30px;
+            }
+            .nav-mobile > a,
+            .nav-mobile .has-children {
+                font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+            }
+            .mobile-submenu a {
+                font-size: 0.75rem !important;
+                padding: 5px 0 5px 12px !important;
+            }
+            .mobile-submenu a:hover,
+            .mobile-submenu a.is-current {
+                padding-left: 18px !important;
+            }
+            .ads-rail {
+                grid-template-columns: 1fr;
+            }
+            .doc-card {
+                flex-wrap: wrap;
+            }
+            .doc-meta {
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo small {
+                font-size: 0.4rem;
+            }
+            .hero h1 {
+                font-size: clamp(1.6rem, 5vw, 2.4rem);
+            }
+            .hero-desc p {
+                font-size: 0.92rem;
+            }
+            .card-body {
+                padding: 16px 18px 20px;
+            }
+            .dir-card > .inner {
+                padding: 24px 18px;
+            }
+            .vac-card {
+                padding: 20px 18px 18px;
+            }
+            .review-card {
+                padding: 18px 16px;
+            }
+            .form-panel {
+                padding: 24px 18px;
+            }
+            .footer-top {
+                gap: 24px;
+            }
+        }
 
         .hero{
             position:relative;
@@ -462,15 +763,6 @@
         .scroll-cue::after{content:'';width:1px;height:46px;background:linear-gradient(var(--brass),transparent);animation:scrollcue 2.2s var(--ease) infinite;}
         @keyframes scrollcue{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}50.01%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
 
-        @media (max-width:900px){
-            .nav-desktop,.header-cta{display:none;}
-            .burger{display:block;}
-            .hero-hud{display:none;}
-            .hero-desc{flex-direction:column;align-items:flex-start;}
-        }
-    </style>
-
-    <style>
         section{
             position:relative;
             padding:120px 0;
@@ -611,7 +903,7 @@
             flex-wrap:wrap;
         }
         .institute-strip .badge{
-            width:56px;height:56px;border:1px solid var(--brass);border-radius:50%;
+            width:70px;height:70px;border:1px solid var(--brass);border-radius:50%;
             display:grid;place-items:center;flex:none;
             font-family:var(--f-display);color:var(--brass-bright);font-size:1.1rem;
         }
@@ -887,6 +1179,16 @@
         .study-mode p{font-size:.86rem;margin:0;}
 
 
+        .nav-mobile .has-children .toggle-icon {
+            font-size: 1.2rem;
+            transition: transform .3s ease;
+            display: inline-block;
+            padding-left: 10px;
+        }
+        .nav-mobile .has-children.is-open .toggle-icon {
+            transform: rotate(180deg);
+        }
+
         /* --- Modal --- */
         .modal-overlay{
             position:fixed;
@@ -940,7 +1242,7 @@
             "@context": "https://schema.org",
             "@type": "EducationalOrganization",
             "name": "Обучение на охранника — Институт международных связей и делового сотрудничества",
-            "description": "Обучение на охранника, обучение охраны и обучение обращению с оружием в Сыктывкаре. Институт международных связей и делового сотрудничества. Практические стрелковые занятия проходят на тире «Огневой рубеж».",
+            "description": "Обучение на охранника, обучение охраны и обучение обращению с оружием в Сыктывкаре. Институт международных связей и делового сотрудничества. Практические стрелковые занятия проходят на тире «Институт международных связей и делового сотрудничества».",
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "ул. Карла Маркса, д. 228/3 (вход со стороны шлагбаума)",
@@ -965,24 +1267,40 @@
 <div class="reticle-cursor" id="reticle"></div>
 
 <header class="site-header" id="siteHeader">
-    <a href="#page-home" class="logo" data-page="page-home">
+    <a href="/" class="logo">
         <span class="logo-mark"><i></i></span>
         <span>Институт международных связей и делового сотрудничества<small>· Сыктывкар</small></span>
     </a>
 
     <nav class="nav-desktop">
-        <a href="#page-home" data-page="page-home">Объявления</a>
+        <a href="/">Объявления</a>
+
+        <div class="dropdown">
+            <span>Основные сведения</span>
+            <div class="dropdown-content">
+                <a href="/basic_information">Основные сведения</a>
+                <a href="/basic_information#page-structure">Структура и органы управления</a>
+                <a href="/basic_information#page-docs">Документы</a>
+                <a href="/basic_information#page-education">Образование</a>
+                <a href="/basic_information#page-standards">Образовательные стандарты</a>
+                <a href="/basic_information#page-staff">Руководство. Педагогический состав</a>
+                <a href="/basic_information#page-facilities">Материально-техническое обеспечение</a>
+                <a href="/basic_information#page-scholarships">Стипендии и иные виды материальной поддержки</a>
+                <a href="/basic_information#page-paid-services">Платные образовательные услуги</a>
+                <a href="/basic_information#page-finance">Финансово-хозяйственная деятельность</a>
+                <a href="/basic_information#page-accessible">Доступная среда</a>
+                <a href="/basic_information#page-international">Международное сотрудничество</a>
+            </div>
+        </div>
+
         <a href="#page-about" data-page="page-about">О нас</a>
         <a href="#page-materials" data-page="page-materials">Методички</a>
-        <a href="#page-vacancies" data-page="page-vacancies">Вакантные места</a>
+        <a href="#page-vacancies" data-page="page-vacancies">Вакансии</a>
         <a href="#page-reviews" data-page="page-reviews">Отзывы</a>
     </nav>
 
     <div class="header-cta">
-        <a href="/admin" class="admin-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-            Панель
-        </a>
+        <a href="/admin" class="admin-link">Панель</a>
         <a href="#page-about" class="btn btn--ghost btn--sm" data-page="page-about">Записаться</a>
     </div>
 
@@ -990,20 +1308,39 @@
 </header>
 
 <nav class="nav-mobile" id="navMobile">
-    <a href="#page-home" data-page="page-home">Объявления</a>
+    <div class="has-children" id="mobileMainLink">
+        <span>Основные сведения</span>
+        <span class="toggle-icon">▾</span>
+    </div>
+    <div class="mobile-submenu" id="mobileSubmenu">
+        <a href="/basic_information">Основные сведения</a>
+        <a href="/basic_information#page-structure">Структура и органы управления</a>
+        <a href="/basic_information#page-docs">Документы</a>
+        <a href="/basic_information#page-education">Образование</a>
+        <a href="/basic_information#page-standards">Образовательные стандарты</a>
+        <a href="/basic_information#page-staff">Руководство. Педагогический состав</a>
+        <a href="/basic_information#page-facilities">Материально-техническое обеспечение</a>
+        <a href="/basic_information#page-scholarships">Стипендии и иные виды материальной поддержки</a>
+        <a href="/basic_information#page-paid-services">Платные образовательные услуги</a>
+        <a href="/basic_information#page-finance">Финансово-хозяйственная деятельность</a>
+        <a href="/basic_information#page-accessible">Доступная среда</a>
+        <a href="/basic_information#page-international">Международное сотрудничество</a>
+    </div>
+
+    <a href="/">Объявления</a>
     <a href="#page-about" data-page="page-about">О нас</a>
     <a href="#page-materials" data-page="page-materials">Методички</a>
-    <a href="#page-vacancies" data-page="page-vacancies">Вакантные места</a>
+    <a href="#page-vacancies" data-page="page-vacancies">Вакансии</a>
     <a href="#page-reviews" data-page="page-reviews">Отзывы</a>
 </nav>
 
 <main>
 
-    <div class="page" id="page-home">
+    <div class="page is-active" id="page-home">
 
         <section class="hero" id="hero">
             <div class="hero-bg" id="heroBg">
-                <img src="assets/i.webp" alt="Обучение на охранника в Сыктывкаре" id="heroImg">
+                <img src="" alt="Обучение на охранника в Сыктывкаре" id="heroImg">
             </div>
 
             <div class="hero-hud">
@@ -1050,7 +1387,7 @@
         <section id="contacts">
             <div class="container">
                 <div class="cta-strip reveal">
-                    <h2>Готовы выйти<br>на рубеж?</h2>
+                    <h2>Готовы выйти<br>на обучение?</h2>
                     <div class="hero-actions">
                         <a href="#page-about" class="btn" data-page="page-about">Записаться на занятие
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -1248,10 +1585,6 @@
     <div class="container">
         <div class="footer-top">
             <div class="footer-brand">
-                <div class="logo" style="margin-bottom:1em;">
-                    <span class="logo-mark"><i></i></span>
-                    <span>ОГНЕВОЙ РУБЕЖ</span>
-                </div>
                 <p>Стрелковый тир в Сыктывкаре. Обучение на охранника и обучение на оружие проводит партнёр — Институт международных связей и делового сотрудничества.</p>
             </div>
             <div>
@@ -1279,13 +1612,12 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <span>© <span id="year"></span> Тир «Огневой рубеж», Сыктывкар</span>
+            <span>© <span id="year"></span> Институт международных связей и делового сотрудничества, Сыктывкар</span>
             <a href="/admin" class="admin-link">Панель администратора</a>
         </div>
     </div>
 </footer>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
     <div class="modal-window">
         <button class="close-btn" id="modalClose">✕</button>
@@ -1296,7 +1628,6 @@
 </div>
 
 <script>
-
     const API_BASE = window.__API_BASE__ || '/api/v1';
 
     async function apiRequest(path, { method = 'GET', body, headers, ...rest } = {}) {
@@ -1406,28 +1737,130 @@
 
         const burger = document.getElementById('burger');
         const navMobile = document.getElementById('navMobile');
-        burger.addEventListener('click', () => {
-            const open = burger.classList.toggle('is-open');
-            navMobile.classList.toggle('is-open', open);
-            document.body.style.overflow = open ? 'hidden' : '';
-        });
-        navMobile.querySelectorAll('a[data-page]').forEach((a) => a.addEventListener('click', () => {
+        const submenu = document.getElementById('mobileSubmenu');
+        const menuTitle = document.getElementById('mobileMainLink');
+        const toggleIcon = menuTitle ? menuTitle.querySelector('.toggle-icon') : null;
+
+        function closeMenu() {
             burger.classList.remove('is-open');
             navMobile.classList.remove('is-open');
             document.body.style.overflow = '';
-        }));
+            if (submenu) submenu.classList.remove('is-open');
+            if (menuTitle) menuTitle.classList.remove('is-open');
+            if (toggleIcon) toggleIcon.textContent = '▾';
+        }
 
-        document.getElementById('year').textContent = new Date().getFullYear();
+        burger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const open = burger.classList.toggle('is-open');
+            navMobile.classList.toggle('is-open', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+            if (!open) {
+                if (submenu) submenu.classList.remove('is-open');
+                if (menuTitle) menuTitle.classList.remove('is-open');
+                if (toggleIcon) toggleIcon.textContent = '▾';
+            }
+        });
+
+        navMobile.addEventListener('click', (e) => {
+            if (e.target === navMobile) {
+                closeMenu();
+            }
+        });
+
+        if (menuTitle) {
+            menuTitle.addEventListener('click', (e) => {
+                if (e.target.classList.contains('toggle-icon')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const isOpen = submenu.classList.toggle('is-open');
+                    menuTitle.classList.toggle('is-open', isOpen);
+                    toggleIcon.textContent = isOpen ? '▴' : '▾';
+                    return;
+                }
+                window.location.href = '/basic_information';
+            });
+        }
+
+        navMobile.querySelectorAll('a').forEach((a) => {
+            a.addEventListener('click', (e) => {
+                const href = a.getAttribute('href');
+
+                if (href && href.startsWith('/basic_information')) {
+                    closeMenu();
+                    if (href.includes('#') && window.location.pathname === '/basic_information') {
+                        e.preventDefault();
+                        const targetId = href.split('#')[1];
+                        const target = document.getElementById(targetId);
+                        if (target) target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    return;
+                }
+
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    closeMenu();
+                    const targetId = href.replace('#', '');
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        const pageId = a.dataset.page;
+                        if (pageId) showPage(pageId);
+                    }
+                    return;
+                }
+
+                closeMenu();
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMobile.classList.contains('is-open')) {
+                closeMenu();
+            }
+        });
+
+        const pages = document.querySelectorAll('.page');
+        const navEls = document.querySelectorAll('[data-page]');
+        const validPages = new Set(Array.from(pages).map((p) => p.id));
+
+        function showPage(id, { scroll = true } = {}) {
+            if (!validPages.has(id)) id = 'page-home';
+            pages.forEach((p) => p.classList.toggle('is-active', p.id === id));
+            navEls.forEach((a) => a.classList.toggle('is-current', a.dataset.page === id));
+            if (scroll) window.scrollTo({ top: 0, behavior: 'auto' });
+        }
+
+        navEls.forEach((a) => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                const id = a.dataset.page;
+                if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
+                showPage(id);
+            });
+        });
+
+        window.addEventListener('popstate', () => {
+            showPage(location.hash.replace('#', '') || 'page-home');
+        });
+
+        (function restorePage() {
+            const hash = location.hash.replace('#', '');
+            showPage(hash || 'page-home', { scroll: false });
+        })();
+
 
         const heroBg = document.getElementById('heroBg');
         const heroImg = document.getElementById('heroImg');
-        heroImg.addEventListener('error', () => {
-            heroBg.classList.add('no-image');
-            heroImg.remove();
-        }, { once: true });
+        if (heroImg) {
+            heroImg.addEventListener('error', () => {
+                heroBg.classList.add('no-image');
+                heroImg.remove();
+            }, { once: true });
+        }
 
         const reticle = document.getElementById('reticle');
-        if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+        if (matchMedia('(hover:hover) and (pointer:fine)').matches && reticle) {
             window.addEventListener('pointermove', (e) => {
                 reticle.style.left = e.clientX + 'px';
                 reticle.style.top = e.clientY + 'px';
@@ -1448,7 +1881,8 @@
                 }
             });
         }, { threshold: 0.14 });
-        function observeReveals(){
+
+        function observeReveals() {
             document.querySelectorAll('.reveal:not(.is-visible)').forEach((el) => io.observe(el));
         }
         observeReveals();
@@ -1461,33 +1895,6 @@
             return `<div class="state-block"><strong>${title}</strong>${text}</div>`;
         }
 
-        /* ---- page router (SPA pages inside this single file) ---- */
-        const pages = document.querySelectorAll('.page');
-        const navEls = document.querySelectorAll('[data-page]');
-        const validPages = new Set(Array.from(pages).map((p) => p.id));
-
-        function showPage(id, { scroll = true } = {}) {
-            if (!validPages.has(id)) id = 'page-home';
-            pages.forEach((p) => p.classList.toggle('is-active', p.id === id));
-            navEls.forEach((a) => a.classList.toggle('is-current', a.dataset.page === id));
-            if (scroll) window.scrollTo({ top: 0, behavior: 'auto' });
-            observeReveals();
-        }
-
-        navEls.forEach((a) => a.addEventListener('click', (e) => {
-            e.preventDefault();
-            const id = a.dataset.page;
-            if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
-            showPage(id);
-        }));
-
-        window.addEventListener('popstate', () => {
-            showPage(location.hash.replace('#', '') || 'page-home');
-        });
-
-        showPage(location.hash.replace('#', '') || 'page-home', { scroll: false });
-
-        // ---- Modal ----
         const modalOverlay = document.getElementById('modalOverlay');
         const modalTitle = document.getElementById('modalTitle');
         const modalMeta = document.getElementById('modalMeta');
@@ -1507,17 +1914,20 @@
             document.body.style.overflow = '';
         }
 
-        modalClose.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) closeModal();
-        });
+        if (modalClose) modalClose.addEventListener('click', closeModal);
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeModal();
+            });
+        }
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modalOverlay.classList.contains('is-open')) closeModal();
+            if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('is-open')) closeModal();
         });
 
-        // ---- Ads ----
+
         const adsRail = document.getElementById('adsRail');
         async function loadAds() {
+            if (!adsRail) return;
             try {
                 const data = await Api.advertisements.list(12, 0);
                 const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
@@ -1529,23 +1939,22 @@
                     const desc = ad.description ? escapeHtml(ad.description) : '';
                     const preview = desc.length > 120 ? desc.slice(0, 120) + '…' : desc;
                     return `
-        <article class="card" data-id="${ad.id}">
-          <div class="card-media">
-            ${ad.image ? `<img src="${escapeHtml(ad.image)}" alt="${escapeHtml(ad.title)}" loading="lazy">` : `<div class="ph">ОГНЕВОЙ РУБЕЖ</div>`}
-          </div>
-          <div class="card-body">
-            <span class="card-tag">Объявление</span>
-            <h3>${escapeHtml(ad.title)}</h3>
-            <p>${preview}</p>
-            <div class="card-foot">
-              <span>${formatDate(ad.create_at)}</span>
-              <button class="btn--line modal-trigger" data-id="${ad.id}">Подробнее</button>
-            </div>
-          </div>
-        </article>`;
+    <article class="card" data-id="${ad.id}">
+      <div class="card-media">
+        ${ad.image ? `<img src="${escapeHtml(ad.image)}" alt="${escapeHtml(ad.title)}" loading="lazy">` : `<div class="ph">Институт международных связей и делового сотрудничества</div>`}
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Объявление</span>
+        <h3>${escapeHtml(ad.title)}</h3>
+        <p>${preview}</p>
+        <div class="card-foot">
+          <span>${formatDate(ad.create_at)}</span>
+          <button class="btn--line modal-trigger" data-id="${ad.id}">Подробнее</button>
+        </div>
+      </div>
+    </article>`;
                 }).join('');
 
-                // attach modal triggers
                 adsRail.querySelectorAll('.modal-trigger').forEach(btn => {
                     btn.addEventListener('click', async (e) => {
                         e.stopPropagation();
@@ -1571,9 +1980,9 @@
         }
         loadAds();
 
-        // ---- Materials ----
         const materialsGrid = document.getElementById('materialsGrid');
         async function loadMaterials() {
+            if (!materialsGrid) return;
             try {
                 const data = await Api.materials.list(20, 0);
                 const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
@@ -1582,17 +1991,17 @@
                     return;
                 }
                 materialsGrid.innerHTML = items.map((m) => `
-        <div class="doc-card">
-          <div class="doc-ico">PDF</div>
-          <div class="doc-info">
-            <h3>${escapeHtml(m.title)}</h3>
-            <p>${escapeHtml(m.description || '')}</p>
-          </div>
-          <div class="doc-meta">
-            ${formatDate(m.create_at)}<br>
-            ${m.pdf ? `<a href="${escapeHtml(m.pdf)}" class="btn--line" target="_blank" rel="noopener">Скачать</a>` : '—'}
-          </div>
-        </div>`).join('');
+    <div class="doc-card">
+      <div class="doc-ico">PDF</div>
+      <div class="doc-info">
+        <h3>${escapeHtml(m.title)}</h3>
+        <p>${escapeHtml(m.description || '')}</p>
+      </div>
+      <div class="doc-meta">
+        ${formatDate(m.create_at)}<br>
+        ${m.pdf ? `<a href="${escapeHtml(m.pdf)}" class="btn--line" target="_blank" rel="noopener">Скачать</a>` : '—'}
+      </div>
+    </div>`).join('');
                 staggerChildren(materialsGrid);
             } catch (err) {
                 materialsGrid.innerHTML = stateBlock('Не удалось загрузить материалы', escapeHtml(err.message || ''));
@@ -1600,9 +2009,9 @@
         }
         loadMaterials();
 
-        // ---- Vacancies ----
         const vacanciesGrid = document.getElementById('vacanciesGrid');
         async function loadVacancies() {
+            if (!vacanciesGrid) return;
             try {
                 const data = await Api.vacancies.list(20, 0);
                 const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
@@ -1611,11 +2020,11 @@
                     return;
                 }
                 vacanciesGrid.innerHTML = items.map((v) => `
-        <div class="vac-card">
-          <span class="date">${formatDate(v.create_at)}</span>
-          <h3>${escapeHtml(v.title)}</h3>
-          <p>${escapeHtml(v.description || '')}</p>
-        </div>`).join('');
+    <div class="vac-card">
+      <span class="date">${formatDate(v.create_at)}</span>
+      <h3>${escapeHtml(v.title)}</h3>
+      <p>${escapeHtml(v.description || '')}</p>
+    </div>`).join('');
                 staggerChildren(vacanciesGrid);
             } catch (err) {
                 vacanciesGrid.innerHTML = stateBlock('Не удалось загрузить вакансии', escapeHtml(err.message || ''));
@@ -1623,9 +2032,9 @@
         }
         loadVacancies();
 
-        // ---- Reviews ----
         const reviewsList = document.getElementById('reviewsList');
         async function loadReviews() {
+            if (!reviewsList) return;
             try {
                 const data = await Api.reviews.list(10, 0);
                 const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
@@ -1634,66 +2043,70 @@
                     return;
                 }
                 reviewsList.innerHTML = items.map((r) => `
-        <div class="review-card">
-          <div class="review-top">
-            <span class="review-name">${escapeHtml(r.name)}</span>
-            <span class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(Math.max(0, 5 - r.rating))}</span>
-          </div>
-          <p>${escapeHtml(r.description || '')}</p>
-          <span class="review-date">${formatDate(r.create_at)}</span>
-        </div>`).join('');
+    <div class="review-card">
+      <div class="review-top">
+        <span class="review-name">${escapeHtml(r.name)}</span>
+        <span class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(Math.max(0, 5 - r.rating))}</span>
+      </div>
+      <p>${escapeHtml(r.description || '')}</p>
+      <span class="review-date">${formatDate(r.create_at)}</span>
+    </div>`).join('');
             } catch (err) {
                 reviewsList.innerHTML = stateBlock('Не удалось загрузить отзывы', escapeHtml(err.message || ''));
             }
         }
         loadReviews();
 
-        // ---- Review Form ----
         const ratingPick = document.getElementById('ratingPick');
         const rvRating = document.getElementById('rvRating');
-        ratingPick.addEventListener('click', (e) => {
-            const btn = e.target.closest('button');
-            if (!btn) return;
-            const value = Number(btn.dataset.v);
-            rvRating.value = value;
-            ratingPick.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', Number(b.dataset.v) <= value));
-        });
+        if (ratingPick) {
+            ratingPick.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                const value = Number(btn.dataset.v);
+                rvRating.value = value;
+                ratingPick.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', Number(b.dataset.v) <= value));
+            });
+        }
 
         const reviewForm = document.getElementById('reviewForm');
         const reviewMsg = document.getElementById('reviewMsg');
-        reviewForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            reviewMsg.className = 'form-msg';
+        if (reviewForm) {
+            reviewForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                reviewMsg.className = 'form-msg';
 
-            const name = reviewForm.name.value.trim();
-            const email = reviewForm.email.value.trim();
-            const description = reviewForm.description.value.trim();
-            const rating = Number(rvRating.value);
+                const name = reviewForm.name.value.trim();
+                const email = reviewForm.email.value.trim();
+                const description = reviewForm.description.value.trim();
+                const rating = Number(rvRating ? rvRating.value : 0);
 
-            if (!name || !email || !description || !rating) {
-                reviewMsg.textContent = 'Заполните все поля и выберите оценку.';
-                reviewMsg.classList.add('is-visible', 'is-error');
-                return;
-            }
+                if (!name || !email || !description || !rating) {
+                    reviewMsg.textContent = 'Заполните все поля и выберите оценку.';
+                    reviewMsg.classList.add('is-visible', 'is-error');
+                    return;
+                }
 
-            const submitBtn = reviewForm.querySelector('button[type=submit]');
-            submitBtn.disabled = true;
-            try {
-                await Api.reviews.create({ name, email, description, rating });
-                reviewMsg.textContent = 'Спасибо! Отзыв отправлен.';
-                reviewMsg.classList.add('is-visible', 'is-ok');
-                reviewForm.reset();
-                ratingPick.querySelectorAll('button').forEach((b) => b.classList.remove('is-active'));
-                loadReviews();
-            } catch (err) {
-                reviewMsg.textContent = err.message || 'Не удалось отправить отзыв. Попробуйте позже.';
-                reviewMsg.classList.add('is-visible', 'is-error');
-            } finally {
-                submitBtn.disabled = false;
-            }
-        });
+                const submitBtn = reviewForm.querySelector('button[type=submit]');
+                submitBtn.disabled = true;
+                try {
+                    await Api.reviews.create({ name, email, description, rating });
+                    reviewMsg.textContent = 'Спасибо! Отзыв отправлен.';
+                    reviewMsg.classList.add('is-visible', 'is-ok');
+                    reviewForm.reset();
+                    if (ratingPick) {
+                        ratingPick.querySelectorAll('button').forEach((b) => b.classList.remove('is-active'));
+                    }
+                    loadReviews();
+                } catch (err) {
+                    reviewMsg.textContent = err.message || 'Не удалось отправить отзыв. Попробуйте позже.';
+                    reviewMsg.classList.add('is-visible', 'is-error');
+                } finally {
+                    submitBtn.disabled = false;
+                }
+            });
+        }
 
-        // toggle for cards
         document.querySelectorAll('[data-toggle]').forEach(btn => {
             btn.addEventListener('click', () => {
                 const desc = btn.parentElement.querySelector('.card-desc');
@@ -1703,6 +2116,12 @@
                 }
             });
         });
+
+        const yearSpan = document.getElementById('year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+
     })();
 </script>
 </body>
