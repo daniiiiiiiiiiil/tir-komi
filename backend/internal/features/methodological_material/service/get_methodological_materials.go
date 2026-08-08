@@ -8,7 +8,7 @@ import (
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/pagination"
 )
 
-func (s *MethodologicalMaterialService) GetMethodologicalMaterials(ctx context.Context, limit, offset int) ([]domain.MethodologicalMaterial, int, error) {
+func (s *MethodologicalMaterialService) GetMethodologicalMaterials(ctx context.Context, limit int, offset int) ([]domain.MethodologicalMaterial, int, error) {
 	limit, offset = pagination.LimitOffset(limit, offset)
 
 	materials, total, err := s.repo.GetMethodologicalMaterials(ctx, limit, offset)

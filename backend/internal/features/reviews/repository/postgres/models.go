@@ -9,8 +9,8 @@ import (
 type ReviewModel struct {
 	ID          int
 	Name        string
-	Email       *string
-	Description *string
+	Email       string
+	Description string
 	Rating      int
 	CreatedAt   time.Time
 }
