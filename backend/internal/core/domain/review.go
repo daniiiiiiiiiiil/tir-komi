@@ -9,30 +9,33 @@ import (
 )
 
 type Review struct {
-	ID        int
-	Name      string
-	Email     *string
-	Rating    int
-	CreatedAt time.Time
+	ID          int
+	Name        string
+	Email       *string
+	Description *string
+	Rating      int
+	CreatedAt   time.Time
 }
 
-func NewReview(id int, name string, email *string, rating int, createdAt time.Time) Review {
+func NewReview(id int, name string, email *string, description *string, rating int, createdAt time.Time) Review {
 	return Review{
-		ID:        id,
-		Name:      name,
-		Email:     email,
-		Rating:    rating,
-		CreatedAt: createdAt,
+		ID:          id,
+		Name:        name,
+		Email:       email,
+		Description: description,
+		Rating:      rating,
+		CreatedAt:   createdAt,
 	}
 }
 
-func NewReviewUninitialized(name string, email *string, rating int) Review {
+func NewReviewUninitialized(name string, email *string, description *string, rating int) Review {
 	return Review{
-		ID:        UninitializedID,
-		Name:      name,
-		Email:     email,
-		Rating:    rating,
-		CreatedAt: time.Now(),
+		ID:          UninitializedID,
+		Name:        name,
+		Email:       email,
+		Description: description,
+		Rating:      rating,
+		CreatedAt:   time.Now(),
 	}
 }
 
@@ -53,6 +56,13 @@ func (r *Review) Validate() error {
 		}
 	}
 
+	if r.Description != nil {
+		descLen := len([]rune(*r.Description))
+		if descLen > 1000 {
+			return fmt.Errorf("description too long: %d, max 1000 characters, %w", descLen, core_errors.ErrInvalidArgument)
+		}
+	}
+
 	if r.Rating < 1 || r.Rating > 5 {
 		return fmt.Errorf("rating must be between 1 and 5: %d, %w", r.Rating, core_errors.ErrInvalidArgument)
 	}
@@ -61,16 +71,18 @@ func (r *Review) Validate() error {
 }
 
 type ReviewPatch struct {
-	Name   Nullable[string]
-	Email  Nullable[string]
-	Rating Nullable[int]
+	Name        Nullable[string]
+	Email       Nullable[string]
+	Description Nullable[string]
+	Rating      Nullable[int]
 }
 
-func NewReviewPatch(name Nullable[string], email Nullable[string], rating Nullable[int], captchaOK Nullable[bool]) ReviewPatch {
+func NewReviewPatch(name Nullable[string], email Nullable[string], description Nullable[string], rating Nullable[int]) ReviewPatch {
 	return ReviewPatch{
-		Name:   name,
-		Email:  email,
-		Rating: rating,
+		Name:        name,
+		Email:       email,
+		Description: description,
+		Rating:      rating,
 	}
 }
 
@@ -100,6 +112,10 @@ func (r *Review) ApplyPatch(patch ReviewPatch) error {
 
 	if patch.Email.Set {
 		tmp.Email = patch.Email.Value
+	}
+
+	if patch.Description.Set {
+		tmp.Description = patch.Description.Value
 	}
 
 	if patch.Rating.Set {

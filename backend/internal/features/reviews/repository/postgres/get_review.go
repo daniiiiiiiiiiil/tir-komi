@@ -15,7 +15,7 @@ func (r *ReviewRepository) GetReview(ctx context.Context, id int) (domain.Review
 	defer cancel()
 
 	query := `
-		SELECT id, name, email, rating, created_at
+		SELECT id, name, email, description, rating, created_at
 		FROM reviews
 		WHERE id = $1
 	`
@@ -25,6 +25,7 @@ func (r *ReviewRepository) GetReview(ctx context.Context, id int) (domain.Review
 		&model.ID,
 		&model.Name,
 		&model.Email,
+		&model.Description,
 		&model.Rating,
 		&model.CreatedAt,
 	)

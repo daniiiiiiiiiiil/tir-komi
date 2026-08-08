@@ -21,7 +21,7 @@ func (r *ReviewRepository) GetReviews(ctx context.Context, limit, offset int) ([
 	}
 
 	query := `
-		SELECT id, name, email, rating, created_at
+		SELECT id, name, email, description, rating, created_at
 		FROM reviews
 		ORDER BY created_at DESC
 		LIMIT $1 OFFSET $2
@@ -40,6 +40,7 @@ func (r *ReviewRepository) GetReviews(ctx context.Context, limit, offset int) ([
 			&model.ID,
 			&model.Name,
 			&model.Email,
+			&model.Description,
 			&model.Rating,
 			&model.CreatedAt,
 		)

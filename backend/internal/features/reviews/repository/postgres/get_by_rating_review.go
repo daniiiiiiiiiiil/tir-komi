@@ -23,7 +23,7 @@ func (r *ReviewRepository) GetReviewsByRating(ctx context.Context, rating int, l
 	}
 
 	query := `
-		SELECT id, name, email, rating, created_at
+		SELECT id, name, email, description, rating, created_at
 		FROM reviews
 		WHERE rating = $1
 		ORDER BY created_at DESC
@@ -43,6 +43,7 @@ func (r *ReviewRepository) GetReviewsByRating(ctx context.Context, rating int, l
 			&model.ID,
 			&model.Name,
 			&model.Email,
+			&model.Description,
 			&model.Rating,
 			&model.CreatedAt,
 		)

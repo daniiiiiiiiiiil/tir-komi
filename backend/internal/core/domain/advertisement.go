@@ -8,33 +8,36 @@ import (
 )
 
 type Advertisement struct {
-	ID        int
-	Title     string
-	Image     *string
-	Pdf       *string
-	Url       *string
-	CreatedAt time.Time
+	ID          int
+	Title       string
+	Description *string
+	Image       *string
+	Pdf         *string
+	Url         *string
+	CreatedAt   time.Time
 }
 
-func NewAdvertisement(id int, title string, image *string, pdf *string, url *string, createdAt time.Time) Advertisement {
+func NewAdvertisement(id int, title string, description *string, image *string, pdf *string, url *string, createdAt time.Time) Advertisement {
 	return Advertisement{
-		ID:        id,
-		Title:     title,
-		Image:     image,
-		Pdf:       pdf,
-		Url:       url,
-		CreatedAt: createdAt,
+		ID:          id,
+		Title:       title,
+		Description: description,
+		Image:       image,
+		Pdf:         pdf,
+		Url:         url,
+		CreatedAt:   createdAt,
 	}
 }
 
-func NewAdvertisementUninitialized(title string, image *string, pdf *string, url *string) Advertisement {
+func NewAdvertisementUninitialized(title string, description *string, image *string, pdf *string, url *string) Advertisement {
 	return Advertisement{
-		ID:        UninitializedID,
-		Title:     title,
-		Image:     image,
-		Pdf:       pdf,
-		Url:       url,
-		CreatedAt: time.Now(),
+		ID:          UninitializedID,
+		Title:       title,
+		Description: description,
+		Image:       image,
+		Pdf:         pdf,
+		Url:         url,
+		CreatedAt:   time.Now(),
 	}
 }
 
@@ -42,6 +45,13 @@ func (a *Advertisement) Validate() error {
 	titleLen := len([]rune(a.Title))
 	if titleLen < 1 || titleLen > 200 {
 		return fmt.Errorf("title must be between 1 and 200 characters: %d, %w", titleLen, core_errors.ErrInvalidArgument)
+	}
+
+	if a.Description != nil {
+		descLen := len([]rune(*a.Description))
+		if descLen > 1000 {
+			return fmt.Errorf("description too long: %d, max 1000 characters, %w", descLen, core_errors.ErrInvalidArgument)
+		}
 	}
 
 	if a.Image != nil {
@@ -69,18 +79,20 @@ func (a *Advertisement) Validate() error {
 }
 
 type AdvertisementPatch struct {
-	Title Nullable[string]
-	Image Nullable[string]
-	Pdf   Nullable[string]
-	Url   Nullable[string]
+	Title       Nullable[string]
+	Description Nullable[string]
+	Image       Nullable[string]
+	Pdf         Nullable[string]
+	Url         Nullable[string]
 }
 
-func NewAdvertisementPatch(title Nullable[string], image Nullable[string], pdf Nullable[string], url Nullable[string]) AdvertisementPatch {
+func NewAdvertisementPatch(title Nullable[string], description Nullable[string], image Nullable[string], pdf Nullable[string], url Nullable[string]) AdvertisementPatch {
 	return AdvertisementPatch{
-		Title: title,
-		Image: image,
-		Pdf:   pdf,
-		Url:   url,
+		Title:       title,
+		Description: description,
+		Image:       image,
+		Pdf:         pdf,
+		Url:         url,
 	}
 }
 
@@ -103,6 +115,10 @@ func (a *Advertisement) ApplyPatch(patch AdvertisementPatch) error {
 			return fmt.Errorf("title cannot be null: %w", core_errors.ErrInvalidArgument)
 		}
 		tmp.Title = *patch.Title.Value
+	}
+
+	if patch.Description.Set {
+		tmp.Description = patch.Description.Value
 	}
 
 	if patch.Image.Set {

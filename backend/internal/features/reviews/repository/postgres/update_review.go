@@ -27,21 +27,24 @@ func (r *ReviewRepository) UpdateReview(ctx context.Context, id int, patch domai
 		UPDATE reviews SET
 		name = $1,
 		email = $2,
-		rating = $3
-		WHERE id = $4
-		RETURNING id, name, email, rating, created_at
+		description = $3,
+		rating = $4
+		WHERE id = $5
+		RETURNING id, name, email, description, rating, created_at
 	`
 
 	var model ReviewModel
 	err = r.pool.QueryRow(ctx, query,
 		current.Name,
 		current.Email,
+		current.Description,
 		current.Rating,
 		id,
 	).Scan(
 		&model.ID,
 		&model.Name,
 		&model.Email,
+		&model.Description,
 		&model.Rating,
 		&model.CreatedAt,
 	)

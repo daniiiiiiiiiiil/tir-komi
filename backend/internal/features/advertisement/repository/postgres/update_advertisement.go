@@ -26,16 +26,18 @@ func (r *AdvertisementRepository) UpdateAdvertisement(ctx context.Context, id in
 	query := `
 		UPDATE advertisement SET
 		title = $1,
-		image = $2,
-		pdf = $3,
-		url = $4
-		WHERE id = $5
-		RETURNING id, title, image, pdf, url, created_at
+		description = $2,
+		image = $3,
+		pdf = $4,
+		url = $5
+		WHERE id = $6
+		RETURNING id, title, description, image, pdf, url, created_at
 	`
 
 	var model AdvertisementModel
 	err = r.pool.QueryRow(ctx, query,
 		current.Title,
+		current.Description,
 		current.Image,
 		current.Pdf,
 		current.Url,
@@ -43,6 +45,7 @@ func (r *AdvertisementRepository) UpdateAdvertisement(ctx context.Context, id in
 	).Scan(
 		&model.ID,
 		&model.Title,
+		&model.Description,
 		&model.Image,
 		&model.Pdf,
 		&model.Url,

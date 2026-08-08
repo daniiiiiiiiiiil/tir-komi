@@ -12,8 +12,8 @@ func (r *ReviewRepository) CreateReview(ctx context.Context, review domain.Revie
 	defer cancel()
 
 	query := `
-		INSERT INTO reviews (name, email, rating)
-		VALUES ($1, $2, $3)
+		INSERT INTO reviews (name, email, description, rating)
+		VALUES ($1, $2, $3, $4)
 		RETURNING id, created_at
 	`
 
@@ -21,6 +21,7 @@ func (r *ReviewRepository) CreateReview(ctx context.Context, review domain.Revie
 	err := r.pool.QueryRow(ctx, query,
 		review.Name,
 		review.Email,
+		review.Description,
 		review.Rating,
 	).Scan(
 		&createdReview.ID,
@@ -32,6 +33,7 @@ func (r *ReviewRepository) CreateReview(ctx context.Context, review domain.Revie
 
 	createdReview.Name = review.Name
 	createdReview.Email = review.Email
+	createdReview.Description = review.Description
 	createdReview.Rating = review.Rating
 
 	return createdReview, nil

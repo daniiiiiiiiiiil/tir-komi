@@ -7,18 +7,20 @@ import (
 )
 
 type AdvertisementModel struct {
-	ID        int
-	Title     string
-	Image     *string
-	Pdf       *string
-	Url       *string
-	CreatedAt time.Time
+	ID          int
+	Title       string
+	Description *string
+	Image       *string
+	Pdf         *string
+	Url         *string
+	CreatedAt   time.Time
 }
 
 func advertisementDomainFromModel(model AdvertisementModel) domain.Advertisement {
 	return domain.NewAdvertisement(
 		model.ID,
 		model.Title,
+		model.Description,
 		model.Image,
 		model.Pdf,
 		model.Url,
@@ -30,12 +32,13 @@ func advertisementModelsFromDomains(ads []domain.Advertisement) []AdvertisementM
 	models := make([]AdvertisementModel, len(ads))
 	for i, ad := range ads {
 		models[i] = AdvertisementModel{
-			ID:        ad.ID,
-			Title:     ad.Title,
-			Image:     ad.Image,
-			Pdf:       ad.Pdf,
-			Url:       ad.Url,
-			CreatedAt: ad.CreatedAt,
+			ID:          ad.ID,
+			Title:       ad.Title,
+			Description: ad.Description,
+			Image:       ad.Image,
+			Pdf:         ad.Pdf,
+			Url:         ad.Url,
+			CreatedAt:   ad.CreatedAt,
 		}
 	}
 	return models

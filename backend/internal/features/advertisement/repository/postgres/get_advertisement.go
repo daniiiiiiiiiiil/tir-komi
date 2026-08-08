@@ -15,7 +15,7 @@ func (r *AdvertisementRepository) GetAdvertisement(ctx context.Context, id int) 
 	defer cancel()
 
 	query := `
-		SELECT id, title, image, pdf, url, created_at
+		SELECT id, title, description, image, pdf, url, created_at
 		FROM advertisement
 		WHERE id = $1
 	`
@@ -24,6 +24,7 @@ func (r *AdvertisementRepository) GetAdvertisement(ctx context.Context, id int) 
 	err := r.pool.QueryRow(ctx, query, id).Scan(
 		&model.ID,
 		&model.Title,
+		&model.Description,
 		&model.Image,
 		&model.Pdf,
 		&model.Url,

@@ -12,14 +12,15 @@ func (r *AdvertisementRepository) CreateAdvertisement(ctx context.Context, ad do
 	defer cancel()
 
 	query := `
-		INSERT INTO advertisement (title, image, pdf, url)
-		VALUES ($1, $2, $3, $4)
+		INSERT INTO advertisement (title, description, image, pdf, url)
+		VALUES ($1, $2, $3, $4, $5)
 		RETURNING id, created_at
 	`
 
 	var createdAd domain.Advertisement
 	err := r.pool.QueryRow(ctx, query,
 		ad.Title,
+		ad.Description,
 		ad.Image,
 		ad.Pdf,
 		ad.Url,
@@ -32,6 +33,7 @@ func (r *AdvertisementRepository) CreateAdvertisement(ctx context.Context, ad do
 	}
 
 	createdAd.Title = ad.Title
+	createdAd.Description = ad.Description
 	createdAd.Image = ad.Image
 	createdAd.Pdf = ad.Pdf
 	createdAd.Url = ad.Url
