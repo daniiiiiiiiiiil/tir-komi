@@ -11,8 +11,9 @@ import (
 )
 
 type CreateVacantRequest struct {
-	Title       string `json:"title" validate:"required,min=1,max=200" example:"Go разработчик"`
-	Description string `json:"description" validate:"omitempty,max=1000" example:"Ищем опытного Go разработчика в команду"`
+	Title       string     `json:"title" validate:"required,min=1,max=200" example:"Go разработчик"`
+	Description string     `json:"description" validate:"omitempty,max=1000" example:"Ищем опытного Go разработчика в команду"`
+	Date        *time.Time `json:"date,omitempty"`
 }
 
 type CreateVacantResponse VacantDto

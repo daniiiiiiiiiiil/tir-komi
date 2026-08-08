@@ -10,10 +10,10 @@ import (
 )
 
 type CreateReviewRequest struct {
-	Name        string `json:"name" validate:"required,min=1,max=100" example:"Иван Иванов"`
-	Email       string `json:"email" validate:"required,email,max=250" example:"ivan@example.com"`
-	Description string `json:"description" validate:"required,min=1,max=1000" example:"Отличный сервис, всё понравилось"`
-	Rating      int    `json:"rating" validate:"required,min=1,max=5" example:"5"`
+	Name        string  `json:"name" validate:"required,min=1,max=100" example:"Иван Иванов"`
+	Email       *string `json:"email" validate:"required,email,max=250" example:"ivan@example.com"`
+	Description *string `json:"description" validate:"required,min=1,max=1000" example:"Отличный сервис, всё понравилось"`
+	Rating      int     `json:"rating" validate:"required,min=1,max=5" example:"5"`
 }
 
 type CreateReviewResponse ReviewDto

@@ -11,7 +11,6 @@ type ReviewRepository interface {
 	GetReview(ctx context.Context, id int) (domain.Review, error)
 	GetReviews(ctx context.Context, limit, offset int) ([]domain.Review, int, error)
 	GetReviewsByRating(ctx context.Context, rating int, limit, offset int) ([]domain.Review, int, error)
-	GetReviewStats(ctx context.Context) (ReviewStats, error)
 	UpdateReview(ctx context.Context, id int, patch domain.ReviewPatch) (domain.Review, error)
 	DeleteReview(ctx context.Context, id int) error
 }

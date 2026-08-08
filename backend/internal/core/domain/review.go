@@ -2,7 +2,6 @@ package domain
 
 import (
 	"fmt"
-	"regexp"
 	"time"
 
 	core_errors "github.com/daniiiiiiiiiiil/tir-komi/internal/core/errors"
@@ -11,13 +10,13 @@ import (
 type Review struct {
 	ID          int
 	Name        string
-	Email       string
-	Description string
+	Email       *string
+	Description *string
 	Rating      int
 	CreatedAt   time.Time
 }
 
-func NewReview(id int, name string, email string, description string, rating int, createdAt time.Time) Review {
+func NewReview(id int, name string, email *string, description *string, rating int, createdAt time.Time) Review {
 	return Review{
 		ID:          id,
 		Name:        name,
@@ -28,7 +27,7 @@ func NewReview(id int, name string, email string, description string, rating int
 	}
 }
 
-func NewReviewUninitialized(name string, email string, description string, rating int) Review {
+func NewReviewUninitialized(name string, email *string, description *string, rating int) Review {
 	return Review{
 		ID:          UninitializedID,
 		Name:        name,
@@ -43,20 +42,6 @@ func (r *Review) Validate() error {
 	nameLen := len([]rune(r.Name))
 	if nameLen < 1 || nameLen > 100 {
 		return fmt.Errorf("name must be between 1 and 100 characters: %d, %w", nameLen, core_errors.ErrInvalidArgument)
-	}
-
-	emailLen := len([]rune(r.Email))
-	if emailLen > 128 {
-		return fmt.Errorf("email too long: %d, %w", emailLen, core_errors.ErrInvalidArgument)
-	}
-	re := regexp.MustCompile(`^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$`)
-	if !re.MatchString(r.Email) {
-		return fmt.Errorf("invalid email format: %s, %w", r.Email, core_errors.ErrInvalidArgument)
-	}
-
-	descLen := len([]rune(r.Description))
-	if descLen > 1000 {
-		return fmt.Errorf("description too long: %d, max 1000 characters, %w", descLen, core_errors.ErrInvalidArgument)
 	}
 
 	if r.Rating < 1 || r.Rating > 5 {
@@ -107,11 +92,11 @@ func (r *Review) ApplyPatch(patch ReviewPatch) error {
 	}
 
 	if patch.Email.Set {
-		tmp.Email = *patch.Email.Value
+		tmp.Email = patch.Email.Value
 	}
 
 	if patch.Description.Set {
-		tmp.Description = *patch.Description.Value
+		tmp.Description = patch.Description.Value
 	}
 
 	if patch.Rating.Set {

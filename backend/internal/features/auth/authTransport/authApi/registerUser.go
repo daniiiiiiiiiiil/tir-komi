@@ -10,7 +10,6 @@ import (
 )
 
 type RegisterUserRequest struct {
-	Name     string `json:"name" validate:"required,min=2,max=64" example:"Никита"`
 	Email    string `json:"email" validate:"required,email" example:"bgeheh@bk.ru"`
 	Password string `json:"password" validate:"required,min=8" example:"12345678"`
 }

@@ -13,8 +13,8 @@ func (r *AuthRepository) CreateUser(ctx context.Context, user domain.User) (doma
 
 	query := `
 	INSERT INTO users (email,password,role,created_at)
-	VALUES ($1,$2, $3, $4,$5)
-	RETURNING id, email, name, password, role, created_at;
+	VALUES ($1,$2, $3, $4)
+	RETURNING id, email, password, role, created_at;
 `
 	exec := r.pool.ExecutorFromContext(ctx)
 	row := exec.QueryRow(ctx, query, user.Email, user.Password, user.Role, user.CreateAt)

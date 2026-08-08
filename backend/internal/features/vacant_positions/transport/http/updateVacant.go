@@ -14,6 +14,7 @@ import (
 type UpdateVacantRequest struct {
 	Title       domain.Nullable[string] `json:"title"`
 	Description domain.Nullable[string] `json:"description"`
+	Date        domain.Nullable[time.Time]
 }
 
 func (r *UpdateVacantRequest) Validate() error {

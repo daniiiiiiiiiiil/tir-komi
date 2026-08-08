@@ -12,10 +12,11 @@ import (
 )
 
 type UpdateAdvertisementRequest struct {
-	Title domain.Nullable[string] `json:"title"`
-	Image domain.Nullable[[]byte] `json:"image"`
-	Pdf   domain.Nullable[[]byte] `json:"pdf"`
-	Url   domain.Nullable[string] `json:"url"`
+	Title       domain.Nullable[string] `json:"title"`
+	Description domain.Nullable[string] `json:"description"`
+	Image       domain.Nullable[[]byte] `json:"image"`
+	Pdf         domain.Nullable[[]byte] `json:"pdf"`
+	Url         domain.Nullable[string] `json:"url"`
 }
 
 func (r *UpdateAdvertisementRequest) Validate() error {
