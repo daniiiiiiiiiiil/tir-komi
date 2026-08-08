@@ -121,9 +121,9 @@ func main() {
 	apiRouter.RegisterRouters(vacantHandler.Routers()...)
 	apiRouter.RegisterRouters(materialHandler.Routers()...)
 
+	httpServer.RegisterRoutes(webController.Routes()...)
 	httpServer.RegisterAPIRouters(apiRouter)
 	httpServer.RegisterSwagger()
-	httpServer.RegisterRoutes(webController.Routes()...)
 
 	log.Info("Starting application...")
 	if err := httpServer.Run(ctx); err != nil {

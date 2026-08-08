@@ -162,16 +162,26 @@
         }
         .btn--ghost:hover{border-color:var(--brass);background:rgba(198,154,74,.08);box-shadow:none;}
 
-        .btn--line{
-            --btn-bg:transparent;
-            --btn-fg:var(--brass);
-            border:none;
-            padding:.3em 0;
-            border-bottom:1px solid var(--brass-dim);
-            border-radius:0;
+        .btn--line,
+        button.btn--line {
+            --btn-bg: transparent;
+            --btn-fg: var(--brass);
+            border: none;
+            padding: .3em 0;
+            border-bottom: 1px solid var(--brass-dim);
+            border-radius: 0;
+            background: transparent;
+            color: var(--brass);
+            font-family: inherit;
+            cursor: pointer;
+            transition: border-color .25s, color .25s;
         }
-        .btn--line:hover{border-color:var(--brass-bright);box-shadow:none;transform:none;color:var(--brass-bright);}
-
+        .btn--line:hover,
+        button.btn--line:hover {
+            border-color: var(--brass-bright);
+            color: var(--brass-bright);
+        }
+        
         .btn--sm{padding:.6em 1.1em;font-size:.78rem;}
         .btn--danger{--btn-bg:var(--danger);border-color:var(--danger);}
         .btn[disabled]{opacity:.45;pointer-events:none;}
