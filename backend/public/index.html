@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Тир в Сыктывкаре — стрельба, обучение на охранника и обращению с оружием | ОГНЕВОЙ РУБЕЖ</title>
-<meta name="description" content="Тир в Сыктывкаре: стрелковые занятия, обучение на охранника и курсы обращения с оружием. Совместная программа с Институтом международных связей и делового сотрудничества. Адрес: ул. Карла Маркса, 228/3.">
-<meta name="keywords" content="тир Сыктывкар, обучение на охранника Сыктывкар, обучение охраны Сыктывкар, Институт международных связей и делового сотрудничества, образование по профессии охранник, обучение на оружие Сыктывкар">
-<link rel="canonical" href="https://example.com/">
-<meta name="robots" content="index, follow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Обучение на охранника в Сыктывкаре — Институт международных связей и делового сотрудничества | практика на тире «Огневой рубеж»</title>
+    <meta name="description" content="Обучение на охранника в Сыктывкаре: образование по профессии «охранник», обучение охраны и обучение на оружие проводит Институт международных связей и делового сотрудничества. Практические стрелковые занятия — на тире «Огневой рубеж», ул. Карла Маркса, 228/3. Телефон 8-8212-314060.">
+    <meta name="keywords" content="обучение на охранника Сыктывкар, обучение охраны Сыктывкар, Институт международных связей и делового сотрудничества, Институт международных связей и делового сотрудничества Сыктывкар, образование по профессии охранник, обучение на оружие Сыктывкар, тир Сыктывкар">
+    <link rel="canonical" href="https://example.com/">
+    <meta name="robots" content="index, follow">
 
-<meta property="og:type" content="website">
-<meta property="og:locale" content="ru_RU">
-<meta property="og:title" content="Тир в Сыктывкаре — стрельба и обучение на охранника">
-<meta property="og:description" content="Стрелковые занятия и курсы подготовки охранников в Сыктывкаре. Партнёрская программа с Институтом международных связей и делового сотрудничества.">
-<meta property="og:image" content="/assets/main.jpg">
-<meta property="og:url" content="https://example.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:title" content="Обучение на охранника в Сыктывкаре — Институт международных связей и делового сотрудничества">
+    <meta property="og:description" content="Образование по профессии «охранник», обучение охраны и обучение на оружие в Сыктывкаре. Практика — на тире «Огневой рубеж».">
+    <meta property="og:image" content="/assets/main.jpg">
+    <meta property="og:url" content="https://example.com/">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23c69a4a' stroke-width='2'/%3E%3Cline x1='16' y1='4' x2='16' y2='10' stroke='%23c69a4a' stroke-width='2'/%3E%3Cline x1='16' y1='22' x2='16' y2='28' stroke='%23c69a4a' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23c69a4a'/%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23c69a4a' stroke-width='2'/%3E%3Cline x1='16' y1='4' x2='16' y2='10' stroke='%23c69a4a' stroke-width='2'/%3E%3Cline x1='16' y1='22' x2='16' y2='28' stroke='%23c69a4a' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23c69a4a'/%3E%3C/svg%3E">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <style>
 
@@ -272,6 +272,8 @@
         }
         .nav-desktop a:hover{color:var(--paper);}
         .nav-desktop a:hover::after{right:0;}
+        .nav-desktop a.is-current{color:var(--brass-bright);}
+        .nav-desktop a.is-current::after{right:0;}
 
         .header-cta{display:flex;align-items:center;gap:1em;}
         .admin-link{
@@ -459,7 +461,6 @@
     </style>
 
     <style>
-
         section{
             position:relative;
             padding:120px 0;
@@ -503,7 +504,8 @@
         .card{
             background:var(--bg-2);
             border:1px solid var(--line-soft);
-            display:flex;flex-direction:column;
+            display:flex;
+            flex-direction:column;
             height:100%;
             transition:border-color .3s, transform .3s var(--ease), background .3s;
         }
@@ -543,23 +545,16 @@
             border-top:1px solid var(--line-soft);
             font-family:var(--f-mono);font-size:.72rem;color:var(--steel-dim);
         }
+        .card-foot .btn--line{font-size:.68rem;}
 
 
         .ads-rail{
-            display:flex;
-            gap:20px;
-            overflow-x:auto;
-            scroll-snap-type:x mandatory;
+            display:grid;
+            grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+            gap:24px;
             padding-bottom:14px;
-            margin:0 -24px;
-            padding-left:24px;padding-right:24px;
-            scrollbar-width:thin;
-            scrollbar-color:var(--brass-dim) transparent;
         }
-        .ads-rail::-webkit-scrollbar{height:6px;}
-        .ads-rail::-webkit-scrollbar-thumb{background:var(--brass-dim);}
-        .ads-rail .card{min-width:320px;max-width:320px;scroll-snap-align:start;}
-        @media (max-width:520px){.ads-rail .card{min-width:82vw;max-width:82vw;}}
+        .ads-rail .card{height:100%;}
 
         .rail-controls{display:flex;gap:.6em;}
         .rail-btn{
@@ -570,6 +565,8 @@
             transition:border-color .25s,background .25s;
         }
         .rail-btn:hover{border-color:var(--brass);background:rgba(198,154,74,.08);}
+        /* Hide scroll buttons since we use grid now */
+        .rail-controls{display:none;}
 
 
         .dir-card{
@@ -596,7 +593,7 @@
         .dir-list li::before{content:'—';color:var(--brass-dim);flex:none;}
 
         .institute-strip{
-            margin-top:56px;
+            margin-top:32px;
             display:flex;align-items:center;gap:28px;
             padding:26px 28px;
             border:1px solid var(--line);
@@ -610,6 +607,15 @@
         }
         .institute-strip strong{display:block;color:var(--paper);font-family:var(--f-head);font-size:1.02rem;letter-spacing:.01em;}
         .institute-strip span{color:var(--steel);font-size:.88rem;}
+        .institute-note{
+            margin-top:14px;
+            font-family:var(--f-mono);
+            font-size:.76rem;
+            color:var(--brass-bright);
+            letter-spacing:.02em;
+            border-left:2px solid var(--brass-dim);
+            padding-left:14px;
+        }
 
 
         .about-grid{
@@ -810,374 +816,474 @@
         .footer-bottom .admin-link{color:var(--steel-dim);}
 
         ::selection{background:var(--brass);color:var(--bg-0);}
+
+
+        /* --- page tabs (SPA-style pages inside one file) --- */
+        .page{display:none;}
+        .page.is-active{display:block;}
+
+        /* --- uniform card sizing + expandable description --- */
+        .grid--3 > *,.grid--4 > *,.ads-rail > *{height:100%;}
+        .card-body,.dir-card > .inner,.vac-card{min-height:190px;}
+        .card-desc{display:none;overflow:hidden;}
+        .card-desc.is-open{display:block;animation:desc-open .25s var(--ease);}
+        @keyframes desc-open{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
+        .card-toggle{
+            align-self:flex-start;
+            margin-top:.2em;
+            background:none;
+            border:none;
+            border-bottom:1px solid var(--brass-dim);
+            padding:.2em 0;
+            font-family:var(--f-mono);
+            font-size:.72rem;
+            letter-spacing:.08em;
+            text-transform:uppercase;
+            color:var(--brass);
+            display:inline-flex;
+            align-items:center;
+            gap:.4em;
+            transition:color .2s,border-color .2s;
+        }
+        .card-toggle:hover{color:var(--brass-bright);border-color:var(--brass-bright);}
+        .card-toggle .arrow{transition:transform .25s var(--ease);display:inline-block;}
+        .card-toggle.is-open .arrow{transform:rotate(180deg);}
+
+        .contact-board{
+            font-family:var(--f-mono);
+            border:1px solid var(--line);
+            background:var(--bg-1);
+            margin-top:26px;
+        }
+        .contact-board .row{
+            display:flex;justify-content:space-between;gap:16px;
+            padding:14px 20px;
+            border-bottom:1px solid var(--line-soft);
+            font-size:.88rem;
+            flex-wrap:wrap;
+        }
+        .contact-board .row:last-child{border-bottom:none;}
+        .contact-board .row span:first-child{color:var(--ink-dim);letter-spacing:.05em;}
+        .contact-board .row span:last-child{color:var(--brass-bright);}
+        .contact-board .row a{color:var(--brass-bright);}
+        .contact-board .row a:hover{color:var(--paper);}
+        .study-mode{
+            margin-top:14px;
+            padding:16px 20px;
+            border:1px solid var(--line);
+            background:var(--bg-2);
+        }
+        .study-mode strong{display:block;color:var(--paper);font-family:var(--f-head);font-size:.9rem;letter-spacing:.02em;margin-bottom:.4em;text-transform:none;}
+        .study-mode p{font-size:.86rem;margin:0;}
+
+
+        /* --- Modal --- */
+        .modal-overlay{
+            position:fixed;
+            inset:0;
+            z-index:300;
+            background:rgba(14,15,10,.92);
+            backdrop-filter:blur(6px);
+            display:none;
+            align-items:center;
+            justify-content:center;
+            padding:24px;
+            animation:fadeIn .25s var(--ease);
+        }
+        .modal-overlay.is-open{display:flex;}
+        .modal-window{
+            max-width:640px;
+            width:100%;
+            background:var(--bg-1);
+            border:1px solid var(--line);
+            padding:32px 36px;
+            position:relative;
+            max-height:90vh;
+            overflow-y:auto;
+        }
+        .modal-window .close-btn{
+            position:absolute;
+            top:16px;right:20px;
+            background:none;border:none;
+            color:var(--steel-dim);
+            font-size:1.6rem;
+            font-family:var(--f-mono);
+            cursor:pointer;
+            transition:color .2s,transform .2s;
+        }
+        .modal-window .close-btn:hover{color:var(--paper);transform:rotate(90deg);}
+        .modal-window h3{margin-bottom:.3em;padding-right:30px;}
+        .modal-window .modal-meta{font-family:var(--f-mono);font-size:.72rem;color:var(--steel-dim);margin-bottom:1em;}
+        .modal-window .modal-body p{font-size:.96rem;margin-bottom:1em;}
+        .modal-window .modal-body img{max-width:100%;margin:1em 0;border:1px solid var(--line-soft);}
+        @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+        .grid--vacancies{grid-template-columns:1fr;}
+
+        @media (max-width:620px){
+            .modal-window{padding:24px 20px;}
+        }
     </style>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SportsActivityLocation",
-  "name": "Тир «Огневой рубеж»",
-  "description": "Тир в Сыктывкаре: стрелковые занятия, обучение на охранника и курсы обращения с оружием.",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "ул. Карла Маркса, д. 228/3 (вход со стороны шлагбаума)",
-    "addressLocality": "Сыктывкар",
-    "addressCountry": "RU"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 61.659996,
-    "longitude": 50.822636
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "1"
-  }
-}
-</script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "EducationalOrganization",
+            "name": "Обучение на охранника — Институт международных связей и делового сотрудничества",
+            "description": "Обучение на охранника, обучение охраны и обучение обращению с оружием в Сыктывкаре. Институт международных связей и делового сотрудничества. Практические стрелковые занятия проходят на тире «Огневой рубеж».",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "ул. Карла Маркса, д. 228/3 (вход со стороны шлагбаума)",
+                "addressLocality": "Сыктывкар",
+                "addressCountry": "RU"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 61.659996,
+                "longitude": 50.822636
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5.0",
+                "reviewCount": "1"
+            }
+        }
+    </script>
 </head>
 <body>
 
 <div class="reticle-cursor" id="reticle"></div>
 
 <header class="site-header" id="siteHeader">
-  <a href="#hero" class="logo">
-    <span class="logo-mark"><i></i></span>
-    <span>ОГНЕВОЙ РУБЕЖ<small>тир · Сыктывкар</small></span>
-  </a>
-
-  <nav class="nav-desktop">
-    <a href="#ads">Объявления</a>
-    <a href="#training">Обучение</a>
-    <a href="#about">О нас</a>
-    <a href="#materials">Методички</a>
-    <a href="#vacancies">Вакансии</a>
-    <a href="#reviews">Отзывы</a>
-  </nav>
-
-  <div class="header-cta">
-    <a href="admin.html" class="admin-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-      Панель
+    <a href="#page-home" class="logo" data-page="page-home">
+        <span class="logo-mark"><i></i></span>
+        <span>Институт международных связей и делового сотрудничества<small>· Сыктывкар</small></span>
     </a>
-    <a href="#contacts" class="btn btn--ghost btn--sm">Записаться</a>
-  </div>
 
-  <button class="burger" id="burger" aria-label="Меню"><span></span></button>
+    <nav class="nav-desktop">
+        <a href="#page-home" data-page="page-home">Объявления</a>
+        <a href="#page-about" data-page="page-about">О нас</a>
+        <a href="#page-materials" data-page="page-materials">Методички</a>
+        <a href="#page-vacancies" data-page="page-vacancies">Вакантные места</a>
+        <a href="#page-reviews" data-page="page-reviews">Отзывы</a>
+    </nav>
+
+    <div class="header-cta">
+        <a href="/admin" class="admin-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            Панель
+        </a>
+        <a href="#page-about" class="btn btn--ghost btn--sm" data-page="page-about">Записаться</a>
+    </div>
+
+    <button class="burger" id="burger" aria-label="Меню"><span></span></button>
 </header>
 
 <nav class="nav-mobile" id="navMobile">
-  <a href="#ads">Объявления</a>
-  <a href="#training">Обучение</a>
-  <a href="#about">О нас</a>
-  <a href="#materials">Методички</a>
-  <a href="#vacancies">Вакансии</a>
-  <a href="#reviews">Отзывы</a>
-  <a href="admin.html" class="admin-link">Панель администратора →</a>
+    <a href="#page-home" data-page="page-home">Объявления</a>
+    <a href="#page-about" data-page="page-about">О нас</a>
+    <a href="#page-materials" data-page="page-materials">Методички</a>
+    <a href="#page-vacancies" data-page="page-vacancies">Вакантные места</a>
+    <a href="#page-reviews" data-page="page-reviews">Отзывы</a>
 </nav>
 
 <main>
 
-<section class="hero" id="hero">
-  <div class="hero-bg" id="heroBg">
-    <img src="assets/i.webp" alt="Стрелковый тир «Огневой рубеж» в Сыктывкаре" id="heroImg">
-  </div>
+    <div class="page" id="page-home">
 
-  <div class="hero-hud">
-    <span>СЫКТЫВКАР · КАРЛА МАРКСА 228/3</span>
-    <span class="rating">★★★★★ 5.0 GOOGLE</span>
-  </div>
+        <section class="hero" id="hero">
+            <div class="hero-bg" id="heroBg">
+                <img src="assets/i.webp" alt="Обучение на охранника в Сыктывкаре" id="heroImg">
+            </div>
 
-  <div class="hero-inner">
-    <div class="hero-eyebrow"><i></i>ТИР · СТРЕЛЬБА · ОБУЧЕНИЕ</div>
-    <h1>ТОЧНЫЙ<br><em>ВЫСТРЕЛ.</em><br>ТВЁРДАЯ ПОДГОТОВКА.</h1>
+            <div class="hero-hud">
+                <span>СЫКТЫВКАР · КАРЛА МАРКСА 228/3</span>
+            </div>
 
-    <div class="hero-desc">
-      <p>Стрелковый тир в Сыктывкаре и курсы подготовки охранников совместно с
-        <strong>Институтом международных связей и делового сотрудничества</strong>.
-        Обучение обращению с оружием, практическая стрельба и официальный документ по итогам курса.</p>
-      <div class="hero-actions">
-        <a href="#training" class="btn">Курсы обучения
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="#about" class="btn btn--ghost">Как добраться</a>
-      </div>
-    </div>
-  </div>
+            <div class="hero-inner">
+                <div class="hero-eyebrow"><i></i>ОБУЧЕНИЕ НА ОХРАННИКА · СЫКТЫВКАР</div>
+                <h1>ОБУЧЕНИЕ<br><em>НА ОХРАННИКА.</em></h1>
 
-  <div class="scroll-cue">ЛИСТАЙТЕ ВНИЗ</div>
-</section>
+                <div class="hero-desc">
+                    <p>Образование по профессии «охранник» в Сыктывкаре: обучение охраны и обучение на оружие проводит <strong>Институт международных связей и делового сотрудничества</strong>. Теория — в учреждении, практическая стрельба в рамках программы.</p>
+                    <div class="hero-actions">
+                        <a href="#page-about" class="btn" data-page="page-about">О программе обучения
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </a>
+                        <a href="#page-about" class="btn btn--ghost" data-page="page-about">Контакты и адрес</a>
+                    </div>
+                </div>
+            </div>
 
-<section id="ads">
-  <div class="container">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow">Объявления</div>
-        <h2>Актуально сейчас</h2>
-        <p class="lede">Расписание, акции и новости огневого рубежа.</p>
-      </div>
-      <div class="rail-controls">
-        <button class="rail-btn" id="adsPrev" aria-label="Назад">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
-        </button>
-        <button class="rail-btn" id="adsNext" aria-label="Вперёд">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-        </button>
-      </div>
-    </div>
+            <div class="scroll-cue">ЛИСТАЙТЕ ВНИЗ</div>
+        </section>
 
-    <div class="ads-rail reveal" id="adsRail">
-      <div class="state-block">Загрузка объявлений…</div>
-    </div>
-  </div>
-</section>
+        <section id="ads">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="eyebrow">Объявления</div>
+                        <h2>Актуально сейчас</h2>
+                        <p class="lede">Расписание, акции и новости огневого рубежа.</p>
+                    </div>
+                    <div class="rail-controls">
+                        <!-- kept for compatibility but hidden via CSS -->
+                    </div>
+                </div>
 
-<section id="training" class="bg-alt">
-  <div class="container">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow">Направления</div>
-        <h2>Обучение и стрельба</h2>
-        <p class="lede">От первого выстрела на стрельбище до официальной профессии охранника.</p>
-      </div>
-      <div class="section-tag">г. Сыктывкар<br>приём групп и индивидуально</div>
-    </div>
+                <div class="ads-rail reveal" id="adsRail">
+                    <div class="state-block">Загрузка объявлений…</div>
+                </div>
+            </div>
+        </section>
 
-    <div class="grid grid--3 reveal reveal-stagger">
-      <div class="dir-card frame" style="--i:0">
-        <div class="inner">
-          <span class="dir-index">01 / СТРЕЛЬБА</span>
-          <h3>Тир для новичков и практиков</h3>
-          <p>Стрелковые занятия в тире Сыктывкара: инструктаж по технике безопасности, постановка хвата и стойки, отработка точности на разных дистанциях.</p>
-          <ul class="dir-list">
-            <li>Индивидуальные и групповые занятия</li>
-            <li>Прокат оружия и экипировки</li>
-            <li>Инструктор на каждой смене</li>
-          </ul>
-        </div>
-      </div>
+        <section id="contacts">
+            <div class="container">
+                <div class="cta-strip reveal">
+                    <h2>Готовы выйти<br>на рубеж?</h2>
+                    <div class="hero-actions">
+                        <a href="#page-about" class="btn" data-page="page-about">Записаться на занятие
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </a>
+                        <a href="#page-reviews" class="btn btn--ghost" data-page="page-reviews">Отзывы</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <div class="dir-card frame" style="--i:1">
-        <div class="inner">
-          <span class="dir-index">02 / ПРОФЕССИЯ</span>
-          <h3>Обучение на охранника в Сыктывкаре</h3>
-          <p>Образование по профессии «охранник»: правовая подготовка, тактика действий, физическая и огневая подготовка. Курс готовит к квалификационному экзамену.</p>
-          <ul class="dir-list">
-            <li>Теория + практика на стрельбище</li>
-            <li>Подготовка к экзамену на разряд</li>
-            <li>Документ по итогам обучения</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="dir-card frame" style="--i:2">
-        <div class="inner">
-          <span class="dir-index">03 / ОРУЖИЕ</span>
-          <h3>Обучение обращению с оружием</h3>
-          <p>Курс обучения на оружие в Сыктывкаре: устройство и разборка, правила хранения и переноски, безопасное обращение и практическая стрельба под контролем инструктора.</p>
-          <ul class="dir-list">
-            <li>Работа с боевым и служебным оружием</li>
-            <li>Разбор нормативной базы</li>
-            <li>Итоговая практическая аттестация</li>
-          </ul>
-        </div>
-      </div>
     </div>
 
-    <div class="institute-strip reveal">
-      <span class="badge">ИМСДС</span>
-      <div>
-        <strong>Институт международных связей и делового сотрудничества</strong>
-        <span>Программы обучения на охранника и курсы по обращению с оружием реализуются совместно с институтом — документ по итогам курса.</span>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- ================= PAGE 2 — О НАС ================= -->
+    <div class="page" id="page-about">
 
-<section id="about">
-  <div class="container">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow">О нас</div>
-        <h2>Огневой рубеж в центре Сыктывкара</h2>
-        <p class="lede">Современный тир, оборудованный для обучения стрельбе и подготовки охранников — от первого посещения до профессиональной квалификации.</p>
-      </div>
-    </div>
+        <section id="institute">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="eyebrow">О нас</div>
+                        <h2>Обучение на охранника в Сыктывкаре</h2>
+                        <p class="lede">Образование по профессии «охранник»: обучение охраны и обучение на оружие проводит <strong>Институт международных связей и делового сотрудничества</strong>. Практические стрелковые занятия в рамках программы проходят в тире.</p>
+                    </div>
+                </div>
 
-    <div class="about-grid">
-      <div class="reveal">
-        <h3 style="margin-bottom:1em;">Режим работы</h3>
-        <div class="hours-board">
-          <div class="row"><span>Понедельник — Пятница</span><span>10:00 — 21:00</span></div>
-          <div class="row"><span>Суббота</span><span>10:00 — 20:00</span></div>
-          <div class="row"><span>Воскресенье</span><span>10:00 — 18:00</span></div>
-          <div class="row is-off"><span>Технический перерыв</span><span>13:00 — 14:00</span></div>
-        </div>
+                <div class="institute-strip reveal">
+                    <span class="badge">ИМСДС</span>
+                    <div>
+                        <strong>Институт международных связей и делового сотрудничества (Сыктывкар)</strong>
+                        <span>Институт реализует образовательную программу по профессии «охранник»: правовая подготовка, тактика действий, курс обучения на оружие и итоговая аттестация. Документ по итогам обучения выдаёт институт.</span>
+                        <div class="institute-note">Практическая стрельба в рамках программы проходит в тире.</div>
+                    </div>
+                </div>
 
-        <div class="info-list">
-          <div class="item">
-            <span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-            <div><strong>Адрес</strong><span>г. Сыктывкар, ул. Карла Маркса, д. 228/3 — вход со стороны шлагбаума</span></div>
-          </div>
-          <div class="item">
-            <span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L13 14l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 7a2 2 0 0 1 2-2z"/></svg></span>
-            <div><strong>Запись и вопросы</strong><span>оставьте заявку через форму ниже или напишите нам в разделе «Отзывы»</span></div>
-          </div>
-          <div class="item">
-            <span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6l-9-4z"/></svg></span>
-            <div><strong>Безопасность</strong><span>каждое занятие проходит под контролем аттестованного инструктора</span></div>
-          </div>
-        </div>
-      </div>
+                <div class="grid grid--3 reveal reveal-stagger" style="margin-top:32px;">
+                    <div class="dir-card frame" style="--i:0">
+                        <div class="inner">
+                            <span class="dir-index">ПРОГРАММА</span>
+                            <h3>Обучение на охранника Сыктывкар</h3>
+                            <button type="button" class="card-toggle" data-toggle>Подробнее <span class="arrow">▾</span></button>
+                            <p class="card-desc">Образование по профессии «охранник»: теория, тактика действий, правовая, физическая и огневая подготовка, подготовка к квалификационному экзамену на разряд.</p>
+                        </div>
+                    </div>
+                    <div class="dir-card frame" style="--i:1">
+                        <div class="inner">
+                            <span class="dir-index">ПРОГРАММА</span>
+                            <h3>Обучение охраны и обращению с оружием</h3>
+                            <button type="button" class="card-toggle" data-toggle>Подробнее <span class="arrow">▾</span></button>
+                            <p class="card-desc">Устройство и разборка оружия, правила хранения и переноски, безопасное обращение — курс обучения на оружие в Сыктывкаре с итоговой практической аттестацией.</p>
+                        </div>
+                    </div>
+                    <div class="dir-card frame" style="--i:2">
+                        <div class="inner">
+                            <span class="dir-index">ПРАКТИКА</span>
+                            <h3>Стрельба в тире</h3>
+                            <button type="button" class="card-toggle" data-toggle>Подробнее <span class="arrow">▾</span></button>
+                            <p class="card-desc">Практическая часть программы: постановка хвата и стойки, отработка точности на разных дистанциях под контролем инструктора.</p>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="reveal">
-        <div class="map-wrap">
-          <span class="map-tag">КАРЛА МАРКСА, 228/3</span>
-          <iframe src="https://yandex.com/map-widget/v1/?ll=50.822636%2C61.659996&z=17" width="100%" height="450" frameborder="0" loading="lazy" title="Карта — тир Огневой рубеж, Сыктывкар"></iframe>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+                <div class="about-grid" style="margin-top:56px;">
+                    <div class="reveal">
+                        <h3 style="margin-bottom:1em;">Контакты и режим работы</h3>
+                        <div class="contact-board">
+                            <div class="row"><span>Телефон</span><span><a href="tel:882123140060">8-8212-314060</a></span></div>
+                            <div class="row"><span>Email</span><span><a href="mailto:tirkomi@mail.ru">tirkomi@yandex.ru</a></span></div>
+                            <div class="row"><span>Понедельник — Пятница</span><span>9:00 — 17:00</span></div>
+                        </div>
 
-<section id="materials" class="bg-alt">
-  <div class="container">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow">Методические материалы</div>
-        <h2>Документы для подготовки</h2>
-        <p class="lede">Методички и справочные материалы по курсам — доступны для скачивания в PDF.</p>
-      </div>
-    </div>
+                        <div class="study-mode">
+                            <strong>Режим учебных занятий</strong>
+                            <p>Занятия проводятся в группах по расписанию каждой группы (устанавливается отдельно) в режиме работы учреждения. Академический час учебных занятий — 45 минут.</p>
+                        </div>
 
-    <div class="grid grid--3 reveal reveal-stagger" id="materialsGrid">
-      <div class="state-block">Загрузка материалов…</div>
-    </div>
-  </div>
-</section>
+                        <div class="info-list">
+                            <div class="item">
+                                <span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                                <div><strong>Адрес практики</strong><span>г. Сыктывкар, ул. Карла Маркса, д. 228/3 — Институт международных связей и делового сотрудничества, вход со стороны шлагбаума</span></div>
+                            </div>
+                        </div>
+                    </div>
 
-<section id="vacancies">
-  <div class="container">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow">Вакансии</div>
-        <h2>Присоединяйтесь к команде</h2>
-        <p class="lede">Открытые позиции в тире — инструкторы, администраторы, техники.</p>
-      </div>
-    </div>
+                    <div class="reveal">
+                        <div class="map-wrap">
+                            <span class="map-tag">КАРЛА МАРКСА, 228/3</span>
+                            <iframe src="https://yandex.com/map-widget/v1/?ll=50.822636%2C61.659996&z=17" width="100%" height="450" frameborder="0" loading="lazy" title="Карта — Институт международных связей и делового сотрудничества, Сыктывкар"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <div class="grid grid--3 reveal reveal-stagger" id="vacanciesGrid">
-      <div class="state-block">Загрузка вакансий…</div>
-    </div>
-  </div>
-</section>
-
-<section id="reviews" class="bg-alt">
-  <div class="container">
-    <div class="section-head reveal">
-      <div>
-        <div class="eyebrow">Отзывы</div>
-        <h2>Слово тем, кто уже стрелял</h2>
-        <p class="lede">Оставьте отзыв о занятии или курсе — это помогает нам стать точнее.</p>
-      </div>
     </div>
 
-    <div class="reviews-layout">
-      <div class="reveal" id="reviewsList">
-        <div class="state-block">Загрузка отзывов…</div>
-      </div>
+    <!-- ================= PAGE 3 — МЕТОДИЧКИ ================= -->
+    <div class="page" id="page-materials">
 
-      <form class="form-panel reveal" id="reviewForm" novalidate>
-        <h3 style="margin-bottom:1.2em;">Оставить отзыв</h3>
+        <section id="materials">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="eyebrow">Методические материалы</div>
+                        <h2>Документы для подготовки</h2>
+                        <p class="lede">Методички и справочные материалы — доступны для скачивания в PDF.</p>
+                    </div>
+                </div>
 
-        <div class="form-row">
-          <label for="rvName">Имя</label>
-          <input type="text" id="rvName" name="name" maxlength="100" required>
-        </div>
-        <div class="form-row">
-          <label for="rvEmail">Email</label>
-          <input type="email" id="rvEmail" name="email" maxlength="250" required>
-        </div>
-        <div class="form-row">
-          <label for="rvDesc">Отзыв</label>
-          <textarea id="rvDesc" name="description" maxlength="1000" required></textarea>
-        </div>
-        <div class="form-row">
-          <label>Оценка</label>
-          <div class="rating-pick" id="ratingPick">
-            <button type="button" data-v="1">1</button>
-            <button type="button" data-v="2">2</button>
-            <button type="button" data-v="3">3</button>
-            <button type="button" data-v="4">4</button>
-            <button type="button" data-v="5">5</button>
-          </div>
-          <input type="hidden" name="rating" id="rvRating" value="">
-        </div>
+                <div class="grid grid--3 reveal reveal-stagger" id="materialsGrid">
+                    <div class="state-block">Загрузка материалов…</div>
+                </div>
+            </div>
+        </section>
 
-        <button type="submit" class="btn" style="width:100%;justify-content:center;">Отправить отзыв</button>
-        <div class="form-msg" id="reviewMsg"></div>
-      </form>
     </div>
-  </div>
-</section>
 
-<section id="contacts">
-  <div class="container">
-    <div class="cta-strip reveal">
-      <h2>Готовы выйти<br>на рубеж?</h2>
-      <div class="hero-actions">
-        <a href="#about" class="btn">Записаться на занятие
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="#training" class="btn btn--ghost">Узнать про курсы</a>
-      </div>
+    <!-- ================= PAGE 4 — ВАКАНСИИ ================= -->
+    <div class="page" id="page-vacancies">
+
+        <section id="vacancies">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="eyebrow">Вакантные места для приема</div>
+                        <h2>Присоединяйтесь к команде</h2>
+                        <p class="lede">Открытые позиции на прием заявок.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid--vacancies reveal reveal-stagger" id="vacanciesGrid">
+                    <div class="state-block">Загрузка вакансий…</div>
+                </div>
+            </div>
+        </section>
+
     </div>
-  </div>
-</section>
+
+    <!-- ================= PAGE 5 — ОТЗЫВЫ ================= -->
+    <div class="page" id="page-reviews">
+
+        <section id="reviews">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="eyebrow">Отзывы</div>
+                        <h2>Слово тем, кто уже стрелял</h2>
+                        <p class="lede">Оставьте отзыв о занятии — это помогает нам стать точнее.</p>
+                    </div>
+                </div>
+
+                <div class="reviews-layout">
+                    <div class="reveal" id="reviewsList">
+                        <div class="state-block">Загрузка отзывов…</div>
+                    </div>
+
+                    <form class="form-panel reveal" id="reviewForm" novalidate>
+                        <h3 style="margin-bottom:1.2em;">Оставить отзыв</h3>
+
+                        <div class="form-row">
+                            <label for="rvName">Имя</label>
+                            <input type="text" id="rvName" name="name" maxlength="100" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="rvEmail">Email</label>
+                            <input type="email" id="rvEmail" name="email" maxlength="250" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="rvDesc">Отзыв</label>
+                            <textarea id="rvDesc" name="description" maxlength="1000" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label>Оценка</label>
+                            <div class="rating-pick" id="ratingPick">
+                                <button type="button" data-v="1">1</button>
+                                <button type="button" data-v="2">2</button>
+                                <button type="button" data-v="3">3</button>
+                                <button type="button" data-v="4">4</button>
+                                <button type="button" data-v="5">5</button>
+                            </div>
+                            <input type="hidden" name="rating" id="rvRating" value="">
+                        </div>
+
+                        <button type="submit" class="btn" style="width:100%;justify-content:center;">Отправить отзыв</button>
+                        <div class="form-msg" id="reviewMsg"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </div>
 
 </main>
 
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="logo" style="margin-bottom:1em;">
-          <span class="logo-mark"><i></i></span>
-          <span>ОГНЕВОЙ РУБЕЖ</span>
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo" style="margin-bottom:1em;">
+                    <span class="logo-mark"><i></i></span>
+                    <span>ОГНЕВОЙ РУБЕЖ</span>
+                </div>
+                <p>Стрелковый тир в Сыктывкаре. Обучение на охранника и обучение на оружие проводит партнёр — Институт международных связей и делового сотрудничества.</p>
+            </div>
+            <div>
+                <h4>Разделы</h4>
+                <ul>
+                    <li><a href="#page-home" data-page="page-home">Объявления</a></li>
+                    <li><a href="#page-materials" data-page="page-materials">Методички</a></li>
+                    <li><a href="#page-vacancies" data-page="page-vacancies">Вакантные места</a></li>
+                    <li><a href="#page-reviews" data-page="page-reviews">Отзывы</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Контакты</h4>
+                <ul>
+                    <li>г. Сыктывкар, ул. Карла Маркса, 228/3</li>
+                    <li>вход со стороны шлагбаума</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Обучение на охранника</h4>
+                <ul>
+                    <li><a href="#page-about" data-page="page-about">Институт международных связей и делового сотрудничества</a></li>
+                    <li><a href="#page-about" data-page="page-about">Образование по профессии «охранник»</a></li>
+                </ul>
+            </div>
         </div>
-        <p>Тир и учебный центр в Сыктывкаре: стрельба, обучение на охранника и курсы обращения с оружием.</p>
-      </div>
-      <div>
-        <h4>Разделы</h4>
-        <ul>
-          <li><a href="#ads">Объявления</a></li>
-          <li><a href="#training">Обучение</a></li>
-          <li><a href="#materials">Методички</a></li>
-          <li><a href="#vacancies">Вакансии</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Контакты</h4>
-        <ul>
-          <li>г. Сыктывкар, ул. Карла Маркса, 228/3</li>
-          <li>вход со стороны шлагбаума</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Партнёр</h4>
-        <ul>
-          <li>Институт международных связей и делового сотрудничества</li>
-        </ul>
-      </div>
+        <div class="footer-bottom">
+            <span>© <span id="year"></span> Тир «Огневой рубеж», Сыктывкар</span>
+            <a href="/admin" class="admin-link">Панель администратора</a>
+        </div>
     </div>
-    <div class="footer-bottom">
-      <span>© <span id="year"></span> Тир «Огневой рубеж», Сыктывкар</span>
-      <a href="admin.html" class="admin-link">Панель администратора</a>
-    </div>
-  </div>
 </footer>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-window">
+        <button class="close-btn" id="modalClose">✕</button>
+        <h3 id="modalTitle">Заголовок</h3>
+        <div class="modal-meta" id="modalMeta"></div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
 
 <script>
 
@@ -1295,7 +1401,7 @@
             navMobile.classList.toggle('is-open', open);
             document.body.style.overflow = open ? 'hidden' : '';
         });
-        navMobile.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+        navMobile.querySelectorAll('a[data-page]').forEach((a) => a.addEventListener('click', () => {
             burger.classList.remove('is-open');
             navMobile.classList.remove('is-open');
             document.body.style.overflow = '';
@@ -1332,7 +1438,10 @@
                 }
             });
         }, { threshold: 0.14 });
-        document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+        function observeReveals(){
+            document.querySelectorAll('.reveal:not(.is-visible)').forEach((el) => io.observe(el));
+        }
+        observeReveals();
 
         function staggerChildren(container) {
             Array.from(container.children).forEach((child, i) => child.style.setProperty('--i', i));
@@ -1342,6 +1451,61 @@
             return `<div class="state-block"><strong>${title}</strong>${text}</div>`;
         }
 
+        /* ---- page router (SPA pages inside this single file) ---- */
+        const pages = document.querySelectorAll('.page');
+        const navEls = document.querySelectorAll('[data-page]');
+        const validPages = new Set(Array.from(pages).map((p) => p.id));
+
+        function showPage(id, { scroll = true } = {}) {
+            if (!validPages.has(id)) id = 'page-home';
+            pages.forEach((p) => p.classList.toggle('is-active', p.id === id));
+            navEls.forEach((a) => a.classList.toggle('is-current', a.dataset.page === id));
+            if (scroll) window.scrollTo({ top: 0, behavior: 'auto' });
+            observeReveals();
+        }
+
+        navEls.forEach((a) => a.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = a.dataset.page;
+            if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
+            showPage(id);
+        }));
+
+        window.addEventListener('popstate', () => {
+            showPage(location.hash.replace('#', '') || 'page-home');
+        });
+
+        showPage(location.hash.replace('#', '') || 'page-home', { scroll: false });
+
+        // ---- Modal ----
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMeta = document.getElementById('modalMeta');
+        const modalBody = document.getElementById('modalBody');
+        const modalClose = document.getElementById('modalClose');
+
+        function openModal(title, meta, bodyHTML) {
+            modalTitle.textContent = title;
+            modalMeta.textContent = meta;
+            modalBody.innerHTML = bodyHTML;
+            modalOverlay.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('is-open');
+            document.body.style.overflow = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('is-open')) closeModal();
+        });
+
+        // ---- Ads ----
         const adsRail = document.getElementById('adsRail');
         async function loadAds() {
             try {
@@ -1351,37 +1515,60 @@
                     adsRail.innerHTML = stateBlock('Пока нет объявлений', 'Загляните позже — здесь появятся новости и акции тира.');
                     return;
                 }
-                adsRail.innerHTML = items.map((ad) => `
-        <article class="card">
+                adsRail.innerHTML = items.map((ad) => {
+                    const desc = ad.description ? escapeHtml(ad.description) : '';
+                    const preview = desc.length > 120 ? desc.slice(0, 120) + '…' : desc;
+                    return `
+        <article class="card" data-id="${ad.id}">
           <div class="card-media">
             ${ad.image ? `<img src="${escapeHtml(ad.image)}" alt="${escapeHtml(ad.title)}" loading="lazy">` : `<div class="ph">ОГНЕВОЙ РУБЕЖ</div>`}
           </div>
           <div class="card-body">
             <span class="card-tag">Объявление</span>
             <h3>${escapeHtml(ad.title)}</h3>
-            <p>${escapeHtml(ad.description || '')}</p>
+            <p>${preview}</p>
             <div class="card-foot">
               <span>${formatDate(ad.create_at)}</span>
-              ${ad.url ? `<a href="${escapeHtml(ad.url)}" class="btn--line" target="_blank" rel="noopener">Подробнее</a>` : (ad.pdf ? `<a href="${escapeHtml(ad.pdf)}" class="btn--line" target="_blank" rel="noopener">PDF</a>` : '')}
+              <button class="btn--line modal-trigger" data-id="${ad.id}">Подробнее</button>
             </div>
           </div>
-        </article>`).join('');
+        </article>`;
+                }).join('');
+
+                // attach modal triggers
+                adsRail.querySelectorAll('.modal-trigger').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        e.stopPropagation();
+                        const id = btn.dataset.id;
+                        try {
+                            const ad = await Api.advertisements.get(id);
+                            if (!ad) throw new Error('Объявление не найдено');
+                            let bodyHTML = `<p>${escapeHtml(ad.description || '')}</p>`;
+                            if (ad.image) bodyHTML += `<img src="${escapeHtml(ad.image)}" alt="${escapeHtml(ad.title)}">`;
+                            if (ad.url) bodyHTML += `<p><a href="${escapeHtml(ad.url)}" target="_blank" rel="noopener" class="btn btn--sm">Перейти по ссылке</a></p>`;
+                            if (ad.pdf) bodyHTML += `<p><a href="${escapeHtml(ad.pdf)}" target="_blank" rel="noopener" class="btn btn--sm">Скачать PDF</a></p>`;
+                            openModal(ad.title, formatDate(ad.create_at), bodyHTML);
+                        } catch (err) {
+                            console.error(err);
+                            openModal('Ошибка', '', `<p>Не удалось загрузить объявление: ${escapeHtml(err.message)}</p>`);
+                        }
+                    });
+                });
+
             } catch (err) {
                 adsRail.innerHTML = stateBlock('Не удалось загрузить объявления', escapeHtml(err.message || 'Проверьте соединение и попробуйте обновить страницу.'));
             }
         }
         loadAds();
 
-        document.getElementById('adsPrev').addEventListener('click', () => adsRail.scrollBy({ left: -340, behavior: 'smooth' }));
-        document.getElementById('adsNext').addEventListener('click', () => adsRail.scrollBy({ left: 340, behavior: 'smooth' }));
-
+        // ---- Materials ----
         const materialsGrid = document.getElementById('materialsGrid');
         async function loadMaterials() {
             try {
                 const data = await Api.materials.list(20, 0);
                 const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
                 if (!items.length) {
-                    materialsGrid.innerHTML = stateBlock('Материалов пока нет', 'Методички появятся здесь по мере публикации курсов.');
+                    materialsGrid.innerHTML = stateBlock('Материалов пока нет', 'Методички появятся здесь по мере публикации.');
                     return;
                 }
                 materialsGrid.innerHTML = items.map((m) => `
@@ -1403,6 +1590,7 @@
         }
         loadMaterials();
 
+        // ---- Vacancies ----
         const vacanciesGrid = document.getElementById('vacanciesGrid');
         async function loadVacancies() {
             try {
@@ -1425,6 +1613,7 @@
         }
         loadVacancies();
 
+        // ---- Reviews ----
         const reviewsList = document.getElementById('reviewsList');
         async function loadReviews() {
             try {
@@ -1449,6 +1638,7 @@
         }
         loadReviews();
 
+        // ---- Review Form ----
         const ratingPick = document.getElementById('ratingPick');
         const rvRating = document.getElementById('rvRating');
         ratingPick.addEventListener('click', (e) => {
@@ -1491,6 +1681,17 @@
             } finally {
                 submitBtn.disabled = false;
             }
+        });
+
+        // toggle for cards
+        document.querySelectorAll('[data-toggle]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const desc = btn.parentElement.querySelector('.card-desc');
+                if (desc) {
+                    desc.classList.toggle('is-open');
+                    btn.classList.toggle('is-open');
+                }
+            });
         });
     })();
 </script>
