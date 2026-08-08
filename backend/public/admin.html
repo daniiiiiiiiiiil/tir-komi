@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Панель администратора — Тир «Огневой рубеж»</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+
+<style>
+    .admin-body{background:var(--bg-0);}
+    .admin-main{padding:150px 0 100px;min-height:100vh;}
+
+    .login-wrap{
+        display:flex;justify-content:center;
+        padding:40px 0;
+    }
+    .login-card{
+        background:var(--bg-1);
+        padding:44px 40px;
+        width:100%;max-width:420px;
+    }
+    .login-card .form-row:last-of-type{margin-bottom:22px;}
+
+    .dash-head{
+        display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:18px;
+        margin-bottom:34px;
+        padding-bottom:26px;
+        border-bottom:1px solid var(--line-soft);
+    }
+    .dash-user{display:flex;align-items:center;gap:14px;}
+    .mono-tag{font-family:var(--f-mono);font-size:.74rem;color:var(--steel-dim);letter-spacing:.05em;}
+
+    .tabs{display:flex;gap:6px;margin-bottom:32px;flex-wrap:wrap;border-bottom:1px solid var(--line-soft);}
+    .tab{
+        background:transparent;border:none;color:var(--steel);
+        font-family:var(--f-head);font-size:.86rem;letter-spacing:.05em;text-transform:uppercase;
+        padding:.9em 1.3em;position:relative;
+    }
+    .tab::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:transparent;transition:background .25s;}
+    .tab.is-active{color:var(--brass-bright);}
+    .tab.is-active::after{background:var(--brass);}
+    .tab:hover{color:var(--paper);}
+
+    .tab-panel{display:none;}
+    .tab-panel.is-active{display:block;animation:panelIn .35s var(--ease);}
+    @keyframes panelIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+    .panel-toolbar{
+        display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+        margin-bottom:20px;
+    }
+    .panel-toolbar h3{color:var(--paper);}
+
+    .entity-form{
+        background:var(--bg-1);border:1px solid var(--line);
+        padding:24px 24px 20px;margin-bottom:26px;
+        display:grid;grid-template-columns:repeat(2,1fr);gap:0 20px;
+    }
+    .entity-form .form-row{grid-column:span 1;}
+    .entity-form .form-row:has(textarea){grid-column:1/-1;}
+    .entity-form > button{grid-column:1/-1;justify-self:start;margin-top:4px;}
+    .entity-form .form-msg{grid-column:1/-1;}
+    @media (max-width:640px){.entity-form{grid-template-columns:1fr;}}
+
+    .table-wrap{overflow-x:auto;border:1px solid var(--line-soft);}
+    .data-table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:640px;}
+    .data-table th{
+        text-align:left;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+        color:var(--steel-dim);padding:12px 16px;border-bottom:1px solid var(--line);background:var(--bg-1);
+        white-space:nowrap;
+    }
+    .data-table td{padding:12px 16px;border-bottom:1px solid var(--line-soft);color:var(--ink-dim);vertical-align:top;}
+    .data-table td.title-cell{color:var(--paper);font-family:var(--f-head);font-weight:500;}
+    .data-table tr:hover td{background:var(--bg-2);}
+    .data-table .desc-cell{max-width:280px;}
+    .data-table .desc-cell span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .data-table .row-actions{display:flex;gap:8px;white-space:nowrap;}
+    .data-table .icon-btn{
+        width:30px;height:30px;border:1px solid var(--line);background:transparent;color:var(--steel);
+        display:inline-grid;place-items:center;transition:border-color .2s,color .2s;
+    }
+    .data-table .icon-btn:hover{border-color:var(--brass);color:var(--brass-bright);}
+    .data-table .icon-btn.danger:hover{border-color:var(--danger);color:#e2a89f;}
+
+    .edit-row td{background:var(--bg-1);}
+    .edit-row .entity-form{margin:0;border:none;padding:12px 0;}
+
+    .empty-row td{text-align:center;padding:36px;font-family:var(--f-mono);color:var(--steel-dim);}
+</style>
+
+<style>
+
+    section{
+        position:relative;
+        padding:120px 0;
+    }
+    section + section{border-top:1px solid var(--line-soft);}
+    @media (max-width:700px){section{padding:80px 0;}}
+
+    .section-head{
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-end;
+        gap:32px;
+        margin-bottom:56px;
+    }
+    .section-head .lede{margin-top:.3em;}
+    @media (max-width:700px){.section-head{flex-direction:column;align-items:flex-start;gap:16px;}}
+
+    .section-tag{
+        font-family:var(--f-mono);
+        font-size:.72rem;
+        color:var(--steel-dim);
+        text-align:right;
+        line-height:1.7;
+    }
+    @media (max-width:700px){.section-tag{text-align:left;}}
+
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease), transform .8s var(--ease);}
+    .reveal.is-visible{opacity:1;transform:translateY(0);}
+    .reveal-stagger > *{transition-delay:calc(var(--i,0) * 70ms);}
+
+    .bg-alt{background:var(--bg-1);}
+    .bg-panel{background:linear-gradient(180deg, var(--bg-1), var(--bg-0));}
+
+
+    .grid{display:grid;gap:24px;}
+    .grid--3{grid-template-columns:repeat(3,1fr);}
+    .grid--4{grid-template-columns:repeat(4,1fr);}
+    @media (max-width:980px){.grid--3,.grid--4{grid-template-columns:repeat(2,1fr);}}
+    @media (max-width:620px){.grid--3,.grid--4{grid-template-columns:1fr;}}
+
+    .card{
+        background:var(--bg-2);
+        border:1px solid var(--line-soft);
+        display:flex;flex-direction:column;
+        height:100%;
+        transition:border-color .3s, transform .3s var(--ease), background .3s;
+    }
+    .card:hover{border-color:var(--line);transform:translateY(-4px);background:var(--bg-3);}
+
+    .card-media{
+        aspect-ratio:4/3;
+        background:var(--bg-1);
+        position:relative;
+        overflow:hidden;
+        border-bottom:1px solid var(--line-soft);
+    }
+    .card-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease);}
+    .card:hover .card-media img{transform:scale(1.06);}
+    .card-media .ph{
+        width:100%;height:100%;
+        display:grid;place-items:center;
+        color:var(--steel-dim);
+        font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;
+        background:
+                repeating-linear-gradient(45deg, rgba(198,154,74,.05) 0 2px, transparent 2px 14px);
+    }
+
+    .card-body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:.6em;flex:1;}
+    .card-tag{
+        font-family:var(--f-mono);
+        font-size:.68rem;
+        letter-spacing:.14em;
+        text-transform:uppercase;
+        color:var(--brass);
+    }
+    .card-body h3{color:var(--paper);}
+    .card-body p{font-size:.92rem;flex:1;}
+    .card-foot{
+        display:flex;align-items:center;justify-content:space-between;
+        margin-top:.6em;padding-top:.9em;
+        border-top:1px solid var(--line-soft);
+        font-family:var(--f-mono);font-size:.72rem;color:var(--steel-dim);
+    }
+
+
+    .ads-rail{
+        display:flex;
+        gap:20px;
+        overflow-x:auto;
+        scroll-snap-type:x mandatory;
+        padding-bottom:14px;
+        margin:0 -24px;
+        padding-left:24px;padding-right:24px;
+        scrollbar-width:thin;
+        scrollbar-color:var(--brass-dim) transparent;
+    }
+    .ads-rail::-webkit-scrollbar{height:6px;}
+    .ads-rail::-webkit-scrollbar-thumb{background:var(--brass-dim);}
+    .ads-rail .card{min-width:320px;max-width:320px;scroll-snap-align:start;}
+    @media (max-width:520px){.ads-rail .card{min-width:82vw;max-width:82vw;}}
+
+    .rail-controls{display:flex;gap:.6em;}
+    .rail-btn{
+        width:42px;height:42px;
+        border:1px solid var(--line);
+        background:transparent;color:var(--paper);
+        display:grid;place-items:center;
+        transition:border-color .25s,background .25s;
+    }
+    .rail-btn:hover{border-color:var(--brass);background:rgba(198,154,74,.08);}
+
+
+    .dir-card{
+        padding:2px;
+    }
+    .dir-card > .inner{
+        background:var(--bg-2);
+        padding:34px 28px;
+        height:100%;
+        display:flex;flex-direction:column;gap:14px;
+    }
+    .dir-index{
+        font-family:var(--f-mono);
+        font-size:.78rem;
+        color:var(--brass);
+        letter-spacing:.1em;
+    }
+    .dir-card h3{color:var(--paper);}
+    .dir-list{margin-top:.4em;display:flex;flex-direction:column;gap:.5em;}
+    .dir-list li{
+        font-size:.88rem;color:var(--ink-dim);
+        display:flex;gap:.6em;align-items:flex-start;
+    }
+    .dir-list li::before{content:'—';color:var(--brass-dim);flex:none;}
+
+    .institute-strip{
+        margin-top:56px;
+        display:flex;align-items:center;gap:28px;
+        padding:26px 28px;
+        border:1px solid var(--line);
+        background:var(--bg-1);
+        flex-wrap:wrap;
+    }
+    .institute-strip .badge{
+        width:56px;height:56px;border:1px solid var(--brass);border-radius:50%;
+        display:grid;place-items:center;flex:none;
+        font-family:var(--f-display);color:var(--brass-bright);font-size:1.1rem;
+    }
+    .institute-strip strong{display:block;color:var(--paper);font-family:var(--f-head);font-size:1.02rem;letter-spacing:.01em;}
+    .institute-strip span{color:var(--steel);font-size:.88rem;}
+
+
+    .about-grid{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:60px;
+        align-items:start;
+    }
+    @media (max-width:900px){.about-grid{grid-template-columns:1fr;gap:44px;}}
+
+    .hours-board{
+        font-family:var(--f-mono);
+        border:1px solid var(--line);
+        background:var(--bg-1);
+    }
+    .hours-board .row{
+        display:flex;justify-content:space-between;
+        padding:14px 20px;
+        border-bottom:1px solid var(--line-soft);
+        font-size:.88rem;
+    }
+    .hours-board .row:last-child{border-bottom:none;}
+    .hours-board .row span:first-child{color:var(--ink-dim);letter-spacing:.05em;}
+    .hours-board .row span:last-child{color:var(--brass-bright);}
+    .hours-board .row.is-off span:last-child{color:var(--steel-dim);}
+
+    .info-list{margin-top:26px;display:flex;flex-direction:column;gap:16px;}
+    .info-list .item{display:flex;gap:16px;align-items:flex-start;}
+    .info-list .ico{
+        width:38px;height:38px;flex:none;
+        border:1px solid var(--line);
+        display:grid;place-items:center;color:var(--brass);
+    }
+    .info-list strong{display:block;color:var(--paper);font-family:var(--f-head);font-size:.95rem;letter-spacing:.02em;margin-bottom:.15em;}
+    .info-list span,.info-list p{color:var(--steel);font-size:.88rem;margin:0;}
+
+    .map-wrap{
+        border:1px solid var(--line);
+        position:relative;
+        filter:grayscale(.35) contrast(1.05);
+        transition:filter .4s;
+    }
+    .map-wrap:hover{filter:grayscale(0) contrast(1);}
+    .map-wrap iframe{width:100%;height:420px;border:0;display:block;}
+    .map-wrap .map-tag{
+        position:absolute;top:14px;left:14px;
+        background:var(--bg-0);border:1px solid var(--brass);
+        padding:.5em .9em;
+        font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;color:var(--brass-bright);
+        z-index:2;
+    }
+
+
+    .doc-card{
+        display:flex;align-items:center;gap:18px;
+        padding:20px 22px;
+        background:var(--bg-2);
+        border:1px solid var(--line-soft);
+        transition:border-color .25s, background .25s;
+    }
+    .doc-card:hover{border-color:var(--line);background:var(--bg-3);}
+    .doc-ico{
+        width:48px;height:56px;flex:none;
+        border:1px solid var(--brass-dim);
+        display:grid;place-items:center;
+        font-family:var(--f-mono);font-size:.62rem;color:var(--brass);
+        position:relative;
+    }
+    .doc-ico::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 10px 10px 0;border-color:transparent var(--bg-0) transparent transparent;}
+    .doc-info{flex:1;min-width:0;}
+    .doc-info h3{font-size:1.02rem;color:var(--paper);margin-bottom:.2em;}
+    .doc-info p{font-size:.84rem;margin:0;}
+    .doc-meta{font-family:var(--f-mono);font-size:.7rem;color:var(--steel-dim);white-space:nowrap;}
+
+
+    .vac-card{
+        padding:26px 26px 22px;
+        background:var(--bg-2);
+        border-left:2px solid var(--brass-dim);
+        border-top:1px solid var(--line-soft);border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
+        display:flex;flex-direction:column;gap:10px;
+        transition:border-left-color .25s, background .25s;
+    }
+    .vac-card:hover{border-left-color:var(--brass-bright);background:var(--bg-3);}
+    .vac-card h3{color:var(--paper);}
+    .vac-card .date{font-family:var(--f-mono);font-size:.7rem;color:var(--steel-dim);letter-spacing:.08em;}
+
+
+    .reviews-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:start;}
+    @media (max-width:940px){.reviews-layout{grid-template-columns:1fr;}}
+
+    .review-card{
+        padding:22px 24px;
+        background:var(--bg-2);
+        border:1px solid var(--line-soft);
+    }
+    .review-card + .review-card{margin-top:16px;}
+    .review-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5em;}
+    .review-name{font-family:var(--f-head);font-weight:600;letter-spacing:.02em;color:var(--paper);}
+    .stars{font-family:var(--f-mono);color:var(--brass-bright);letter-spacing:.1em;font-size:.85rem;}
+    .review-date{font-family:var(--f-mono);font-size:.68rem;color:var(--steel-dim);}
+
+    .form-panel{
+        background:var(--bg-1);
+        border:1px solid var(--line);
+        padding:30px 28px;
+    }
+    .form-row{margin-bottom:18px;}
+    .form-row label{
+        display:block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+        color:var(--steel);margin-bottom:.55em;
+    }
+    .form-row input[type=text],.form-row input[type=email],.form-row textarea,.form-row input[type=password],.form-row input[type=date],.form-row select{
+        width:100%;
+        background:var(--bg-0);
+        border:1px solid var(--line);
+        color:var(--ink);
+        padding:.85em 1em;
+        font-family:var(--f-body);
+        font-size:.94rem;
+        transition:border-color .25s;
+        border-radius:var(--radius);
+    }
+    .form-row input:focus,.form-row textarea:focus,.form-row select:focus{border-color:var(--brass);outline:none;}
+    .form-row textarea{resize:vertical;min-height:110px;}
+
+    .rating-pick{display:flex;gap:8px;}
+    .rating-pick button{
+        width:40px;height:40px;
+        border:1px solid var(--line);
+        background:transparent;color:var(--steel-dim);
+        font-family:var(--f-mono);
+        transition:border-color .2s,color .2s,background .2s;
+    }
+    .rating-pick button.is-active,.rating-pick button:hover{border-color:var(--brass);color:var(--brass-bright);background:rgba(198,154,74,.08);}
+
+    .form-msg{
+        margin-top:14px;font-family:var(--f-mono);font-size:.78rem;
+        padding:.8em 1em;border-left:2px solid var(--brass);background:var(--bg-2);display:none;
+    }
+    .form-msg.is-visible{display:block;}
+    .form-msg.is-error{border-color:var(--danger);color:#e2a89f;}
+    .form-msg.is-ok{border-color:var(--brass);color:var(--brass-bright);}
+
+
+    .state-block{
+        padding:48px 24px;
+        text-align:center;
+        border:1px dashed var(--line);
+        font-family:var(--f-mono);
+        font-size:.84rem;
+        color:var(--steel-dim);
+        grid-column:1/-1;
+    }
+    .state-block strong{display:block;color:var(--steel);font-family:var(--f-head);font-size:1rem;margin-bottom:.4em;text-transform:none;letter-spacing:.02em;}
+
+    .skeleton{
+        background:linear-gradient(100deg, var(--bg-2) 30%, var(--bg-3) 50%, var(--bg-2) 70%);
+        background-size:200% 100%;
+        animation:shimmer 1.4s infinite;
+    }
+    @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
+
+    .cta-strip{
+        display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;
+        padding:56px 0;
+    }
+    .cta-strip h2{max-width:14ch;}
+
+
+    .site-footer{
+        background:var(--bg-0);
+        border-top:1px solid var(--line);
+        padding:64px 0 28px;
+    }
+    .footer-top{
+        display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;
+        padding-bottom:44px;border-bottom:1px solid var(--line-soft);
+    }
+    @media (max-width:900px){.footer-top{grid-template-columns:1fr 1fr;}}
+    @media (max-width:560px){.footer-top{grid-template-columns:1fr;}}
+
+    .footer-top h4{
+        font-family:var(--f-head);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;
+        color:var(--brass);margin:0 0 1em;
+    }
+    .footer-top ul{display:flex;flex-direction:column;gap:.7em;}
+    .footer-top a{color:var(--steel);font-size:.88rem;transition:color .2s;}
+    .footer-top a:hover{color:var(--paper);}
+    .footer-brand p{max-width:32ch;font-size:.88rem;}
+
+    .footer-bottom{
+        display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+        padding-top:22px;
+        font-family:var(--f-mono);font-size:.72rem;color:var(--steel-dim);letter-spacing:.03em;
+    }
+    .footer-bottom .admin-link{color:var(--steel-dim);}
+
+    ::selection{background:var(--brass);color:var(--bg-0);}
+</style>
+
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Oswald:wght@400;500;600;700&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+    :root{
+        --bg-0:#0e0f0a;
+        --bg-1:#15160f;
+        --bg-2:#1c1d15;
+        --bg-3:#24261b;
+        --olive:#454a2f;
+        --olive-deep:#2b2e1d;
+        --brass:#c69a4a;
+        --brass-bright:#e6bb6a;
+        --brass-dim:#8a6c34;
+        --steel:#9a9c8f;
+        --steel-dim:#6c6e61;
+        --paper:#eee7d6;
+        --ink:#efe9da;
+        --ink-dim:#c9c4b2;
+        --danger:#a3392c;
+        --line:rgba(198,154,74,.22);
+        --line-soft:rgba(238,231,214,.10);
+
+        /* --- type --- */
+        --f-display:'Russo One', 'Oswald', sans-serif;
+        --f-head:'Oswald', sans-serif;
+        --f-body:'PT Sans', sans-serif;
+        --f-mono:'JetBrains Mono', monospace;
+
+        /* --- misc --- */
+        --radius:2px;
+        --ease:cubic-bezier(.16,.8,.2,1);
+        --shadow-lg:0 30px 60px -20px rgba(0,0,0,.6);
+        --container:1240px;
+    }
+
+    *,*::before,*::after{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    @media (prefers-reduced-motion:reduce){
+        html{scroll-behavior:auto;}
+        *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
+    }
+
+    body{
+        margin:0;
+        background:var(--bg-0);
+        color:var(--ink);
+        font-family:var(--f-body);
+        font-size:16px;
+        line-height:1.6;
+        -webkit-font-smoothing:antialiased;
+        overflow-x:hidden;
+    }
+
+    img{max-width:100%;display:block;}
+    a{color:inherit;text-decoration:none;}
+    ul{margin:0;padding:0;list-style:none;}
+    button{font-family:inherit;cursor:pointer;}
+    input,textarea,select{font-family:inherit;}
+
+    :focus-visible{outline:2px solid var(--brass-bright);outline-offset:3px;}
+
+    .container{
+        width:100%;
+        max-width:var(--container);
+        margin:0 auto;
+        padding:0 24px;
+    }
+
+
+    h1,h2,h3,.h1,.h2,.h3{
+        font-family:var(--f-display);
+        font-weight:400;
+        letter-spacing:.01em;
+        margin:0;
+        color:var(--paper);
+        text-transform:uppercase;
+    }
+    h1,.h1{font-size:clamp(2.6rem,7vw,5.6rem);line-height:.98;}
+    h2,.h2{font-size:clamp(1.9rem,4.4vw,3.2rem);line-height:1.02;}
+    h3,.h3{font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.15;}
+
+    p{margin:0 0 1em;color:var(--ink-dim);}
+    p:last-child{margin-bottom:0;}
+
+    .eyebrow{
+        font-family:var(--f-mono);
+        font-size:.78rem;
+        letter-spacing:.24em;
+        text-transform:uppercase;
+        color:var(--brass);
+        display:inline-flex;
+        align-items:center;
+        gap:.6em;
+        margin-bottom:1em;
+    }
+    .eyebrow::before{
+        content:'';
+        width:26px;height:1px;
+        background:var(--brass);
+        display:inline-block;
+    }
+
+    .lede{
+        font-family:var(--f-head);
+        font-weight:400;
+        font-size:1.15rem;
+        color:var(--steel);
+        max-width:56ch;
+    }
+
+
+    .btn{
+        --btn-fg:var(--bg-0);
+        --btn-bg:var(--brass);
+        display:inline-flex;
+        align-items:center;
+        gap:.6em;
+        font-family:var(--f-head);
+        font-weight:600;
+        font-size:.92rem;
+        letter-spacing:.06em;
+        text-transform:uppercase;
+        padding:.95em 1.7em;
+        background:var(--btn-bg);
+        color:var(--btn-fg);
+        border:1px solid var(--btn-bg);
+        border-radius:var(--radius);
+        transition:transform .25s var(--ease), background .25s, color .25s, box-shadow .25s;
+        position:relative;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(198,154,74,.45);}
+    .btn:active{transform:translateY(0);}
+    .btn svg{width:1em;height:1em;transition:transform .3s var(--ease);}
+    .btn:hover svg{transform:translateX(3px);}
+
+    .btn--ghost{
+        --btn-bg:transparent;
+        --btn-fg:var(--paper);
+        border-color:var(--line);
+    }
+    .btn--ghost:hover{border-color:var(--brass);background:rgba(198,154,74,.08);box-shadow:none;}
+
+    .btn--line{
+        --btn-bg:transparent;
+        --btn-fg:var(--brass);
+        border:none;
+        padding:.3em 0;
+        border-bottom:1px solid var(--brass-dim);
+        border-radius:0;
+    }
+    .btn--line:hover{border-color:var(--brass-bright);box-shadow:none;transform:none;color:var(--brass-bright);}
+
+    .btn--sm{padding:.6em 1.1em;font-size:.78rem;}
+    .btn--danger{--btn-bg:var(--danger);border-color:var(--danger);}
+    .btn[disabled]{opacity:.45;pointer-events:none;}
+
+    .frame{
+        position:relative;
+        background:
+                linear-gradient(var(--brass),var(--brass)) top left / 22px 2px no-repeat,
+                linear-gradient(var(--brass),var(--brass)) top left / 2px 22px no-repeat,
+                linear-gradient(var(--brass),var(--brass)) top right / 22px 2px no-repeat,
+                linear-gradient(var(--brass),var(--brass)) top right / 2px 22px no-repeat,
+                linear-gradient(var(--brass),var(--brass)) bottom left / 22px 2px no-repeat,
+                linear-gradient(var(--brass),var(--brass)) bottom left / 2px 22px no-repeat,
+                linear-gradient(var(--brass),var(--brass)) bottom right / 22px 2px no-repeat,
+                linear-gradient(var(--brass),var(--brass)) bottom right / 2px 22px no-repeat;
+        background-color:transparent;
+        padding:2px;
+    }
+    .frame > *{padding:1.4em;}
+    .frame--dim{opacity:.55;}
+
+    .belt{
+        height:14px;
+        background:
+                repeating-linear-gradient(90deg,
+                var(--brass-dim) 0 3px,
+                transparent 3px 22px);
+        opacity:.4;
+        margin:0;
+    }
+
+
+    .site-header{
+        position:fixed;
+        inset:0 0 auto 0;
+        z-index:100;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        padding:20px 28px;
+        transition:background .35s var(--ease), padding .35s var(--ease), border-color .35s;
+        border-bottom:1px solid transparent;
+    }
+    .site-header.is-scrolled{
+        background:rgba(14,15,10,.86);
+        backdrop-filter:blur(10px);
+        padding:12px 28px;
+        border-color:var(--line);
+    }
+
+    .logo{
+        display:flex;
+        align-items:center;
+        gap:.6em;
+        font-family:var(--f-display);
+        font-size:1.35rem;
+        letter-spacing:.04em;
+        color:var(--paper);
+    }
+    .logo .logo-mark{
+        width:34px;height:34px;
+        display:grid;place-items:center;
+        border:1px solid var(--brass);
+        border-radius:50%;
+        position:relative;
+        flex:none;
+    }
+    .logo .logo-mark::before,.logo .logo-mark::after{
+        content:'';position:absolute;background:var(--brass);
+    }
+    .logo .logo-mark::before{width:16px;height:1px;top:50%;left:50%;transform:translate(-50%,-50%);}
+    .logo .logo-mark::after{width:1px;height:16px;top:50%;left:50%;transform:translate(-50%,-50%);}
+    .logo .logo-mark i{width:4px;height:4px;border-radius:50%;background:var(--brass-bright);}
+    .logo small{
+        display:block;
+        font-family:var(--f-mono);
+        font-size:.56rem;
+        letter-spacing:.18em;
+        color:var(--steel-dim);
+        text-transform:uppercase;
+        margin-top:2px;
+    }
+
+    .nav-desktop{display:flex;align-items:center;gap:2.2em;}
+    .nav-desktop a{
+        font-family:var(--f-head);
+        font-size:.86rem;
+        letter-spacing:.05em;
+        text-transform:uppercase;
+        color:var(--ink-dim);
+        position:relative;
+        padding:.3em 0;
+        transition:color .25s;
+    }
+    .nav-desktop a::after{
+        content:'';position:absolute;left:0;right:100%;bottom:-2px;height:1px;background:var(--brass);
+        transition:right .3s var(--ease);
+    }
+    .nav-desktop a:hover{color:var(--paper);}
+    .nav-desktop a:hover::after{right:0;}
+
+    .header-cta{display:flex;align-items:center;gap:1em;}
+    .admin-link{
+        font-family:var(--f-mono);
+        font-size:.72rem;
+        letter-spacing:.1em;
+        color:var(--steel-dim);
+        display:flex;align-items:center;gap:.4em;
+        transition:color .25s;
+    }
+    .admin-link:hover{color:var(--brass);}
+
+    .burger{
+        display:none;
+        width:42px;height:42px;
+        border:1px solid var(--line);
+        background:transparent;
+        border-radius:var(--radius);
+        position:relative;
+        flex:none;
+    }
+    .burger span,.burger span::before,.burger span::after{
+        content:'';position:absolute;left:11px;right:11px;height:1px;background:var(--paper);transition:transform .3s var(--ease),opacity .2s;
+    }
+    .burger span{top:50%;transform:translateY(-50%);}
+    .burger span::before{top:-7px;}
+    .burger span::after{top:7px;}
+    .burger.is-open span{background:transparent;}
+    .burger.is-open span::before{top:0;transform:rotate(45deg);}
+    .burger.is-open span::after{top:0;transform:rotate(-45deg);}
+
+    .nav-mobile{
+        position:fixed;inset:0;
+        background:var(--bg-0);
+        z-index:99;
+        display:flex;flex-direction:column;
+        justify-content:center;
+        padding:0 32px;
+        transform:translateY(-100%);
+        transition:transform .45s var(--ease);
+    }
+    .nav-mobile.is-open{transform:translateY(0);}
+    .nav-mobile a{
+        font-family:var(--f-display);
+        font-size:2.1rem;
+        color:var(--paper);
+        padding:.35em 0;
+        border-bottom:1px solid var(--line-soft);
+        text-transform:uppercase;
+    }
+    .nav-mobile .admin-link{margin-top:1.6em;font-size:.85rem;}
+
+
+    .hero{
+        position:relative;
+        min-height:100svh;
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-end;
+        overflow:hidden;
+        background:var(--bg-0);
+    }
+    .hero-bg{
+        position:absolute;inset:0;
+        background:
+                radial-gradient(ellipse at 70% 20%, rgba(198,154,74,.10), transparent 55%),
+                linear-gradient(180deg, rgba(10,11,7,.35) 0%, rgba(10,11,7,.55) 55%, var(--bg-0) 100%);
+        z-index:1;
+    }
+    .hero-bg img{
+        position:absolute;inset:0;
+        width:100%;height:100%;
+        object-fit:cover;
+        object-position:center 30%;
+        z-index:0;
+        filter:grayscale(.25) contrast(1.08) brightness(.62);
+        transform:scale(1.06);
+    }
+    .hero-bg.no-image{
+        background:
+                radial-gradient(circle at 74% 34%, rgba(198,154,74,.16), transparent 42%),
+                linear-gradient(180deg, #1a1c12 0%, #0e0f0a 70%);
+    }
+    .hero-bg.no-image::after{
+        content:'';
+        position:absolute;inset:0;
+        background-image:
+                linear-gradient(var(--line-soft) 1px, transparent 1px),
+                linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+        background-size:64px 64px;
+        opacity:.35;
+        mask-image:radial-gradient(ellipse at 60% 40%, black, transparent 75%);
+    }
+
+    .hero-hud{
+        position:absolute;top:100px;left:24px;right:24px;
+        z-index:2;
+        display:flex;
+        justify-content:space-between;
+        font-family:var(--f-mono);
+        font-size:.72rem;
+        letter-spacing:.08em;
+        color:var(--steel);
+        pointer-events:none;
+    }
+    .hero-hud span{display:block;}
+    .hero-hud .rating{color:var(--brass-bright);letter-spacing:.15em;}
+
+    .hero-inner{
+        position:relative;z-index:2;
+        padding:0 24px 64px;
+        width:100%;
+        max-width:var(--container);
+        margin:0 auto;
+    }
+    .hero-eyebrow{
+        display:flex;align-items:center;gap:.7em;
+        font-family:var(--f-mono);
+        font-size:.78rem;
+        letter-spacing:.22em;
+        text-transform:uppercase;
+        color:var(--brass);
+        margin-bottom:1.1em;
+    }
+    .hero-eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--brass);box-shadow:0 0 0 3px rgba(198,154,74,.2);}
+
+    .hero h1{margin-bottom:.3em;}
+    .hero h1 em{
+        font-style:normal;
+        color:transparent;
+        -webkit-text-stroke:1.5px var(--brass);
+    }
+
+    .hero-desc{
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-end;
+        gap:40px;
+        margin-top:1.4em;
+        border-top:1px solid var(--line);
+        padding-top:1.4em;
+    }
+    .hero-desc p{max-width:52ch;font-size:1.02rem;}
+    .hero-actions{display:flex;gap:1em;flex-wrap:wrap;flex:none;}
+
+    .reticle-cursor{
+        position:fixed;
+        width:46px;height:46px;
+        border:1px solid var(--brass-bright);
+        border-radius:50%;
+        pointer-events:none;
+        z-index:200;
+        transform:translate(-50%,-50%);
+        opacity:0;
+        transition:opacity .3s, width .2s, height .2s, border-color .2s;
+        mix-blend-mode:difference;
+    }
+    .reticle-cursor::before,.reticle-cursor::after{
+        content:'';position:absolute;background:var(--brass-bright);
+    }
+    .reticle-cursor::before{width:10px;height:1px;top:50%;left:50%;transform:translate(-50%,-50%);}
+    .reticle-cursor::after{width:1px;height:10px;top:50%;left:50%;transform:translate(-50%,-50%);}
+    .reticle-cursor.is-active{opacity:.85;}
+    .reticle-cursor.is-tight{width:20px;height:20px;border-color:var(--brass);}
+    @media (hover:none), (pointer:coarse){.reticle-cursor{display:none;}}
+
+    .scroll-cue{
+        position:absolute;bottom:26px;right:28px;z-index:2;
+        writing-mode:vertical-rl;
+        font-family:var(--f-mono);
+        font-size:.7rem;
+        letter-spacing:.2em;
+        color:var(--steel-dim);
+        display:flex;align-items:center;gap:.8em;
+    }
+    .scroll-cue::after{content:'';width:1px;height:46px;background:linear-gradient(var(--brass),transparent);animation:scrollcue 2.2s var(--ease) infinite;}
+    @keyframes scrollcue{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}50.01%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+    @media (max-width:900px){
+        .nav-desktop,.header-cta{display:none;}
+        .burger{display:block;}
+        .hero-hud{display:none;}
+        .hero-desc{flex-direction:column;align-items:flex-start;}
+    }
+</style>
+
+<body class="admin-body">
+
+
+<header class="site-header is-scrolled">
+    <a href="index.html" class="logo">
+        <span class="logo-mark"><i></i></span>
+        <span>ОГНЕВОЙ РУБЕЖ<small>панель администратора</small></span>
+    </a>
+    <div class="header-cta" id="headerAuthArea">
+        <a href="index.html" class="admin-link">← На сайт</a>
+    </div>
+</header>
+
+<main class="admin-main">
+    <div class="container">
+
+        <section id="loginView" class="admin-view">
+            <div class="login-wrap">
+                <div class="frame">
+                    <div class="login-card">
+                        <div class="eyebrow">Доступ ограничен</div>
+                        <h2 style="margin-bottom:.2em;">Вход в панель</h2>
+                        <p style="margin-bottom:1.8em;">Авторизуйтесь, чтобы управлять объявлениями, методичками, вакансиями и отзывами.</p>
+
+                        <form id="loginForm" novalidate>
+                            <div class="form-row">
+                                <label for="loginEmail">Email</label>
+                                <input type="email" id="loginEmail" required autocomplete="username">
+                            </div>
+                            <div class="form-row">
+                                <label for="loginPassword">Пароль</label>
+                                <input type="password" id="loginPassword" required autocomplete="current-password" minlength="8">
+                            </div>
+                            <button type="submit" class="btn" style="width:100%;justify-content:center;">Войти</button>
+                            <div class="form-msg" id="loginMsg"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboardView" class="admin-view" hidden>
+            <div class="dash-head">
+                <div>
+                    <div class="eyebrow">Панель управления</div>
+                    <h2>Огневой рубеж — CRUD</h2>
+                </div>
+                <div class="dash-user">
+                    <span id="dashUserEmail" class="mono-tag"></span>
+                    <button class="btn btn--ghost btn--sm" id="logoutBtn">Выйти</button>
+                </div>
+            </div>
+
+            <div class="tabs" id="tabs">
+                <button class="tab is-active" data-tab="ads">Объявления</button>
+                <button class="tab" data-tab="materials">Методички</button>
+                <button class="tab" data-tab="vacancies">Вакансии</button>
+                <button class="tab" data-tab="reviews">Отзывы</button>
+            </div>
+
+            <div class="tab-panel is-active" data-panel="ads">
+                <div class="panel-toolbar">
+                    <h3>Объявления</h3>
+                    <button class="btn btn--sm" data-toggle-form="adCreateForm">+ Новое объявление</button>
+                </div>
+
+                <form class="entity-form" id="adCreateForm" hidden>
+                    <div class="form-row"><label>Заголовок</label><input type="text" name="title" maxlength="200" required></div>
+                    <div class="form-row"><label>Описание</label><textarea name="description" maxlength="1000"></textarea></div>
+                    <div class="form-row"><label>Ссылка (URL)</label><input type="text" name="url" maxlength="250"></div>
+                    <div class="form-row"><label>Изображение</label><input type="file" name="image" accept="image/*"></div>
+                    <div class="form-row"><label>PDF</label><input type="file" name="pdf" accept="application/pdf"></div>
+                    <button type="submit" class="btn btn--sm">Создать</button>
+                    <div class="form-msg"></div>
+                </form>
+
+                <div class="table-wrap"><table class="data-table" id="adsTable"><thead><tr><th>ID</th><th>Заголовок</th><th>Описание</th><th>Дата</th><th></th></tr></thead><tbody></tbody></table></div>
+            </div>
+
+            <div class="tab-panel" data-panel="materials">
+                <div class="panel-toolbar">
+                    <h3>Методические материалы</h3>
+                    <button class="btn btn--sm" data-toggle-form="materialCreateForm">+ Новый материал</button>
+                </div>
+
+                <form class="entity-form" id="materialCreateForm" hidden>
+                    <div class="form-row"><label>Заголовок</label><input type="text" name="title" maxlength="200" required></div>
+                    <div class="form-row"><label>Описание</label><textarea name="description" maxlength="1000"></textarea></div>
+                    <div class="form-row"><label>PDF</label><input type="file" name="pdf" accept="application/pdf"></div>
+                    <button type="submit" class="btn btn--sm">Создать</button>
+                    <div class="form-msg"></div>
+                </form>
+
+                <div class="table-wrap"><table class="data-table" id="materialsTable"><thead><tr><th>ID</th><th>Заголовок</th><th>Описание</th><th>Дата</th><th></th></tr></thead><tbody></tbody></table></div>
+            </div>
+
+            <div class="tab-panel" data-panel="vacancies">
+                <div class="panel-toolbar">
+                    <h3>Вакансии</h3>
+                    <button class="btn btn--sm" data-toggle-form="vacantCreateForm">+ Новая вакансия</button>
+                </div>
+
+                <form class="entity-form" id="vacantCreateForm" hidden>
+                    <div class="form-row"><label>Заголовок</label><input type="text" name="title" maxlength="200" required></div>
+                    <div class="form-row"><label>Описание</label><textarea name="description" maxlength="1000"></textarea></div>
+                    <button type="submit" class="btn btn--sm">Создать</button>
+                    <div class="form-msg"></div>
+                </form>
+
+                <div class="table-wrap"><table class="data-table" id="vacanciesTable"><thead><tr><th>ID</th><th>Заголовок</th><th>Описание</th><th>Дата</th><th></th></tr></thead><tbody></tbody></table></div>
+            </div>
+
+            <div class="tab-panel" data-panel="reviews">
+                <div class="panel-toolbar">
+                    <h3>Отзывы</h3>
+                    <span class="mono-tag">только просмотр и удаление</span>
+                </div>
+
+                <div class="table-wrap"><table class="data-table" id="reviewsTable"><thead><tr><th>ID</th><th>Имя</th><th>Отзыв</th><th>Оценка</th><th>Дата</th><th></th></tr></thead><tbody></tbody></table></div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script>
+
+    const API_BASE = 'http://localhost:8080/api/v1';
+
+    async function apiRequest(path, { method = 'GET', body, headers, ...rest } = {}) {
+        const res = await fetch(API_BASE + path, {
+            method,
+            credentials: 'include',
+            headers: {
+                ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}),
+                ...headers,
+            },
+            body: body !== undefined ? JSON.stringify(body) : undefined,
+            ...rest,
+        });
+
+        let data = null;
+        const text = await res.text();
+        if (text) {
+            try { data = JSON.parse(text); } catch (_) { data = text; }
+        }
+
+        if (!res.ok) {
+            const message = (data && (data.message || data.error)) || `Ошибка запроса (${res.status})`;
+            const err = new Error(message);
+            err.status = res.status;
+            err.data = data;
+            throw err;
+        }
+        return data;
+    }
+
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            if (!file) return resolve(null);
+            const reader = new FileReader();
+            reader.onload = () => resolve(String(reader.result).split(',')[1] || '');
+            reader.onerror = () => reject(reader.error);
+            reader.readAsDataURL(file);
+        });
+    }
+
+    const Api = {
+        advertisements: {
+            list: (limit = 20, offset = 0) => apiRequest(`/advertisements?limit=${limit}&offset=${offset}`),
+            get: (id) => apiRequest(`/advertisements/${id}`),
+            create: (payload) => apiRequest('/advertisements', { method: 'POST', body: payload }),
+            update: (id, patch) => apiRequest(`/advertisements/${id}`, { method: 'PATCH', body: patch }),
+            remove: (id) => apiRequest(`/advertisements/${id}`, { method: 'DELETE' }),
+        },
+
+        materials: {
+            list: (limit = 20, offset = 0) => apiRequest(`/materials?limit=${limit}&offset=${offset}`),
+            get: (id) => apiRequest(`/materials/${id}`),
+            create: (payload) => apiRequest('/materials', { method: 'POST', body: payload }),
+            update: (id, patch) => apiRequest(`/materials/${id}`, { method: 'PATCH', body: patch }),
+            remove: (id) => apiRequest(`/materials/${id}`, { method: 'DELETE' }),
+        },
+
+        vacancies: {
+            list: (limit = 20, offset = 0) => apiRequest(`/vacancies?limit=${limit}&offset=${offset}`),
+            get: (id) => apiRequest(`/vacancies/${id}`),
+            create: (payload) => apiRequest('/vacancies', { method: 'POST', body: payload }),
+            update: (id, patch) => apiRequest(`/vacancies/${id}`, { method: 'PATCH', body: patch }),
+            remove: (id) => apiRequest(`/vacancies/${id}`, { method: 'DELETE' }),
+        },
+
+        reviews: {
+            list: (limit = 20, offset = 0) => apiRequest(`/reviews?limit=${limit}&offset=${offset}`),
+            byRating: (rating, limit = 20, offset = 0) => apiRequest(`/reviews/rating/${rating}?limit=${limit}&offset=${offset}`),
+            get: (id) => apiRequest(`/reviews/${id}`),
+            create: (payload) => apiRequest('/reviews', { method: 'POST', body: payload }),
+            update: (id, patch) => apiRequest(`/reviews/${id}`, { method: 'PATCH', body: patch }),
+            remove: (id) => apiRequest(`/reviews/${id}`, { method: 'DELETE' }),
+        },
+
+        auth: {
+            login: (email, password) => apiRequest('/auth/login', { method: 'POST', body: { email, password } }),
+            register: (email, password) => apiRequest('/auth/register', { method: 'POST', body: { email, password } }),
+            logout: () => apiRequest('/auth/logout', { method: 'POST' }),
+            refresh: () => apiRequest('/auth/refresh', { method: 'POST' }),
+        },
+    };
+
+    function formatDate(iso) {
+        if (!iso) return '—';
+        try {
+            const d = new Date(iso);
+            if (Number.isNaN(d.getTime())) return '—';
+            return d.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        } catch (_) { return '—'; }
+    }
+
+    function escapeHtml(str) {
+        return String(str ?? '').replace(/[&<>"']/g, (c) => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+        }[c]));
+    }
+</script>
+
+<script>
+    (() => {
+        'use strict';
+
+        const loginView = document.getElementById('loginView');
+        const dashboardView = document.getElementById('dashboardView');
+        const loginForm = document.getElementById('loginForm');
+        const loginMsg = document.getElementById('loginMsg');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const dashUserEmail = document.getElementById('dashUserEmail');
+
+        function showLogin(message) {
+            dashboardView.hidden = true;
+            loginView.hidden = false;
+            if (message) {
+                loginMsg.textContent = message;
+                loginMsg.className = 'form-msg is-visible is-error';
+            }
+        }
+
+        function showDashboard(email) {
+            loginView.hidden = true;
+            dashboardView.hidden = false;
+            dashUserEmail.textContent = email ? email : 'сессия активна';
+            refreshAllTables();
+        }
+
+        async function withAuth(fn) {
+            try {
+                return await fn();
+            } catch (err) {
+                if (err.status === 401) {
+                    try {
+                        await Api.auth.refresh();
+                        return await fn();
+                    } catch (_) {
+                        showLogin('Сессия истекла — войдите снова.');
+                        throw _;
+                    }
+                }
+                throw err;
+            }
+        }
+
+        (async function boot() {
+            try {
+                await Api.auth.refresh();
+                showDashboard(sessionStorage.getItem('adminEmail'));
+            } catch (_) {
+                showLogin();
+            }
+        })();
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            loginMsg.className = 'form-msg';
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const btn = loginForm.querySelector('button[type=submit]');
+            btn.disabled = true;
+            try {
+                const user = await Api.auth.login(email, password);
+                if (user && user.email) sessionStorage.setItem('adminEmail', user.email);
+                loginForm.reset();
+                showDashboard(user && user.email);
+            } catch (err) {
+                loginMsg.textContent = err.message || 'Неверный email или пароль.';
+                loginMsg.classList.add('is-visible', 'is-error');
+            } finally {
+                btn.disabled = false;
+            }
+        });
+
+        logoutBtn.addEventListener('click', async () => {
+            try { await Api.auth.logout(); } catch (_) { /* proceed regardless */ }
+            sessionStorage.removeItem('adminEmail');
+            showLogin();
+        });
+
+        document.getElementById('tabs').addEventListener('click', (e) => {
+            const btn = e.target.closest('.tab');
+            if (!btn) return;
+            document.querySelectorAll('.tab').forEach((t) => t.classList.toggle('is-active', t === btn));
+            document.querySelectorAll('.tab-panel').forEach((p) => p.classList.toggle('is-active', p.dataset.panel === btn.dataset.tab));
+        });
+
+        document.querySelectorAll('[data-toggle-form]').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const form = document.getElementById(btn.dataset.toggleForm);
+                form.hidden = !form.hidden;
+                btn.textContent = form.hidden ? btn.dataset.labelClosed || btn.textContent.replace('Скрыть форму', '+ ' + btn.dataset.entity) : 'Скрыть форму';
+            });
+        });
+
+        function setFormMsg(form, text, isError) {
+            const el = form.querySelector('.form-msg');
+            if (!el) return;
+            el.textContent = text;
+            el.className = 'form-msg is-visible ' + (isError ? 'is-error' : 'is-ok');
+        }
+
+        function tableBody(id) { return document.querySelector(`#${id} tbody`); }
+
+        function emptyRow(colspan, text) {
+            return `<tr class="empty-row"><td colspan="${colspan}">${text}</td></tr>`;
+        }
+
+        function rowActions(id) {
+            return `<div class="row-actions">
+      <button type="button" class="icon-btn" data-action="edit" data-id="${id}" title="Изменить">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+      </button>
+      <button type="button" class="icon-btn danger" data-action="delete" data-id="${id}" title="Удалить">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+      </button>
+    </div>`;
+        }
+
+        const adsBody = tableBody('adsTable');
+
+        async function loadAds() {
+            adsBody.innerHTML = emptyRow(5, 'Загрузка…');
+            try {
+                const data = await withAuth(() => Api.advertisements.list(50, 0));
+                const items = (data && data.items) || [];
+                if (!items.length) { adsBody.innerHTML = emptyRow(5, 'Объявлений нет'); return; }
+                adsBody.innerHTML = items.map((a) => `
+        <tr data-id="${a.id}">
+          <td>${a.id}</td>
+          <td class="title-cell">${escapeHtml(a.title)}</td>
+          <td class="desc-cell"><span>${escapeHtml(a.description || '')}</span></td>
+          <td>${formatDate(a.create_at)}</td>
+          <td>${rowActions(a.id)}</td>
+        </tr>`).join('');
+            } catch (err) {
+                adsBody.innerHTML = emptyRow(5, 'Ошибка загрузки: ' + escapeHtml(err.message || ''));
+            }
+        }
+
+        document.getElementById('adCreateForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const fd = new FormData(form);
+            try {
+                const payload = {
+                    title: fd.get('title'),
+                    description: fd.get('description') || '',
+                    url: fd.get('url') || undefined,
+                };
+                const imageFile = fd.get('image');
+                const pdfFile = fd.get('pdf');
+                if (imageFile && imageFile.size) payload.image = await fileToBase64(imageFile);
+                if (pdfFile && pdfFile.size) payload.pdf = await fileToBase64(pdfFile);
+                await withAuth(() => Api.advertisements.create(payload));
+                setFormMsg(form, 'Объявление создано.', false);
+                form.reset();
+                loadAds();
+            } catch (err) {
+                setFormMsg(form, err.message || 'Не удалось создать объявление.', true);
+            }
+        });
+
+        adsBody.addEventListener('click', (e) => handleRowAction(e, {
+            getItem: (id) => Api.advertisements.get(id),
+            remove: (id) => Api.advertisements.remove(id),
+            update: (id, patch) => Api.advertisements.update(id, patch),
+            reload: loadAds,
+            buildEditRow: (item) => `
+      <div class="form-row"><label>Заголовок</label><input type="text" name="title" value="${escapeHtml(item.title)}" required></div>
+      <div class="form-row"><label>Описание</label><textarea name="description">${escapeHtml(item.description || '')}</textarea></div>
+      <div class="form-row"><label>Ссылка (URL)</label><input type="text" name="url" value="${escapeHtml(item.url || '')}"></div>`,
+            buildPatch: (fd) => {
+                const patch = {};
+
+                const title = fd.get('title');
+                if (title !== undefined && title !== null && title !== '') {
+                    patch.title = { Set: true, Value: title };
+                }
+
+                const description = fd.get('description');
+                if (description !== undefined && description !== null && description !== '') {
+                    patch.description = { Set: true, Value: description };
+                }
+
+                const url = fd.get('url');
+                if (url !== undefined && url !== null && url !== '') {
+                    patch.url = { Set: true, Value: url };
+                } else if (url === '') {
+                    patch.url = { Set: true, Value: null };
+                }
+
+                return patch;
+            },
+        }));
+
+        const materialsBody = tableBody('materialsTable');
+
+        async function loadMaterials() {
+            materialsBody.innerHTML = emptyRow(5, 'Загрузка…');
+            try {
+                const data = await withAuth(() => Api.materials.list(50, 0));
+                const items = (data && data.items) || [];
+                if (!items.length) { materialsBody.innerHTML = emptyRow(5, 'Материалов нет'); return; }
+                materialsBody.innerHTML = items.map((m) => `
+        <tr data-id="${m.id}">
+          <td>${m.id}</td>
+          <td class="title-cell">${escapeHtml(m.title)}</td>
+          <td class="desc-cell"><span>${escapeHtml(m.description || '')}</span></td>
+          <td>${formatDate(m.create_at)}</td>
+          <td>${rowActions(m.id)}</td>
+        </tr>`).join('');
+            } catch (err) {
+                materialsBody.innerHTML = emptyRow(5, 'Ошибка загрузки: ' + escapeHtml(err.message || ''));
+            }
+        }
+
+        document.getElementById('materialCreateForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const fd = new FormData(form);
+            try {
+                const payload = { title: fd.get('title'), description: fd.get('description') || '' };
+                const pdfFile = fd.get('pdf');
+                if (pdfFile && pdfFile.size) payload.pdf = await fileToBase64(pdfFile);
+                await withAuth(() => Api.materials.create(payload));
+                setFormMsg(form, 'Материал создан.', false);
+                form.reset();
+                loadMaterials();
+            } catch (err) {
+                setFormMsg(form, err.message || 'Не удалось создать материал.', true);
+            }
+        });
+
+        materialsBody.addEventListener('click', (e) => handleRowAction(e, {
+            getItem: (id) => Api.materials.get(id),
+            remove: (id) => Api.materials.remove(id),
+            update: (id, patch) => Api.materials.update(id, patch),
+            reload: loadMaterials,
+            buildEditRow: (item) => `
+      <div class="form-row"><label>Заголовок</label><input type="text" name="title" value="${escapeHtml(item.title)}" required></div>
+      <div class="form-row"><label>Описание</label><textarea name="description">${escapeHtml(item.description || '')}</textarea></div>`,
+            buildPatch: (fd) => {
+                const patch = {};
+                const title = fd.get('title');
+                if (title !== undefined && title !== null && title !== '') {
+                    patch.title = { Set: true, Value: title };
+                }
+                const description = fd.get('description');
+                if (description !== undefined && description !== null && description !== '') {
+                    patch.description = { Set: true, Value: description };
+                }
+                return patch;
+            },
+        }));
+
+        const vacanciesBody = tableBody('vacanciesTable');
+
+        async function loadVacancies() {
+            vacanciesBody.innerHTML = emptyRow(5, 'Загрузка…');
+            try {
+                const data = await withAuth(() => Api.vacancies.list(50, 0));
+                const items = (data && data.items) || [];
+                if (!items.length) { vacanciesBody.innerHTML = emptyRow(5, 'Вакансий нет'); return; }
+                vacanciesBody.innerHTML = items.map((v) => `
+        <tr data-id="${v.id}">
+          <td>${v.id}</td>
+          <td class="title-cell">${escapeHtml(v.title)}</td>
+          <td class="desc-cell"><span>${escapeHtml(v.description || '')}</span></td>
+          <td>${formatDate(v.create_at)}</td>
+          <td>${rowActions(v.id)}</td>
+        </tr>`).join('');
+            } catch (err) {
+                vacanciesBody.innerHTML = emptyRow(5, 'Ошибка загрузки: ' + escapeHtml(err.message || ''));
+            }
+        }
+
+        document.getElementById('vacantCreateForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const fd = new FormData(form);
+            try {
+                const payload = { title: fd.get('title'), description: fd.get('description') || '' };
+                await withAuth(() => Api.vacancies.create(payload));
+                setFormMsg(form, 'Вакансия создана.', false);
+                form.reset();
+                loadVacancies();
+            } catch (err) {
+                setFormMsg(form, err.message || 'Не удалось создать вакансию.', true);
+            }
+        });
+
+        vacanciesBody.addEventListener('click', (e) => handleRowAction(e, {
+            getItem: (id) => Api.vacancies.get(id),
+            remove: (id) => Api.vacancies.remove(id),
+            update: (id, patch) => Api.vacancies.update(id, patch),
+            reload: loadVacancies,
+            buildEditRow: (item) => `
+      <div class="form-row"><label>Заголовок</label><input type="text" name="title" value="${escapeHtml(item.title)}" required></div>
+      <div class="form-row"><label>Описание</label><textarea name="description">${escapeHtml(item.description || '')}</textarea></div>`,
+            buildPatch: (fd) => {
+                const patch = {};
+                const title = fd.get('title');
+                if (title !== undefined && title !== null && title !== '') {
+                    patch.title = { Set: true, Value: title };
+                }
+                const description = fd.get('description');
+                if (description !== undefined && description !== null && description !== '') {
+                    patch.description = { Set: true, Value: description };
+                }
+                return patch;
+            },
+        }));
+
+        const reviewsBody = tableBody('reviewsTable');
+
+        async function loadReviewsAdmin() {
+            reviewsBody.innerHTML = emptyRow(6, 'Загрузка…');
+            try {
+                const data = await withAuth(() => Api.reviews.list(50, 0));
+                const items = (data && data.items) || [];
+                if (!items.length) { reviewsBody.innerHTML = emptyRow(6, 'Отзывов нет'); return; }
+                reviewsBody.innerHTML = items.map((r) => `
+        <tr data-id="${r.id}">
+          <td>${r.id}</td>
+          <td class="title-cell">${escapeHtml(r.name)}</td>
+          <td class="desc-cell"><span>${escapeHtml(r.description || '')}</span></td>
+          <td>${'★'.repeat(r.rating)}${'☆'.repeat(Math.max(0, 5 - r.rating))}</td>
+          <td>${formatDate(r.create_at)}</td>
+          <td><div class="row-actions">
+            <button type="button" class="icon-btn danger" data-action="delete" data-id="${r.id}" title="Удалить">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+            </button>
+          </div></td>
+        </tr>`).join('');
+            } catch (err) {
+                reviewsBody.innerHTML = emptyRow(6, 'Ошибка загрузки: ' + escapeHtml(err.message || ''));
+            }
+        }
+
+        reviewsBody.addEventListener('click', async (e) => {
+            const btn = e.target.closest('[data-action="delete"]');
+            if (!btn) return;
+            if (!confirm('Удалить отзыв #' + btn.dataset.id + '?')) return;
+            try {
+                await withAuth(() => Api.reviews.remove(btn.dataset.id));
+                loadReviewsAdmin();
+            } catch (err) {
+                alert(err.message || 'Не удалось удалить отзыв.');
+            }
+        });
+
+        async function handleRowAction(e, cfg) {
+            const editBtn = e.target.closest('[data-action="edit"]');
+            const delBtn = e.target.closest('[data-action="delete"]');
+            if (!editBtn && !delBtn) return;
+
+            const row = e.target.closest('tr');
+            const id = (editBtn || delBtn).dataset.id;
+
+            if (delBtn) {
+                if (!confirm('Удалить запись #' + id + '?')) return;
+                try {
+                    await withAuth(() => cfg.remove(id));
+                    cfg.reload();
+                } catch (err) {
+                    alert(err.message || 'Не удалось удалить запись.');
+                }
+                return;
+            }
+
+            const existingEdit = row.nextElementSibling;
+            if (existingEdit && existingEdit.classList.contains('edit-row')) {
+                existingEdit.remove();
+                return;
+            }
+            document.querySelectorAll('.edit-row').forEach((n) => n.remove());
+
+            try {
+                const item = await withAuth(() => cfg.getItem(id));
+                const colspan = row.children.length;
+                const tr = document.createElement('tr');
+                tr.className = 'edit-row';
+                tr.innerHTML = `<td colspan="${colspan}">
+        <form class="entity-form" data-id="${id}">
+          ${cfg.buildEditRow(item)}
+          <button type="submit" class="btn btn--sm">Сохранить</button>
+          <div class="form-msg"></div>
+        </form>
+      </td>`;
+                row.after(tr);
+                tr.querySelector('form').addEventListener('submit', async (ev) => {
+                    ev.preventDefault();
+                    const form = ev.target;
+                    const fd = new FormData(form);
+                    try {
+                        await withAuth(() => cfg.update(id, cfg.buildPatch(fd)));
+                        setFormMsg(form, 'Сохранено.', false);
+                        cfg.reload();
+                    } catch (err) {
+                        setFormMsg(form, err.message || 'Не удалось сохранить изменения.', true);
+                    }
+                });
+            } catch (err) {
+                alert(err.message || 'Не удалось загрузить запись.');
+            }
+        }
+
+        function refreshAllTables() {
+            loadAds();
+            loadMaterials();
+            loadVacancies();
+            loadReviewsAdmin();
+        }
+    })();
+</script>
+
+</body>
+</html>

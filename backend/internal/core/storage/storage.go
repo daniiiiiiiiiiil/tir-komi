@@ -24,7 +24,7 @@ type FileStorageConfig struct {
 
 func NewFileStorage(config FileStorageConfig) *FileStorage {
 	if config.MaxSize == 0 {
-		config.MaxSize = 10 << 20
+		config.MaxSize = 100 << 20
 	}
 	if config.UploadDir == "" {
 		config.UploadDir = "./uploads"

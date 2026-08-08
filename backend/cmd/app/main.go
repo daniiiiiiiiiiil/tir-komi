@@ -67,7 +67,7 @@ func main() {
 
 	fileStorage := storage.NewFileStorage(storage.FileStorageConfig{
 		UploadDir: "./uploads",
-		MaxSize:   10 << 20,
+		MaxSize:   100 << 20,
 	})
 	log.Debug("File storage initialized", zap.String("upload_dir", "./uploads"))
 

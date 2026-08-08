@@ -1,3 +1,5 @@
+// internal/features/web/webTransport/webHttp/controller.go
+
 package webHttp
 
 import (
@@ -10,6 +12,7 @@ type WebController struct {
 
 type WebService interface {
 	GetMainPage() ([]byte, error)
+	GetAdminPage() ([]byte, error)
 }
 
 func NewWebController(webService WebService) *WebController {
@@ -23,6 +26,10 @@ func (c *WebController) Routes() []server.Route {
 		{
 			Path:    "/",
 			Handler: c.GetMainPage,
+		},
+		{
+			Path:    "/admin",
+			Handler: c.GetAdminPage,
 		},
 	}
 }
