@@ -18,7 +18,6 @@ CREATE TABLE vacant_positions
     title       VARCHAR(200)                     NOT NULL CHECK ( CHAR_LENGTH(title) BETWEEN 1 AND 200),
     description VARCHAR,
     date        TIMESTAMPTZ,
-    createAt TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 
     CONSTRAINT PK_vacant_positions_id PRIMARY KEY (id)
 );
