@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/domain"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/cookies"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/jwt"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/server"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/cookies"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/jwt"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/server"
 )
 
 type AuthController struct {

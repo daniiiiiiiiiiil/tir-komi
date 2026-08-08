@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	core_errors "github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/errors"
+	core_errors "github.com/daniiiiiiiiiiil/tir-komi/internal/core/errors"
 )
 
 func (p *WebRepository) GetFile(filePath string) ([]byte, error) {

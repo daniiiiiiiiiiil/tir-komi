@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/repository/pool/postgres"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/repository/pool/postgres"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
 )

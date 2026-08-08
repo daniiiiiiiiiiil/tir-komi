@@ -3,7 +3,7 @@ package authApi
 import (
 	"time"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/domain"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
 )
 
 type UserDTOResponse struct {

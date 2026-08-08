@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/domain"
-	core_errors "github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/errors"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/repository/pool/postgres"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
+	core_errors "github.com/daniiiiiiiiiiil/tir-komi/internal/core/errors"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/repository/pool/postgres"
 )
 
 func (r *AuthRepository) GetUserByEmail(ctx context.Context, email string) (domain.User, error) {

@@ -1,7 +1,7 @@
 package webHttp
 
 import (
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/server"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/server"
 )
 
 type WebController struct {

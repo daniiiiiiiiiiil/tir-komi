@@ -3,7 +3,7 @@ package server
 import (
 	"net/http"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/middleware"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/middleware"
 )
 
 type Route struct {

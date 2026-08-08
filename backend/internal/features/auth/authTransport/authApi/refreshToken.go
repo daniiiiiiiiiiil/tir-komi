@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/logger"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/cookies"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/response"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/logger"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/cookies"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/response"
 )
 
 // RefreshToken 	godoc

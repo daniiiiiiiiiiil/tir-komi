@@ -3,10 +3,10 @@ package authApi
 import (
 	"net/http"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/domain"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/logger"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/requests"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/response"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/logger"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/requests"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/response"
 )
 
 type LoginRequest struct {

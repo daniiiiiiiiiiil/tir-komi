@@ -3,7 +3,7 @@ package core_pgx
 import (
 	"context"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/repository/pool/postgres"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/repository/pool/postgres"
 )
 
 func (t pgxTx) Query(ctx context.Context, sql string, args ...any) (postgres.Rows, error) {

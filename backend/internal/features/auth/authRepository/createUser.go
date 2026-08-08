@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/domain"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
 )
 
 func (r *AuthRepository) CreateUser(ctx context.Context, user domain.User) (domain.User, error) {

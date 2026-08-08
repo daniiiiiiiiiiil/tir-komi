@@ -1,8 +1,8 @@
 package authRepository
 
 import (
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/domain"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/repository/pool/postgres"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/repository/pool/postgres"
 )
 
 type AuthRepository struct {

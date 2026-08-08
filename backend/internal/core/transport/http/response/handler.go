@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
-	core_errors "github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/errors"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/logger"
+	core_errors "github.com/daniiiiiiiiiiil/tir-komi/internal/core/errors"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/logger"
 	"go.uber.org/zap"
 )
 

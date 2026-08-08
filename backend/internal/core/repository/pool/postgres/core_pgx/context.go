@@ -3,7 +3,7 @@ package core_pgx
 import (
 	"context"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/repository/pool/postgres"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/repository/pool/postgres"
 )
 
 type txKey struct{}

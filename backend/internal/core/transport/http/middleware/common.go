@@ -6,12 +6,12 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/domain"
-	core_errors "github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/errors"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/logger"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/cookies"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/jwt"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/response"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
+	core_errors "github.com/daniiiiiiiiiiil/tir-komi/internal/core/errors"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/logger"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/cookies"
+	authjwt "github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/jwt"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/response"
 	"github.com/google/uuid"
 	"go.uber.org/zap"
 )
@@ -135,7 +135,7 @@ func RoleFromContext(ctx context.Context) (domain.Role, bool) {
 }
 
 type tokenParser interface {
-	ParseAccessToken(tokenString string) (*jwt.Claims, error)
+	ParseAccessToken(tokenString string) (*authjwt.Claims, error)
 }
 
 func Auth(tokenParser tokenParser) Middleware {

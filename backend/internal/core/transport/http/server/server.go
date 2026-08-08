@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/logger"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/middleware"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/logger"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/middleware"
 	"github.com/swaggo/http-swagger"
 	"github.com/swaggo/swag/example/basic/docs"
 	"go.uber.org/zap"

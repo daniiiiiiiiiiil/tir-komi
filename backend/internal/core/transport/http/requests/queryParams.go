@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	core_errors "github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/errors"
+	core_errors "github.com/daniiiiiiiiiiil/tir-komi/internal/core/errors"
 )
 
 func GetIntQueryParams(r *http.Request, key string) (*int, error) {

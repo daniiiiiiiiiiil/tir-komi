@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/domain"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
 )
 
 func (s *AuthService) LoginUser(ctx context.Context, credentials domain.Credentials) (domain.User, error) {

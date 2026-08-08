@@ -3,8 +3,8 @@ package webHttp
 import (
 	"net/http"
 
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/logger"
-	"github.com/daniiiiiiiiiiil/tir-komi/backend/internal/core/transport/http/response"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/logger"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/response"
 )
 
 func (c *WebController) GetMainPage(rw http.ResponseWriter, r *http.Request) {
