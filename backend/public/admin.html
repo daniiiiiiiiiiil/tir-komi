@@ -1042,12 +1042,12 @@
 
 
 <header class="site-header is-scrolled">
-    <a href="index.html" class="logo">
+    <a href="/" class="logo">
         <span class="logo-mark"><i></i></span>
         <span>ПАНЕЛЬ АДМИНИСТРАТОРА</span>
     </a>
     <div class="header-cta" id="headerAuthArea">
-        <a href="index.html" class="admin-link">← На сайт</a>
+        <a href="/" class="admin-link">← На сайт</a>
     </div>
 </header>
 
@@ -1111,7 +1111,6 @@
                         <div class="file-input-wrapper">
                             <input type="file" name="image" accept="image/*" id="imageInput">
                             <span class="file-label">Выберите файл</span>
-                            <span class="file-name" id="imageFileName">Файл не выбран</span>
                         </div>
                     </div>
                     <div class="form-row">
@@ -1119,7 +1118,6 @@
                         <div class="file-input-wrapper">
                             <input type="file" name="pdf" accept="application/pdf" id="pdfInput">
                             <span class="file-label">Выберите файл</span>
-                            <span class="file-name" id="pdfFileName">Файл не выбран</span>
                         </div>
                     </div>
                     <button type="submit" class="btn btn--sm">Создать</button>
@@ -1142,7 +1140,6 @@
                         <div class="file-input-wrapper">
                             <input type="file" name="pdf" accept="application/pdf" id="materialPdfInput">
                             <span class="file-label">Выберите файл</span>
-                            <span class="file-name" id="materialPdfFileName">Файл не выбран</span>
                         </div>
                     </div>
                     <button type="submit" class="btn btn--sm">Создать</button>
@@ -1182,7 +1179,7 @@
 
 <script>
 
-    const API_BASE = 'http://localhost:8080/api/v1';
+    const API_BASE = '/api/v1';
 
     async function apiRequest(path, { method = 'GET', body, headers, ...rest } = {}) {
         const res = await fetch(API_BASE + path, {
