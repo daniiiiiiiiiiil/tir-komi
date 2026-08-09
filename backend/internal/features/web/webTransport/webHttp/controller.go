@@ -1,6 +1,7 @@
 package webHttp
 
 import (
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -42,14 +43,33 @@ func (c *WebController) Routes() []server.Route {
 			Handler: c.GetAdminPage,
 		},
 		{
-			Method:  "GET",
-			Path:    "/assets/",
-			Handler: c.serveAssets, // Выносим в отдельную функцию
-		},
-		{
-			Method:  "GET",
-			Path:    "/uploads/",
-			Handler: c.serveUploads, // Выносим в отдельную функцию
+			Method: "GET",
+			Path:   "/assets/{filename}", // <-- без слеша в конце
+			Handler: func(w http.ResponseWriter, r *http.Request) {
+				// Получаем имя файла из URL
+				filename := strings.TrimPrefix(r.URL.Path, "/assets/")
+
+				// Путь к файлу
+				filePath := filepath.Join("./public/assets", filename)
+
+				// Проверяем существование
+				if _, err := os.Stat(filePath); err == nil {
+					// Устанавливаем Content-Type для изображений
+					ext := filepath.Ext(filename)
+					switch ext {
+					case ".jpg", ".jpeg":
+						w.Header().Set("Content-Type", "image/jpeg")
+					case ".png":
+						w.Header().Set("Content-Type", "image/png")
+					case ".pdf":
+						w.Header().Set("Content-Type", "application/pdf")
+					}
+					http.ServeFile(w, r, filePath)
+				} else {
+					log.Printf("File not found: %s", filePath)
+					http.NotFound(w, r)
+				}
+			},
 		},
 	}
 }
@@ -61,30 +81,23 @@ func (c *WebController) serveAssets(w http.ResponseWriter, r *http.Request) {
 		projectRoot = "."
 	}
 
-	// Получаем путь к файлу
 	relativePath := strings.TrimPrefix(r.URL.Path, "/assets/")
 	fullPath := filepath.Join(projectRoot, "public", "assets", relativePath)
 
+	// DEBUG: логируем путь
+	log.Printf("🔍 Looking for file: %s", fullPath)
+
 	// Проверяем существование файла
 	if _, err := os.Stat(fullPath); os.IsNotExist(err) {
+		// DEBUG: выводим все файлы в папке assets
+		assetsDir := filepath.Join(projectRoot, "public", "assets")
+		if files, err := os.ReadDir(assetsDir); err == nil {
+			log.Printf("📁 Files in assets: %v", files)
+		} else {
+			log.Printf("❌ Cannot read assets dir: %v", err)
+		}
 		http.NotFound(w, r)
 		return
-	}
-
-	// Устанавливаем правильные заголовки в зависимости от расширения
-	ext := filepath.Ext(fullPath)
-	switch ext {
-	case ".pdf":
-		w.Header().Set("Content-Type", "application/pdf")
-		w.Header().Set("Content-Disposition", "inline; filename="+filepath.Base(fullPath))
-	case ".png":
-		w.Header().Set("Content-Type", "image/png")
-	case ".jpg", ".jpeg":
-		w.Header().Set("Content-Type", "image/jpeg")
-	case ".css":
-		w.Header().Set("Content-Type", "text/css")
-	case ".js":
-		w.Header().Set("Content-Type", "application/javascript")
 	}
 
 	http.ServeFile(w, r, fullPath)
