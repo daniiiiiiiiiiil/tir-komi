@@ -11,7 +11,7 @@ type MethodologicalMaterialModel struct {
 	Title       string
 	Description *string
 	Date        *time.Time
-	Pdf         *string
+	Pdf         []byte
 }
 
 func methodologicalMaterialDomainFromModel(model MethodologicalMaterialModel) domain.MethodologicalMaterial {

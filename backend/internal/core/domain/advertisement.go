@@ -11,13 +11,13 @@ type Advertisement struct {
 	ID          int
 	Title       string
 	Description *string
-	Image       *string
-	Pdf         *string
+	Image       []byte
+	Pdf         []byte
 	Url         *string
 	CreatedAt   time.Time
 }
 
-func NewAdvertisement(id int, title string, description *string, image *string, pdf *string, url *string, createdAt time.Time) Advertisement {
+func NewAdvertisement(id int, title string, description *string, image []byte, pdf []byte, url *string, createdAt time.Time) Advertisement {
 	return Advertisement{
 		ID:          id,
 		Title:       title,
@@ -29,7 +29,7 @@ func NewAdvertisement(id int, title string, description *string, image *string, 
 	}
 }
 
-func NewAdvertisementUninitialized(title string, description *string, image *string, pdf *string, url *string) Advertisement {
+func NewAdvertisementUninitialized(title string, description *string, image []byte, pdf []byte, url *string) Advertisement {
 	return Advertisement{
 		ID:          UninitializedID,
 		Title:       title,
@@ -54,20 +54,6 @@ func (a *Advertisement) Validate() error {
 		}
 	}
 
-	if a.Image != nil {
-		imageLen := len([]rune(*a.Image))
-		if imageLen < 1 || imageLen > 250 {
-			return fmt.Errorf("image path must be between 1 and 250 characters: %d, %w", imageLen, core_errors.ErrInvalidArgument)
-		}
-	}
-
-	if a.Pdf != nil {
-		pdfLen := len([]rune(*a.Pdf))
-		if pdfLen < 1 || pdfLen > 250 {
-			return fmt.Errorf("pdf path must be between 1 and 250 characters: %d, %w", pdfLen, core_errors.ErrInvalidArgument)
-		}
-	}
-
 	if a.Url != nil {
 		urlLen := len([]rune(*a.Url))
 		if urlLen < 1 || urlLen > 250 {
@@ -81,12 +67,12 @@ func (a *Advertisement) Validate() error {
 type AdvertisementPatch struct {
 	Title       Nullable[string]
 	Description Nullable[string]
-	Image       Nullable[string]
-	Pdf         Nullable[string]
+	Image       Nullable[[]byte]
+	Pdf         Nullable[[]byte]
 	Url         Nullable[string]
 }
 
-func NewAdvertisementPatch(title Nullable[string], description Nullable[string], image Nullable[string], pdf Nullable[string], url Nullable[string]) AdvertisementPatch {
+func NewAdvertisementPatch(title Nullable[string], description Nullable[string], image Nullable[[]byte], pdf Nullable[[]byte], url Nullable[string]) AdvertisementPatch {
 	return AdvertisementPatch{
 		Title:       title,
 		Description: description,
@@ -122,11 +108,19 @@ func (a *Advertisement) ApplyPatch(patch AdvertisementPatch) error {
 	}
 
 	if patch.Image.Set {
-		tmp.Image = patch.Image.Value
+		if patch.Image.Value == nil {
+			tmp.Image = []byte{}
+		} else {
+			tmp.Image = *patch.Image.Value
+		}
 	}
 
 	if patch.Pdf.Set {
-		tmp.Pdf = patch.Pdf.Value
+		if patch.Pdf.Value == nil {
+			tmp.Pdf = []byte{}
+		} else {
+			tmp.Pdf = *patch.Pdf.Value
+		}
 	}
 
 	if patch.Url.Set {

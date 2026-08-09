@@ -1,7 +1,6 @@
 package http
 
 import (
-	"context"
 	"fmt"
 	"net/http"
 	"time"
@@ -79,13 +78,7 @@ func (handler *MaterialHandler) UpdateMaterial(rw http.ResponseWriter, r *http.R
 		return
 	}
 
-	pdfPatch, err := handler.savePdfPatch(ctx, req.Pdf)
-	if err != nil {
-		responseHandler.ErrorResponse(err, "failed to save pdf")
-		return
-	}
-
-	patch := domain.NewMethodologicalMaterialPatch(req.Title, req.Description, domain.Nullable[time.Time]{}, pdfPatch)
+	patch := domain.NewMethodologicalMaterialPatch(req.Title, req.Description, domain.Nullable[time.Time]{}, req.Pdf)
 
 	updated, err := handler.materialService.UpdateMethodologicalMaterial(ctx, materialId, patch)
 	if err != nil {
@@ -95,19 +88,4 @@ func (handler *MaterialHandler) UpdateMaterial(rw http.ResponseWriter, r *http.R
 
 	response := UpdateMaterialResponse(convertMaterialDtoFromDomain(updated))
 	responseHandler.JsonResponse(response, http.StatusOK)
-}
-
-func (handler *MaterialHandler) savePdfPatch(ctx context.Context, patch domain.Nullable[[]byte]) (domain.Nullable[string], error) {
-	if !patch.Set {
-		return domain.Nullable[string]{}, nil
-	}
-	if patch.Value == nil {
-		return domain.Nullable[string]{Set: true, Value: nil}, nil
-	}
-
-	path, err := handler.fileStorage.Save(ctx, *patch.Value)
-	if err != nil {
-		return domain.Nullable[string]{}, err
-	}
-	return domain.Nullable[string]{Set: true, Value: &path}, nil
 }

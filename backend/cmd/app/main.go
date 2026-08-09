@@ -11,7 +11,6 @@ import (
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/config"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/logger"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/repository/pool/postgres/core_pgx"
-	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/storage"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/jwt"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/middleware"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/server"
@@ -65,10 +64,6 @@ func main() {
 	jwtConfig := jwt.NewMustJWtConfig()
 	jwtProvider := jwt.NewJwtProvider(jwtConfig)
 
-	fileStorage := storage.NewFileStorage(storage.FileStorageConfig{
-		UploadDir: "./uploads",
-		MaxSize:   100 << 20,
-	})
 	log.Debug("File storage initialized", zap.String("upload_dir", "./uploads"))
 
 	log.Debug("Initializing feature", zap.String("feature", "auth"))
@@ -80,7 +75,7 @@ func main() {
 	log.Debug("Initializing feature", zap.String("feature", "advertisement"))
 	adRepo := postgres_advertisement.NewAdvertisementRepository(pool)
 	adSvc := advertisementService.NewAdvertisementService(adRepo)
-	adHandler := advertisementHttp.NewAdvertisementHandler(adSvc, fileStorage)
+	adHandler := advertisementHttp.NewAdvertisementHandler(adSvc)
 
 	log.Debug("Initializing feature", zap.String("feature", "review"))
 	reviewRepo := postgres_review.NewReviewRepository(pool)
@@ -95,7 +90,7 @@ func main() {
 	log.Debug("Initializing feature", zap.String("feature", "methodological_material"))
 	materialRepo := postgres_methodological_material.NewMethodologicalMaterialRepository(pool)
 	materialSvc := methodologicalService.NewMethodologicalMaterialService(materialRepo)
-	materialHandler := methodologicalHttp.NewMaterialHandler(materialSvc, fileStorage)
+	materialHandler := methodologicalHttp.NewMaterialHandler(materialSvc)
 
 	log.Debug("Initializing feature", zap.String("feature", "web"))
 	webRepo := webRepository.NewWebRepository()

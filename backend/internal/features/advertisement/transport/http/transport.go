@@ -9,7 +9,6 @@ import (
 
 type AdvertisementHandler struct {
 	advertisementService AdvertisementService
-	fileStorage          FileStorage
 }
 
 type AdvertisementService interface {
@@ -20,14 +19,9 @@ type AdvertisementService interface {
 	UpdateAdvertisement(ctx context.Context, id int, patch domain.AdvertisementPatch) (domain.Advertisement, error)
 }
 
-type FileStorage interface {
-	Save(ctx context.Context, data []byte) (string, error)
-}
-
-func NewAdvertisementHandler(advertisementService AdvertisementService, fileStorage FileStorage) *AdvertisementHandler {
+func NewAdvertisementHandler(advertisementService AdvertisementService) *AdvertisementHandler {
 	return &AdvertisementHandler{
 		advertisementService: advertisementService,
-		fileStorage:          fileStorage,
 	}
 }
 

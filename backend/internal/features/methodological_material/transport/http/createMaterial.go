@@ -11,9 +11,9 @@ import (
 )
 
 type CreateMaterialRequest struct {
-	Title       string  `json:"title" validate:"required,min=1,max=200" example:"Методичка по Go"`
-	Description string  `json:"description" validate:"omitempty,max=1000" example:"Базовые принципы разработки на Go"`
-	Pdf         *[]byte `json:"pdf"`
+	Title       string `json:"title" validate:"required,min=1,max=200" example:"Методичка по Go"`
+	Description string `json:"description" validate:"omitempty,max=1000" example:"Базовые принципы разработки на Go"`
+	Pdf         []byte `json:"pdf"`
 }
 
 type CreateMaterialResponse MaterialDto
@@ -40,19 +40,9 @@ func (handler *MaterialHandler) CreateMaterial(rw http.ResponseWriter, r *http.R
 		return
 	}
 
-	var pdfPath *string
-	if req.Pdf != nil {
-		path, err := handler.fileStorage.Save(ctx, *req.Pdf)
-		if err != nil {
-			responseHandler.ErrorResponse(err, "failed to save pdf")
-			return
-		}
-		pdfPath = &path
-	}
-
 	description := &req.Description
 	date := time.Now()
-	materialDomain := domain.NewMethodologicalMaterialUninitialized(req.Title, description, &date, pdfPath)
+	materialDomain := domain.NewMethodologicalMaterialUninitialized(req.Title, description, &date, req.Pdf)
 	if err := materialDomain.Validate(); err != nil {
 		responseHandler.ErrorResponse(err, "invalid material")
 		return

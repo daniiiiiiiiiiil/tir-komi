@@ -11,7 +11,7 @@ type MaterialDto struct {
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
 	CreateAt    time.Time `json:"create_at"`
-	Pdf         *string   `json:"pdf,omitempty"`
+	Pdf         []byte    `json:"pdf,omitempty"`
 }
 
 func convertMaterialDtoFromDomain(material domain.MethodologicalMaterial) MaterialDto {

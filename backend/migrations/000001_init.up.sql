@@ -5,8 +5,8 @@ CREATE TABLE advertisement
     id         INT GENERATED ALWAYS AS IDENTITY NOT NULL,
     title      VARCHAR                          NOT NULL,
     description VARCHAR,
-    image      VARCHAR(250) CHECK ( CHAR_LENGTH(image) BETWEEN 1 AND 250),
-    pdf        VARCHAR(250) CHECK ( CHAR_LENGTH(pdf) BETWEEN 1 AND 250),
+    image      BYTEA,
+    pdf        BYTEA,
     url        VARCHAR(250) CHECK ( CHAR_LENGTH(url) BETWEEN 1 AND 250),
     created_at TIMESTAMPTZ                      NOT NULL DEFAULT NOW(),
 
@@ -41,7 +41,7 @@ CREATE TABLE methodological_material
     title       VARCHAR(200)                     NOT NULL CHECK ( CHAR_LENGTH(title) BETWEEN 1 AND 200),
     description VARCHAR,
     date        TIMESTAMPTZ,
-    pdf         VARCHAR(200),
+    pdf         BYTEA,
 
     CONSTRAINT PK_methodological_material_id PRIMARY KEY (id)
 );

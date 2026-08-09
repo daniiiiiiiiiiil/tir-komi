@@ -10,8 +10,8 @@ type AdvertisementModel struct {
 	ID          int
 	Title       string
 	Description *string
-	Image       *string
-	Pdf         *string
+	Image       []byte
+	Pdf         []byte
 	Url         *string
 	CreatedAt   time.Time
 }

@@ -1,7 +1,6 @@
 package http
 
 import (
-	"context"
 	"fmt"
 	"net/http"
 
@@ -80,19 +79,13 @@ func (handler *AdvertisementHandler) UpdateAdvertisement(rw http.ResponseWriter,
 		return
 	}
 
-	imagePatch, err := handler.convertBytesPatchToPathPatch(ctx, req.Image)
-	if err != nil {
-		responseHandler.ErrorResponse(err, "failed to save image")
-		return
-	}
-
-	pdfPatch, err := handler.convertBytesPatchToPathPatch(ctx, req.Pdf)
-	if err != nil {
-		responseHandler.ErrorResponse(err, "failed to save pdf")
-		return
-	}
-
-	patch := domain.NewAdvertisementPatch(req.Title, domain.Nullable[string]{}, imagePatch, pdfPatch, req.Url)
+	patch := domain.NewAdvertisementPatch(
+		req.Title,
+		req.Description,
+		req.Image,
+		req.Pdf,
+		req.Url,
+	)
 
 	updated, err := handler.advertisementService.UpdateAdvertisement(ctx, adId, patch)
 	if err != nil {
@@ -102,19 +95,4 @@ func (handler *AdvertisementHandler) UpdateAdvertisement(rw http.ResponseWriter,
 
 	response := UpdateAdvertisementResponse(convertAdvertisementDtoFromDomain(updated))
 	responseHandler.JsonResponse(response, http.StatusOK)
-}
-
-func (handler *AdvertisementHandler) convertBytesPatchToPathPatch(ctx context.Context, patch domain.Nullable[[]byte]) (domain.Nullable[string], error) {
-	if !patch.Set {
-		return domain.Nullable[string]{}, nil
-	}
-	if patch.Value == nil {
-		return domain.Nullable[string]{Set: true, Value: nil}, nil
-	}
-
-	path, err := handler.fileStorage.Save(ctx, *patch.Value)
-	if err != nil {
-		return domain.Nullable[string]{}, err
-	}
-	return domain.Nullable[string]{Set: true, Value: &path}, nil
 }

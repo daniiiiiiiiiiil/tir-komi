@@ -9,7 +9,6 @@ import (
 
 type MaterialHandler struct {
 	materialService MaterialService
-	fileStorage     FileStorage
 }
 
 type MaterialService interface {
@@ -20,15 +19,10 @@ type MaterialService interface {
 	UpdateMethodologicalMaterial(ctx context.Context, id int, patch domain.MethodologicalMaterialPatch) (domain.MethodologicalMaterial, error)
 }
 
-func NewMaterialHandler(materialService MaterialService, fileStorage FileStorage) *MaterialHandler {
+func NewMaterialHandler(materialService MaterialService) *MaterialHandler {
 	return &MaterialHandler{
 		materialService: materialService,
-		fileStorage:     fileStorage,
 	}
-}
-
-type FileStorage interface {
-	Save(ctx context.Context, data []byte) (string, error)
 }
 
 func (handler *MaterialHandler) Routers() []server.Route {

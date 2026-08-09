@@ -12,10 +12,10 @@ type MethodologicalMaterial struct {
 	Title       string
 	Description *string
 	Date        *time.Time
-	Pdf         *string
+	Pdf         []byte
 }
 
-func NewMethodologicalMaterial(id int, title string, description *string, date *time.Time, pdf *string) MethodologicalMaterial {
+func NewMethodologicalMaterial(id int, title string, description *string, date *time.Time, pdf []byte) MethodologicalMaterial {
 	return MethodologicalMaterial{
 		ID:          id,
 		Title:       title,
@@ -25,7 +25,7 @@ func NewMethodologicalMaterial(id int, title string, description *string, date *
 	}
 }
 
-func NewMethodologicalMaterialUninitialized(title string, description *string, date *time.Time, pdf *string) MethodologicalMaterial {
+func NewMethodologicalMaterialUninitialized(title string, description *string, date *time.Time, pdf []byte) MethodologicalMaterial {
 	return MethodologicalMaterial{
 		ID:          UninitializedID,
 		Title:       title,
@@ -41,13 +41,6 @@ func (m *MethodologicalMaterial) Validate() error {
 		return fmt.Errorf("title must be between 1 and 200 characters: %d, %w", titleLen, core_errors.ErrInvalidArgument)
 	}
 
-	if m.Pdf != nil {
-		pdfLen := len([]rune(*m.Pdf))
-		if pdfLen > 200 {
-			return fmt.Errorf("pdf path too long: %d, %w", pdfLen, core_errors.ErrInvalidArgument)
-		}
-	}
-
 	return nil
 }
 
@@ -55,10 +48,10 @@ type MethodologicalMaterialPatch struct {
 	Title       Nullable[string]
 	Description Nullable[string]
 	Date        Nullable[time.Time]
-	Pdf         Nullable[string]
+	Pdf         Nullable[[]byte]
 }
 
-func NewMethodologicalMaterialPatch(title Nullable[string], description Nullable[string], date Nullable[time.Time], pdf Nullable[string]) MethodologicalMaterialPatch {
+func NewMethodologicalMaterialPatch(title Nullable[string], description Nullable[string], date Nullable[time.Time], pdf Nullable[[]byte]) MethodologicalMaterialPatch {
 	return MethodologicalMaterialPatch{
 		Title:       title,
 		Description: description,
@@ -97,7 +90,11 @@ func (m *MethodologicalMaterial) ApplyPatch(patch MethodologicalMaterialPatch) e
 	}
 
 	if patch.Pdf.Set {
-		tmp.Pdf = patch.Pdf.Value
+		if patch.Pdf.Value == nil {
+			tmp.Pdf = []byte{}
+		} else {
+			tmp.Pdf = *patch.Pdf.Value
+		}
 	}
 
 	if err := tmp.Validate(); err != nil {

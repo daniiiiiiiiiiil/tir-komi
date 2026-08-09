@@ -12,8 +12,8 @@ import (
 type CreateAdvertisementRequest struct {
 	Title       string  `json:"title" validate:"required,min=1,max=200" example:"Скидка 20% на всё"`
 	Description string  `json:"description" validate:"omitempty,max=1000" example:"Акция действует до конца месяца"`
-	Image       *[]byte `json:"image,omitempty"`
-	Pdf         *[]byte `json:"pdf,omitempty"`
+	Image       []byte  `json:"image,omitempty"`
+	Pdf         []byte  `json:"pdf,omitempty"`
 	Url         *string `json:"url" validate:"omitempty,max=250"`
 }
 
@@ -41,26 +41,15 @@ func (handler *AdvertisementHandler) CreateAdvertisement(rw http.ResponseWriter,
 		return
 	}
 
-	var imagePath, pdfPath *string
-	if req.Image != nil {
-		path, err := handler.fileStorage.Save(ctx, *req.Image)
-		if err != nil {
-			responseHandler.ErrorResponse(err, "failed to save image")
-			return
-		}
-		imagePath = &path
-	}
-	if req.Pdf != nil {
-		path, err := handler.fileStorage.Save(ctx, *req.Pdf)
-		if err != nil {
-			responseHandler.ErrorResponse(err, "failed to save pdf")
-			return
-		}
-		pdfPath = &path
-	}
-
 	description := &req.Description
-	adDomain := domain.NewAdvertisementUninitialized(req.Title, description, imagePath, pdfPath, req.Url)
+	adDomain := domain.NewAdvertisementUninitialized(
+		req.Title,
+		description,
+		req.Image,
+		req.Pdf,
+		req.Url,
+	)
+
 	if err := adDomain.Validate(); err != nil {
 		responseHandler.ErrorResponse(err, "invalid advertisement")
 		return
