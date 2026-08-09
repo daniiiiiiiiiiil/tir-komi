@@ -91,9 +91,8 @@ func main() {
 	materialSvc := methodologicalService.NewMethodologicalMaterialService(materialRepo)
 	materialHandler := methodologicalHttp.NewMaterialHandler(materialSvc)
 
-	// ========== ИНИЦИАЛИЗИРУЕМ FILE HANDLER ПОСЛЕ СОЗДАНИЯ СЕРВИСОВ ==========
 	log.Debug("Initializing file handler")
-	fileHandler := api.NewFileHandler(adSvc, materialSvc) // ← используем adSvc и materialSvc
+	fileHandler := api.NewFileHandler(adSvc, materialSvc)
 
 	log.Debug("Initializing feature", zap.String("feature", "web"))
 	webRepo := webRepository.NewWebRepository()
