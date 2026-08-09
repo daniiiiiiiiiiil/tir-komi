@@ -1941,7 +1941,7 @@
                     return `
     <article class="card" data-id="${ad.id}">
       <div class="card-media">
-        ${ad.image ? `<img src="${escapeHtml(ad.image)}" alt="${escapeHtml(ad.title)}" loading="lazy">` : `<div class="ph">Институт международных связей и делового сотрудничества</div>`}
+        ${ad.id ? `<img src="/api/v1/advertisements/${ad.id}/image" alt="${escapeHtml(ad.title)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'ph\\'>Институт международных связей и делового сотрудничества</div>'">` : `<div class="ph">Институт международных связей и делового сотрудничества</div>`}
       </div>
       <div class="card-body">
         <span class="card-tag">Объявление</span>
@@ -1962,10 +1962,21 @@
                         try {
                             const ad = await Api.advertisements.get(id);
                             if (!ad) throw new Error('Объявление не найдено');
+
                             let bodyHTML = `<p>${escapeHtml(ad.description || '')}</p>`;
-                            if (ad.image) bodyHTML += `<img src="${escapeHtml(ad.image)}" alt="${escapeHtml(ad.title)}">`;
-                            if (ad.url) bodyHTML += `<p><a href="${escapeHtml(ad.url)}" target="_blank" rel="noopener" class="btn btn--sm">Перейти по ссылке</a></p>`;
-                            if (ad.pdf) bodyHTML += `<p><a href="${escapeHtml(ad.pdf)}" target="_blank" rel="noopener" class="btn btn--sm">Скачать PDF</a></p>`;
+
+                            if (ad.id) {
+                                bodyHTML += `<img src="/api/v1/advertisements/${ad.id}/image" alt="${escapeHtml(ad.title)}" style="max-width:100%;border:1px solid var(--line-soft);margin:1em 0;" onerror="this.style.display='none'">`;
+                            }
+
+                            if (ad.id) {
+                                bodyHTML += `<p><a href="/api/v1/advertisements/${ad.id}/pdf" target="_blank" rel="noopener" class="btn btn--sm">📄 Скачать PDF</a></p>`;
+                            }
+
+                            if (ad.url) {
+                                bodyHTML += `<p><a href="${escapeHtml(ad.url)}" target="_blank" rel="noopener" class="btn btn--sm">Перейти по ссылке</a></p>`;
+                            }
+
                             openModal(ad.title, formatDate(ad.create_at), bodyHTML);
                         } catch (err) {
                             console.error(err);
@@ -1999,7 +2010,7 @@
       </div>
       <div class="doc-meta">
         ${formatDate(m.create_at)}<br>
-        ${m.pdf ? `<a href="${escapeHtml(m.pdf)}" class="btn--line" target="_blank" rel="noopener">Скачать</a>` : '—'}
+        ${m.id ? `<a href="/api/v1/materials/${m.id}/pdf" class="btn--line" target="_blank" rel="noopener">Скачать</a>` : '—'}
       </div>
     </div>`).join('');
                 staggerChildren(materialsGrid);
