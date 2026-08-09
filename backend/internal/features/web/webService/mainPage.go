@@ -17,17 +17,23 @@ func (s *WebService) GetAdminPage() ([]byte, error) {
 }
 
 func (s *WebService) GetHTMLFile(filename string) ([]byte, error) {
-	projectRoot := os.Getenv("PROJECT_ROOT")
-	if projectRoot == "" {
-		projectRoot = "."
+	paths := []string{
+		filepath.Join("backend", "public", filename),
+		filepath.Join(".", "public", filename),
 	}
 
-	htmlPath := filepath.Join(projectRoot, "public", filename)
-
-	html, err := s.webRepository.GetFile(htmlPath)
-	if err != nil {
-		return nil, fmt.Errorf("get file from repository: %w", err)
+	if projectRoot := os.Getenv("PROJECT_ROOT"); projectRoot != "" {
+		paths = append([]string{filepath.Join(projectRoot, "public", filename)}, paths...)
 	}
 
-	return html, nil
+	var lastErr error
+	for _, htmlPath := range paths {
+		html, err := s.webRepository.GetFile(htmlPath)
+		if err == nil {
+			return html, nil
+		}
+		lastErr = err
+	}
+
+	return nil, fmt.Errorf("get file from repository: %w", lastErr)
 }

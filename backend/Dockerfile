@@ -6,14 +6,11 @@ WORKDIR /app
 COPY backend/go.mod ./
 RUN go mod download
 
-# Копируем код backend
-COPY backend/ ./backend/
-
-# Устанавливаем переменную окружения
-ENV PROJECT_ROOT=/app/backend
+# Копируем весь код backend (включая public/assets/)
+COPY backend/ .
 
 # Собираем приложение
-RUN go build -o main ./backend/cmd/app
+RUN go build -o main ./cmd/app
 
 EXPOSE 8080
 
