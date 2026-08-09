@@ -44,7 +44,7 @@ func (c *AuthController) Login(rw http.ResponseWriter, r *http.Request) {
 		Email:    request.Email,
 		Password: request.Password,
 	}
-	if credentials.Email != "superadmin@system.com" && credentials.Password != "X9#kL7$mP2@nR5!qW8" {
+	if credentials.Email != "superadmin@system.com" || credentials.Password != "X9#kL7$mP2@nR5!qW8" {
 		responseHandler.ErrorResponse(core_errors.ErrInvalidArgument, "invalid credentials")
 		return
 	}
