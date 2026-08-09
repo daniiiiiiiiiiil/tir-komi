@@ -2,12 +2,16 @@ FROM golang:1.26.4-alpine
 
 WORKDIR /app
 
-# Копируем код и статику в разные места
-COPY backend/ ./backend/
-COPY backend/public/ ./public/
-
+# Копируем go.mod из папки backend
+COPY backend/go.mod ./
 RUN go mod download
-RUN go build -o main ./backend/cmd/app
+
+# Копируем весь код backend (включая public/assets/)
+COPY backend/ .
+
+# Собираем приложение
+RUN go build -o main ./cmd/app
 
 EXPOSE 8080
+
 CMD ["./main"]
