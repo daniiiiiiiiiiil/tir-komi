@@ -12,16 +12,24 @@ COPY backend/ .
 # Собираем приложение
 RUN go build -o main ./cmd/app
 
-# Финальный этап
+# Финальный этап - используем тот же alpine, что и в builder
 FROM alpine:latest
 
 WORKDIR /app
 
+# Устанавливаем необходимые зависимости (важно!)
+RUN apk add --no-cache \
+    ca-certificates \
+    tzdata
+
 # Копируем бинарник
 COPY --from=builder /app/main .
 
-# Копируем папку assets (ВАЖНО!)
-COPY --from=builder /app/public/assets ./public/assets
+# Копируем папку assets
+COPY --from=builder /app/public ./public
+
+# Копируем папку с шаблонами (если она есть)
+COPY --from=builder /app/templates ./templates
 
 EXPOSE 8080
 
