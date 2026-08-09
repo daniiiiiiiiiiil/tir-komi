@@ -4,10 +4,11 @@ import (
 	"context"
 	"net/http"
 	"strconv"
-	"strings"
 
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/logger"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/requests"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/server"
 )
 
 type FileHandler struct {
@@ -30,19 +31,31 @@ func NewFileHandler(adService AdvertisementService, matService MaterialService) 
 	}
 }
 
+func (h *FileHandler) Routes() []server.Route {
+	return []server.Route{
+		{
+			Method:  "GET",
+			Path:    "/advertisements/{id}/image",
+			Handler: h.GetAdvertisementImage,
+		},
+		{
+			Method:  "GET",
+			Path:    "/advertisements/{id}/pdf",
+			Handler: h.GetAdvertisementPDF,
+		},
+		{
+			Method:  "GET",
+			Path:    "/materials/{id}/pdf",
+			Handler: h.GetMaterialPDF,
+		},
+	}
+}
+
 func (h *FileHandler) GetAdvertisementImage(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	log := logger.FromContext(ctx)
 
-	path := r.URL.Path
-	parts := strings.Split(path, "/")
-
-	if len(parts) < 6 {
-		http.Error(w, "Invalid URL", http.StatusBadRequest)
-		return
-	}
-
-	id, err := strconv.Atoi(parts[4])
+	id, err := requests.GetIntPathValue(r, "id")
 	if err != nil {
 		http.Error(w, "Invalid ID", http.StatusBadRequest)
 		return
@@ -72,15 +85,7 @@ func (h *FileHandler) GetAdvertisementPDF(w http.ResponseWriter, r *http.Request
 	ctx := r.Context()
 	log := logger.FromContext(ctx)
 
-	path := r.URL.Path
-	parts := strings.Split(path, "/")
-
-	if len(parts) < 6 {
-		http.Error(w, "Invalid URL", http.StatusBadRequest)
-		return
-	}
-
-	id, err := strconv.Atoi(parts[4])
+	id, err := requests.GetIntPathValue(r, "id")
 	if err != nil {
 		http.Error(w, "Invalid ID", http.StatusBadRequest)
 		return
@@ -109,15 +114,7 @@ func (h *FileHandler) GetMaterialPDF(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	log := logger.FromContext(ctx)
 
-	path := r.URL.Path
-	parts := strings.Split(path, "/")
-
-	if len(parts) < 6 {
-		http.Error(w, "Invalid URL", http.StatusBadRequest)
-		return
-	}
-
-	id, err := strconv.Atoi(parts[4])
+	id, err := requests.GetIntPathValue(r, "id")
 	if err != nil {
 		http.Error(w, "Invalid ID", http.StatusBadRequest)
 		return
