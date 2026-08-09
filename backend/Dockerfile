@@ -18,7 +18,6 @@ RUN apk add --no-cache ca-certificates tzdata
 COPY --from=builder /app/main .
 COPY --from=builder /app/public ./public
 
-# Создаем папку для uploads (персистентный диск будет смонтирован сюда)
 RUN mkdir -p /app/uploads
 
 EXPOSE 8080

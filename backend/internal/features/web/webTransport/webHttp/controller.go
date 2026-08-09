@@ -152,3 +152,16 @@ func getContentType(filename string) string {
 		return "application/octet-stream"
 	}
 }
+
+func (c *WebController) GetImageProxy(w http.ResponseWriter, r *http.Request) {
+	filename := strings.TrimPrefix(r.URL.Path, "/images/")
+
+	if strings.HasPrefix(filename, "ad_") {
+		id := strings.TrimPrefix(filename, "ad_")
+		id = strings.TrimSuffix(id, ".jpg")
+		http.Redirect(w, r, "/api/v1/advertisements/"+id+"/image", http.StatusSeeOther)
+		return
+	}
+
+	http.NotFound(w, r)
+}

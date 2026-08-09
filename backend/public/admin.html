@@ -1395,24 +1395,72 @@
     </div>`;
         }
 
-        const adsBody = tableBody('adsTable');
+        const adsRail = document.getElementById('adsRail');
 
         async function loadAds() {
-            adsBody.innerHTML = emptyRow(5, 'Загрузка…');
+            if (!adsRail) return;
             try {
-                const data = await withAuth(() => Api.advertisements.list(50, 0));
-                const items = (data && data.items) || [];
-                if (!items.length) { adsBody.innerHTML = emptyRow(5, 'Объявлений нет'); return; }
-                adsBody.innerHTML = items.map((a) => `
-        <tr data-id="${a.id}">
-          <td>${a.id}</td>
-          <td class="title-cell">${escapeHtml(a.title)}</td>
-          <td class="desc-cell"><span>${escapeHtml(a.description || '')}</span></td>
-          <td>${formatDate(a.create_at)}</td>
-          <td>${rowActions(a.id)}</td>
-        </tr>`).join('');
+                const data = await Api.advertisements.list(12, 0);
+                const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
+
+                if (!items.length) {
+                    adsRail.innerHTML = stateBlock('Пока нет объявлений', 'Загляните позже — здесь появятся новости и акции тира.');
+                    return;
+                }
+
+                adsRail.innerHTML = items.map((ad) => {
+                    const desc = ad.description ? escapeHtml(ad.description) : '';
+                    const preview = desc.length > 120 ? desc.slice(0, 120) + '…' : desc;
+
+                    return `
+    <article class="card" data-id="${ad.id}">
+      <div class="card-media">
+        ${ad.id ? `<img src="/api/v1/advertisements/${ad.id}/image" alt="${escapeHtml(ad.title)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'ph\\'>Институт международных связей и делового сотрудничества</div>'">` : `<div class="ph">Институт международных связей и делового сотрудничества</div>`}
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Объявление</span>
+        <h3>${escapeHtml(ad.title)}</h3>
+        <p>${preview}</p>
+        <div class="card-foot">
+          <span>${formatDate(ad.create_at)}</span>
+          <button class="btn--line modal-trigger" data-id="${ad.id}">Подробнее</button>
+        </div>
+      </div>
+    </article>`;
+                }).join('');
+
+                adsRail.querySelectorAll('.modal-trigger').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        e.stopPropagation();
+                        const id = btn.dataset.id;
+                        try {
+                            const ad = await Api.advertisements.get(id);
+                            if (!ad) throw new Error('Объявление не найдено');
+
+                            let bodyHTML = `<p>${escapeHtml(ad.description || '')}</p>`;
+
+                            if (ad.id) {
+                                bodyHTML += `<img src="/api/v1/advertisements/${ad.id}/image" alt="${escapeHtml(ad.title)}" style="max-width:100%;border:1px solid var(--line-soft);margin:1em 0;" onerror="this.style.display='none'">`;
+                            }
+
+                            if (ad.url) {
+                                bodyHTML += `<p><a href="${escapeHtml(ad.url)}" target="_blank" rel="noopener" class="btn btn--sm">Перейти по ссылке</a></p>`;
+                            }
+
+                            if (ad.id) {
+                                bodyHTML += `<p><a href="/api/v1/advertisements/${ad.id}/pdf" target="_blank" rel="noopener" class="btn btn--sm">📄 Скачать PDF</a></p>`;
+                            }
+
+                            openModal(ad.title, formatDate(ad.create_at), bodyHTML);
+                        } catch (err) {
+                            console.error(err);
+                            openModal('Ошибка', '', `<p>Не удалось загрузить объявление: ${escapeHtml(err.message)}</p>`);
+                        }
+                    });
+                });
+
             } catch (err) {
-                adsBody.innerHTML = emptyRow(5, 'Ошибка загрузки: ' + escapeHtml(err.message || ''));
+                adsRail.innerHTML = stateBlock('Не удалось загрузить объявления', escapeHtml(err.message || 'Проверьте соединение и попробуйте обновить страницу.'));
             }
         }
 

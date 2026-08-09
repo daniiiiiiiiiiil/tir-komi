@@ -11,6 +11,7 @@ import (
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/config"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/logger"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/repository/pool/postgres/core_pgx"
+	api "github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/file_handlers"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/jwt"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/middleware"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/server"
@@ -64,8 +65,6 @@ func main() {
 	jwtConfig := jwt.NewMustJWtConfig()
 	jwtProvider := jwt.NewJwtProvider(jwtConfig)
 
-	log.Debug("File storage initialized", zap.String("upload_dir", "./uploads"))
-
 	log.Debug("Initializing feature", zap.String("feature", "auth"))
 	authRepo := authRepository.NewAuthRepository(pool)
 	hasher := &authService.BcryptHasher{}
@@ -92,6 +91,10 @@ func main() {
 	materialSvc := methodologicalService.NewMethodologicalMaterialService(materialRepo)
 	materialHandler := methodologicalHttp.NewMaterialHandler(materialSvc)
 
+	// ========== ИНИЦИАЛИЗИРУЕМ FILE HANDLER ПОСЛЕ СОЗДАНИЯ СЕРВИСОВ ==========
+	log.Debug("Initializing file handler")
+	fileHandler := api.NewFileHandler(adSvc, materialSvc) // ← используем adSvc и materialSvc
+
 	log.Debug("Initializing feature", zap.String("feature", "web"))
 	webRepo := webRepository.NewWebRepository()
 	webSvc := webService.NewWebService(webRepo)
@@ -115,6 +118,24 @@ func main() {
 	apiRouter.RegisterRouters(reviewHandler.Routers()...)
 	apiRouter.RegisterRouters(vacantHandler.Routers()...)
 	apiRouter.RegisterRouters(materialHandler.Routers()...)
+
+	// ========== РЕГИСТРИРУЕМ МАРШРУТЫ ДЛЯ ФАЙЛОВ ==========
+	// Добавляем напрямую в apiRouter
+	apiRouter.RegisterRouters(server.Route{
+		Method:  "GET",
+		Path:    "/advertisements/{id}/image",
+		Handler: fileHandler.GetAdvertisementImage,
+	})
+	apiRouter.RegisterRouters(server.Route{
+		Method:  "GET",
+		Path:    "/advertisements/{id}/pdf",
+		Handler: fileHandler.GetAdvertisementPDF,
+	})
+	apiRouter.RegisterRouters(server.Route{
+		Method:  "GET",
+		Path:    "/materials/{id}/pdf",
+		Handler: fileHandler.GetMaterialPDF,
+	})
 
 	httpServer.RegisterRoutes(webController.Routes()...)
 	httpServer.RegisterAPIRouters(apiRouter)
