@@ -6,10 +6,10 @@ WORKDIR /app
 COPY backend/go.mod ./
 RUN go mod download
 
-# Копируем весь код backend
+# Копируем весь код backend (включая public/assets/)
 COPY backend/ .
 
-# Собираем из cmd/app (относительно backend)
+# Собираем приложение
 RUN go build -o main ./cmd/app
 
 EXPOSE 8080
