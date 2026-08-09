@@ -34,6 +34,12 @@ func NewPool(
 		return nil, fmt.Errorf("failed to parse connection string: %w", err)
 	}
 
+	pgxconfig.MaxConns = 5
+	pgxconfig.MinConns = 1
+	pgxconfig.MaxConnLifetime = 30 * time.Minute
+	pgxconfig.MaxConnIdleTime = 10 * time.Minute
+	pgxconfig.HealthCheckPeriod = 1 * time.Minute
+
 	pool, err := pgxpool.NewWithConfig(ctx, pgxconfig)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create connection pool: %w", err)
