@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/logger"
@@ -33,10 +34,15 @@ func (h *FileHandler) GetAdvertisementImage(w http.ResponseWriter, r *http.Reque
 	ctx := r.Context()
 	log := logger.FromContext(ctx)
 
-	idStr := r.URL.Path[len("/api/v1/advertisements/"):]
-	idStr = idStr[:len(idStr)-len("/image")]
+	path := r.URL.Path
+	parts := strings.Split(path, "/")
 
-	id, err := strconv.Atoi(idStr)
+	if len(parts) < 6 {
+		http.Error(w, "Invalid URL", http.StatusBadRequest)
+		return
+	}
+
+	id, err := strconv.Atoi(parts[4])
 	if err != nil {
 		http.Error(w, "Invalid ID", http.StatusBadRequest)
 		return
@@ -56,7 +62,8 @@ func (h *FileHandler) GetAdvertisementImage(w http.ResponseWriter, r *http.Reque
 
 	contentType := detectContentType(ad.Image)
 	w.Header().Set("Content-Type", contentType)
-	w.Header().Set("Cache-Control", "public, max-age=86400") // Кэширование на 24 часа
+	w.Header().Set("Cache-Control", "public, max-age=86400")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	w.Write(ad.Image)
 }
@@ -65,10 +72,15 @@ func (h *FileHandler) GetAdvertisementPDF(w http.ResponseWriter, r *http.Request
 	ctx := r.Context()
 	log := logger.FromContext(ctx)
 
-	idStr := r.URL.Path[len("/api/v1/advertisements/"):]
-	idStr = idStr[:len(idStr)-len("/pdf")]
+	path := r.URL.Path
+	parts := strings.Split(path, "/")
 
-	id, err := strconv.Atoi(idStr)
+	if len(parts) < 6 {
+		http.Error(w, "Invalid URL", http.StatusBadRequest)
+		return
+	}
+
+	id, err := strconv.Atoi(parts[4])
 	if err != nil {
 		http.Error(w, "Invalid ID", http.StatusBadRequest)
 		return
@@ -89,6 +101,7 @@ func (h *FileHandler) GetAdvertisementPDF(w http.ResponseWriter, r *http.Request
 	w.Header().Set("Content-Type", "application/pdf")
 	w.Header().Set("Content-Disposition", "inline; filename=ad_"+strconv.Itoa(ad.ID)+".pdf")
 	w.Header().Set("Cache-Control", "public, max-age=86400")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write(ad.Pdf)
 }
 
@@ -96,10 +109,15 @@ func (h *FileHandler) GetMaterialPDF(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	log := logger.FromContext(ctx)
 
-	idStr := r.URL.Path[len("/api/v1/materials/"):]
-	idStr = idStr[:len(idStr)-len("/pdf")]
+	path := r.URL.Path
+	parts := strings.Split(path, "/")
 
-	id, err := strconv.Atoi(idStr)
+	if len(parts) < 6 {
+		http.Error(w, "Invalid URL", http.StatusBadRequest)
+		return
+	}
+
+	id, err := strconv.Atoi(parts[4])
 	if err != nil {
 		http.Error(w, "Invalid ID", http.StatusBadRequest)
 		return
@@ -120,6 +138,7 @@ func (h *FileHandler) GetMaterialPDF(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/pdf")
 	w.Header().Set("Content-Disposition", "inline; filename=material_"+strconv.Itoa(material.ID)+".pdf")
 	w.Header().Set("Cache-Control", "public, max-age=86400")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write(material.Pdf)
 }
 
@@ -137,7 +156,7 @@ func detectContentType(data []byte) string {
 	if data[0] == 0x47 && data[1] == 0x49 && data[2] == 0x46 {
 		return "image/gif"
 	}
-	if data[0] == 0x52 && data[1] == 0x49 && data[2] == 0x46 && data[3] == 0x46 {
+	if len(data) > 12 && data[0] == 0x52 && data[1] == 0x49 && data[2] == 0x46 && data[3] == 0x46 {
 		return "image/webp"
 	}
 	if data[0] == 0x25 && data[1] == 0x50 && data[2] == 0x44 && data[3] == 0x46 {
