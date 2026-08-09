@@ -34,7 +34,7 @@ func NewPool(
 		return nil, fmt.Errorf("failed to parse connection string: %w", err)
 	}
 
-	pgxconfig.MaxConns = 5
+	pgxconfig.MaxConns = 3
 	pgxconfig.MinConns = 1
 	pgxconfig.MaxConnLifetime = 30 * time.Minute
 	pgxconfig.MaxConnIdleTime = 10 * time.Minute
