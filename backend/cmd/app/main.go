@@ -102,8 +102,6 @@ func main() {
 	webSvc := webService.NewWebService(webRepo)
 	webController := webHttp.NewWebController(webSvc)
 
-	RegisterAssets()
-
 	log.Debug("Initializing http server")
 	httpServer := server.NewHTTPServer(
 		server.NewConfigMust(),
