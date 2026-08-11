@@ -1630,7 +1630,75 @@
 <script>
     const API_BASE = window.__API_BASE__ || '/api/v1';
 
-    async function apiRequest(path, { method = 'GET', body, headers, ...rest } = {}) {
+    // ===== КЕШИРОВАНИЕ В LOCALSTORAGE (НАВСЕГДА) =====
+    const Cache = {
+        // Получить данные из кеша (без проверки срока годности)
+        get(key) {
+            try {
+                const raw = localStorage.getItem(`cache_${key}`);
+                if (!raw) return null;
+                return JSON.parse(raw);
+            } catch (e) {
+                return null;
+            }
+        },
+
+        // Сохранить данные в кеш (навсегда)
+        set(key, data) {
+            try {
+                localStorage.setItem(`cache_${key}`, JSON.stringify(data));
+            } catch (e) {
+                console.warn('Cache set error:', e);
+            }
+        },
+
+        // Проверить, есть ли данные в кеше
+        has(key) {
+            return localStorage.getItem(`cache_${key}`) !== null;
+        },
+
+        // Очистить кеш для конкретного ключа
+        invalidate(key) {
+            localStorage.removeItem(`cache_${key}`);
+        },
+
+        // Очистить весь кеш
+        clear() {
+            const keys = Object.keys(localStorage);
+            keys.forEach(key => {
+                if (key.startsWith('cache_')) {
+                    localStorage.removeItem(key);
+                }
+            });
+        },
+
+        // Получить все ключи кеша
+        keys() {
+            const result = [];
+            const keys = Object.keys(localStorage);
+            keys.forEach(key => {
+                if (key.startsWith('cache_')) {
+                    result.push(key.replace('cache_', ''));
+                }
+            });
+            return result;
+        }
+    };
+
+    // ===== API ЗАПРОСЫ С КЕШИРОВАНИЕМ (НАВСЕГДА) =====
+    async function apiRequest(path, { method = 'GET', body, headers, useCache = true, cacheKey, forceRefresh = false, ...rest } = {}) {
+        // Для GET-запросов с кешированием
+        if (method === 'GET' && useCache && !forceRefresh) {
+            const key = cacheKey || path.replace(/\?.*$/, '').replace(/\//g, '_');
+            const cached = Cache.get(key);
+
+            if (cached !== null) {
+                // Возвращаем кешированные данные (навсегда)
+                return cached;
+            }
+        }
+
+        // Выполняем запрос
         const res = await fetch(API_BASE + path, {
             method,
             credentials: 'include',
@@ -1655,6 +1723,13 @@
             err.data = data;
             throw err;
         }
+
+        // Сохраняем в кеш для GET-запросов (навсегда)
+        if (method === 'GET' && useCache) {
+            const key = cacheKey || path.replace(/\?.*$/, '').replace(/\//g, '_');
+            Cache.set(key, data);
+        }
+
         return data;
     }
 
@@ -1668,45 +1743,148 @@
         });
     }
 
+    // ===== API СЕРВИСЫ =====
     const Api = {
         advertisements: {
-            list: (limit = 20, offset = 0) => apiRequest(`/advertisements?limit=${limit}&offset=${offset}`),
-            get: (id) => apiRequest(`/advertisements/${id}`),
-            create: (payload) => apiRequest('/advertisements', { method: 'POST', body: payload }),
-            update: (id, patch) => apiRequest(`/advertisements/${id}`, { method: 'PATCH', body: patch }),
-            remove: (id) => apiRequest(`/advertisements/${id}`, { method: 'DELETE' }),
+            list: (limit = 20, offset = 0) => apiRequest(`/advertisements?limit=${limit}&offset=${offset}`, {
+                useCache: true,
+                cacheKey: 'advertisements'
+            }),
+            get: (id) => apiRequest(`/advertisements/${id}`, {
+                useCache: true,
+                cacheKey: `advertisement_${id}`
+            }),
+            create: (payload) => apiRequest('/advertisements', {
+                method: 'POST',
+                body: payload,
+                useCache: false
+            }),
+            update: (id, patch) => apiRequest(`/advertisements/${id}`, {
+                method: 'PATCH',
+                body: patch,
+                useCache: false
+            }),
+            remove: (id) => apiRequest(`/advertisements/${id}`, {
+                method: 'DELETE',
+                useCache: false
+            }),
+            // Принудительно обновить кеш
+            refresh: () => {
+                Cache.invalidate('advertisements');
+                return Api.advertisements.list();
+            }
         },
 
         materials: {
-            list: (limit = 20, offset = 0) => apiRequest(`/materials?limit=${limit}&offset=${offset}`),
-            get: (id) => apiRequest(`/materials/${id}`),
-            create: (payload) => apiRequest('/materials', { method: 'POST', body: payload }),
-            update: (id, patch) => apiRequest(`/materials/${id}`, { method: 'PATCH', body: patch }),
-            remove: (id) => apiRequest(`/materials/${id}`, { method: 'DELETE' }),
+            list: (limit = 20, offset = 0) => apiRequest(`/materials?limit=${limit}&offset=${offset}`, {
+                useCache: true,
+                cacheKey: 'materials'
+            }),
+            get: (id) => apiRequest(`/materials/${id}`, {
+                useCache: true,
+                cacheKey: `material_${id}`
+            }),
+            create: (payload) => apiRequest('/materials', {
+                method: 'POST',
+                body: payload,
+                useCache: false
+            }),
+            update: (id, patch) => apiRequest(`/materials/${id}`, {
+                method: 'PATCH',
+                body: patch,
+                useCache: false
+            }),
+            remove: (id) => apiRequest(`/materials/${id}`, {
+                method: 'DELETE',
+                useCache: false
+            }),
+            refresh: () => {
+                Cache.invalidate('materials');
+                return Api.materials.list();
+            }
         },
 
         vacancies: {
-            list: (limit = 20, offset = 0) => apiRequest(`/vacancies?limit=${limit}&offset=${offset}`),
-            get: (id) => apiRequest(`/vacancies/${id}`),
-            create: (payload) => apiRequest('/vacancies', { method: 'POST', body: payload }),
-            update: (id, patch) => apiRequest(`/vacancies/${id}`, { method: 'PATCH', body: patch }),
-            remove: (id) => apiRequest(`/vacancies/${id}`, { method: 'DELETE' }),
+            list: (limit = 20, offset = 0) => apiRequest(`/vacancies?limit=${limit}&offset=${offset}`, {
+                useCache: true,
+                cacheKey: 'vacancies'
+            }),
+            get: (id) => apiRequest(`/vacancies/${id}`, {
+                useCache: true,
+                cacheKey: `vacancy_${id}`
+            }),
+            create: (payload) => apiRequest('/vacancies', {
+                method: 'POST',
+                body: payload,
+                useCache: false
+            }),
+            update: (id, patch) => apiRequest(`/vacancies/${id}`, {
+                method: 'PATCH',
+                body: patch,
+                useCache: false
+            }),
+            remove: (id) => apiRequest(`/vacancies/${id}`, {
+                method: 'DELETE',
+                useCache: false
+            }),
+            refresh: () => {
+                Cache.invalidate('vacancies');
+                return Api.vacancies.list();
+            }
         },
 
         reviews: {
-            list: (limit = 20, offset = 0) => apiRequest(`/reviews?limit=${limit}&offset=${offset}`),
-            byRating: (rating, limit = 20, offset = 0) => apiRequest(`/reviews/rating/${rating}?limit=${limit}&offset=${offset}`),
-            get: (id) => apiRequest(`/reviews/${id}`),
-            create: (payload) => apiRequest('/reviews', { method: 'POST', body: payload }),
-            update: (id, patch) => apiRequest(`/reviews/${id}`, { method: 'PATCH', body: patch }),
-            remove: (id) => apiRequest(`/reviews/${id}`, { method: 'DELETE' }),
+            list: (limit = 20, offset = 0) => apiRequest(`/reviews?limit=${limit}&offset=${offset}`, {
+                useCache: true,
+                cacheKey: 'reviews'
+            }),
+            byRating: (rating, limit = 20, offset = 0) => apiRequest(`/reviews/rating/${rating}?limit=${limit}&offset=${offset}`, {
+                useCache: true,
+                cacheKey: `reviews_rating_${rating}`
+            }),
+            get: (id) => apiRequest(`/reviews/${id}`, {
+                useCache: true,
+                cacheKey: `review_${id}`
+            }),
+            create: (payload) => apiRequest('/reviews', {
+                method: 'POST',
+                body: payload,
+                useCache: false
+            }),
+            update: (id, patch) => apiRequest(`/reviews/${id}`, {
+                method: 'PATCH',
+                body: patch,
+                useCache: false
+            }),
+            remove: (id) => apiRequest(`/reviews/${id}`, {
+                method: 'DELETE',
+                useCache: false
+            }),
+            refresh: () => {
+                Cache.invalidate('reviews');
+                return Api.reviews.list();
+            }
         },
 
         auth: {
-            login: (email, password) => apiRequest('/auth/login', { method: 'POST', body: { email, password } }),
-            register: (email, password) => apiRequest('/auth/register', { method: 'POST', body: { email, password } }),
-            logout: () => apiRequest('/auth/logout', { method: 'POST' }),
-            refresh: () => apiRequest('/auth/refresh', { method: 'POST' }),
+            login: (email, password) => apiRequest('/auth/login', {
+                method: 'POST',
+                body: { email, password },
+                useCache: false
+            }),
+            register: (email, password) => apiRequest('/auth/register', {
+                method: 'POST',
+                body: { email, password },
+                useCache: false
+            }),
+            logout: () => apiRequest('/auth/logout', {
+                method: 'POST',
+                useCache: false
+            }),
+            refresh: () => apiRequest('/auth/refresh', {
+                method: 'POST',
+                useCache: false
+            }),
         },
     };
 
@@ -1892,7 +2070,7 @@
         }
 
         function stateBlock(title, text) {
-            return `<div class="state-block"><strong>${title}</strong>${text}</div>`;
+            return `<div class="state-block"><strong>${escapeHtml(title)}</strong>${text ? escapeHtml(text) : ''}</div>`;
         }
 
         const modalOverlay = document.getElementById('modalOverlay');
@@ -1924,21 +2102,20 @@
             if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('is-open')) closeModal();
         });
 
-
-        const adsRail = document.getElementById('adsRail');
-        async function loadAds() {
+        function renderAds(data) {
+            const adsRail = document.getElementById('adsRail');
             if (!adsRail) return;
-            try {
-                const data = await Api.advertisements.list(12, 0);
-                const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
-                if (!items.length) {
-                    adsRail.innerHTML = stateBlock('Пока нет объявлений', 'Загляните позже — здесь появятся новости и акции тира.');
-                    return;
-                }
-                adsRail.innerHTML = items.map((ad) => {
-                    const desc = ad.description ? escapeHtml(ad.description) : '';
-                    const preview = desc.length > 120 ? desc.slice(0, 120) + '…' : desc;
-                    return `
+
+            const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
+            if (!items.length) {
+                adsRail.innerHTML = stateBlock('Пока нет объявлений', 'Загляните позже — здесь появятся новости и акции тира.');
+                return;
+            }
+
+            adsRail.innerHTML = items.map((ad) => {
+                const desc = ad.description ? escapeHtml(ad.description) : '';
+                const preview = desc.length > 120 ? desc.slice(0, 120) + '…' : desc;
+                return `
     <article class="card" data-id="${ad.id}">
       <div class="card-media">
         ${ad.id ? `<img src="/api/v1/advertisements/${ad.id}/image" alt="${escapeHtml(ad.title)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'ph\\'>Институт международных связей и делового сотрудничества</div>'">` : `<div class="ph">Институт международных связей и делового сотрудничества</div>`}
@@ -1953,55 +2130,50 @@
         </div>
       </div>
     </article>`;
-                }).join('');
+            }).join('');
 
-                adsRail.querySelectorAll('.modal-trigger').forEach(btn => {
-                    btn.addEventListener('click', async (e) => {
-                        e.stopPropagation();
-                        const id = btn.dataset.id;
-                        try {
-                            const ad = await Api.advertisements.get(id);
-                            if (!ad) throw new Error('Объявление не найдено');
+            adsRail.querySelectorAll('.modal-trigger').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    const id = btn.dataset.id;
+                    try {
+                        const ad = await Api.advertisements.get(id);
+                        if (!ad) throw new Error('Объявление не найдено');
 
-                            let bodyHTML = `<p>${escapeHtml(ad.description || '')}</p>`;
+                        let bodyHTML = `<p>${escapeHtml(ad.description || '')}</p>`;
 
-                            if (ad.id) {
-                                bodyHTML += `<img src="/api/v1/advertisements/${ad.id}/image" alt="${escapeHtml(ad.title)}" style="max-width:100%;border:1px solid var(--line-soft);margin:1em 0;" onerror="this.style.display='none'">`;
-                            }
-
-                            if (ad.id) {
-                                bodyHTML += `<p><a href="/api/v1/advertisements/${ad.id}/pdf" target="_blank" rel="noopener" class="btn btn--sm">📄 Скачать PDF</a></p>`;
-                            }
-
-                            if (ad.url) {
-                                bodyHTML += `<p><a href="${escapeHtml(ad.url)}" target="_blank" rel="noopener" class="btn btn--sm">Перейти по ссылке</a></p>`;
-                            }
-
-                            openModal(ad.title, formatDate(ad.create_at), bodyHTML);
-                        } catch (err) {
-                            console.error(err);
-                            openModal('Ошибка', '', `<p>Не удалось загрузить объявление: ${escapeHtml(err.message)}</p>`);
+                        if (ad.id) {
+                            bodyHTML += `<img src="/api/v1/advertisements/${ad.id}/image" alt="${escapeHtml(ad.title)}" style="max-width:100%;border:1px solid var(--line-soft);margin:1em 0;" onerror="this.style.display='none'">`;
                         }
-                    });
+
+                        if (ad.id) {
+                            bodyHTML += `<p><a href="/api/v1/advertisements/${ad.id}/pdf" target="_blank" rel="noopener" class="btn btn--sm">📄 Скачать PDF</a></p>`;
+                        }
+
+                        if (ad.url) {
+                            bodyHTML += `<p><a href="${escapeHtml(ad.url)}" target="_blank" rel="noopener" class="btn btn--sm">Перейти по ссылке</a></p>`;
+                        }
+
+                        openModal(ad.title, formatDate(ad.create_at), bodyHTML);
+                    } catch (err) {
+                        console.error(err);
+                        openModal('Ошибка', '', `<p>Не удалось загрузить объявление: ${escapeHtml(err.message)}</p>`);
+                    }
                 });
-
-            } catch (err) {
-                adsRail.innerHTML = stateBlock('Не удалось загрузить объявления', escapeHtml(err.message || 'Проверьте соединение и попробуйте обновить страницу.'));
-            }
+            });
         }
-        loadAds();
 
-        const materialsGrid = document.getElementById('materialsGrid');
-        async function loadMaterials() {
+        function renderMaterials(data) {
+            const materialsGrid = document.getElementById('materialsGrid');
             if (!materialsGrid) return;
-            try {
-                const data = await Api.materials.list(20, 0);
-                const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
-                if (!items.length) {
-                    materialsGrid.innerHTML = stateBlock('Материалов пока нет', 'Методички появятся здесь по мере публикации.');
-                    return;
-                }
-                materialsGrid.innerHTML = items.map((m) => `
+
+            const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
+            if (!items.length) {
+                materialsGrid.innerHTML = stateBlock('Материалов пока нет', 'Методички появятся здесь по мере публикации.');
+                return;
+            }
+
+            materialsGrid.innerHTML = items.map((m) => `
     <div class="doc-card">
       <div class="doc-ico">PDF</div>
       <div class="doc-info">
@@ -2013,47 +2185,39 @@
         ${m.id ? `<a href="/api/v1/materials/${m.id}/pdf" class="btn--line" target="_blank" rel="noopener">Скачать</a>` : '—'}
       </div>
     </div>`).join('');
-                staggerChildren(materialsGrid);
-            } catch (err) {
-                materialsGrid.innerHTML = stateBlock('Не удалось загрузить материалы', escapeHtml(err.message || ''));
-            }
+            staggerChildren(materialsGrid);
         }
-        loadMaterials();
 
-        const vacanciesGrid = document.getElementById('vacanciesGrid');
-        async function loadVacancies() {
+        function renderVacancies(data) {
+            const vacanciesGrid = document.getElementById('vacanciesGrid');
             if (!vacanciesGrid) return;
-            try {
-                const data = await Api.vacancies.list(20, 0);
-                const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
-                if (!items.length) {
-                    vacanciesGrid.innerHTML = stateBlock('Открытых вакансий нет', 'Все позиции сейчас закрыты — загляните позже.');
-                    return;
-                }
-                vacanciesGrid.innerHTML = items.map((v) => `
+
+            const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
+            if (!items.length) {
+                vacanciesGrid.innerHTML = stateBlock('Открытых вакансий нет', 'Все позиции сейчас закрыты — загляните позже.');
+                return;
+            }
+
+            vacanciesGrid.innerHTML = items.map((v) => `
     <div class="vac-card">
       <span class="date">${formatDate(v.create_at)}</span>
       <h3>${escapeHtml(v.title)}</h3>
       <p>${escapeHtml(v.description || '')}</p>
     </div>`).join('');
-                staggerChildren(vacanciesGrid);
-            } catch (err) {
-                vacanciesGrid.innerHTML = stateBlock('Не удалось загрузить вакансии', escapeHtml(err.message || ''));
-            }
+            staggerChildren(vacanciesGrid);
         }
-        loadVacancies();
 
-        const reviewsList = document.getElementById('reviewsList');
-        async function loadReviews() {
+        function renderReviews(data) {
+            const reviewsList = document.getElementById('reviewsList');
             if (!reviewsList) return;
-            try {
-                const data = await Api.reviews.list(10, 0);
-                const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
-                if (!items.length) {
-                    reviewsList.innerHTML = stateBlock('Отзывов пока нет', 'Будьте первым, кто оставит отзыв о занятии.');
-                    return;
-                }
-                reviewsList.innerHTML = items.map((r) => `
+
+            const items = Array.isArray(data) ? data : (data && data.items ? data.items : []);
+            if (!items.length) {
+                reviewsList.innerHTML = stateBlock('Отзывов пока нет', 'Будьте первым, кто оставит отзыв о занятии.');
+                return;
+            }
+
+            reviewsList.innerHTML = items.map((r) => `
     <div class="review-card">
       <div class="review-top">
         <span class="review-name">${escapeHtml(r.name)}</span>
@@ -2062,8 +2226,53 @@
       <p>${escapeHtml(r.description || '')}</p>
       <span class="review-date">${formatDate(r.create_at)}</span>
     </div>`).join('');
+        }
+
+
+        const adsRail = document.getElementById('adsRail');
+        async function loadAds(forceRefresh = false) {
+            if (!adsRail) return;
+            try {
+                const data = await Api.advertisements.list(12, 0);
+                renderAds(data);
             } catch (err) {
-                reviewsList.innerHTML = stateBlock('Не удалось загрузить отзывы', escapeHtml(err.message || ''));
+                adsRail.innerHTML = stateBlock('Не удалось загрузить объявления', err.message || 'Проверьте соединение.');
+            }
+        }
+        loadAds();
+
+        const materialsGrid = document.getElementById('materialsGrid');
+        async function loadMaterials(forceRefresh = false) {
+            if (!materialsGrid) return;
+            try {
+                const data = await Api.materials.list(20, 0);
+                renderMaterials(data);
+            } catch (err) {
+                materialsGrid.innerHTML = stateBlock('Не удалось загрузить материалы', err.message || '');
+            }
+        }
+        loadMaterials();
+
+        const vacanciesGrid = document.getElementById('vacanciesGrid');
+        async function loadVacancies(forceRefresh = false) {
+            if (!vacanciesGrid) return;
+            try {
+                const data = await Api.vacancies.list(20, 0);
+                renderVacancies(data);
+            } catch (err) {
+                vacanciesGrid.innerHTML = stateBlock('Не удалось загрузить вакансии', err.message || '');
+            }
+        }
+        loadVacancies();
+
+        const reviewsList = document.getElementById('reviewsList');
+        async function loadReviews(forceRefresh = false) {
+            if (!reviewsList) return;
+            try {
+                const data = await Api.reviews.list(10, 0);
+                renderReviews(data);
+            } catch (err) {
+                reviewsList.innerHTML = stateBlock('Не удалось загрузить отзывы', err.message || '');
             }
         }
         loadReviews();
@@ -2108,6 +2317,7 @@
                     if (ratingPick) {
                         ratingPick.querySelectorAll('button').forEach((b) => b.classList.remove('is-active'));
                     }
+                    Cache.invalidate('reviews');
                     loadReviews();
                 } catch (err) {
                     reviewMsg.textContent = err.message || 'Не удалось отправить отзыв. Попробуйте позже.';
@@ -2132,6 +2342,56 @@
         if (yearSpan) {
             yearSpan.textContent = new Date().getFullYear();
         }
+
+        window.Cache = Cache;
+        window.Api = Api;
+
+        window.refreshAll = async function() {
+            await Promise.all([
+                Api.advertisements.refresh().then(renderAds).catch(console.error),
+                Api.materials.refresh().then(renderMaterials).catch(console.error),
+                Api.vacancies.refresh().then(renderVacancies).catch(console.error),
+                Api.reviews.refresh().then(renderReviews).catch(console.error),
+            ]);
+        };
+
+        window.refreshSection = async function(section) {
+            switch (section) {
+                case 'ads':
+                    await Api.advertisements.refresh().then(renderAds).catch(console.error);
+                    break;
+                case 'materials':
+                    await Api.materials.refresh().then(renderMaterials).catch(console.error);
+                    break;
+                case 'vacancies':
+                    await Api.vacancies.refresh().then(renderVacancies).catch(console.error);
+                    break;
+                case 'reviews':
+                    await Api.reviews.refresh().then(renderReviews).catch(console.error);
+                    break;
+                default:
+                    console.warn('Unknown section:', section);
+            }
+        };
+
+        window.clearCache = function() {
+            Cache.clear();
+            location.reload();
+        };
+
+        window.showCache = function() {
+            const keys = Cache.keys();
+            if (!keys.length) {
+                console.log('Кеш пуст');
+                return;
+            }
+            console.log('Содержимое кеша:');
+            keys.forEach(key => {
+                const data = Cache.get(key);
+                console.log(`  ${key}:`, data);
+            });
+        };
+
 
     })();
 </script>
