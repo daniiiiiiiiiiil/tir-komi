@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 	"runtime/debug"
+	"strings"
 	"time"
 
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
@@ -21,14 +22,11 @@ const requestIdHeader = "X-Request-Id"
 func CORS() Middleware {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			allowedOrigin := map[string]struct{}{
-				"http://localhost:8080": {},
-				"http://localhost:5050": {},
-				"http://127.0.0.1:8080": {},
-			}
 			origin := r.Header.Get("Origin")
 
-			if _, ok := allowedOrigin[origin]; ok {
+			if strings.Contains(origin, "github.io") ||
+				strings.Contains(origin, "localhost") ||
+				origin == "" {
 				w.Header().Set("Access-Control-Allow-Origin", origin)
 				w.Header().Set("Access-Control-Allow-Credentials", "true")
 				w.Header().Set("Access-Control-Allow-Methods", "POST, GET, PATCH, PUT, DELETE, OPTIONS")
