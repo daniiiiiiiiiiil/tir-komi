@@ -44,8 +44,6 @@ func (r *AdvertisementRepository) GetAdvertisements(ctx context.Context, limit, 
 			&model.ID,
 			&model.Title,
 			&model.Description,
-			&model.Image,
-			&model.Pdf,
 			&model.Url,
 			&model.CreatedAt,
 		)
