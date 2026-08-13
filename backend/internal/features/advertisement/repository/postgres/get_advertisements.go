@@ -3,12 +3,16 @@ package postgres
 import (
 	"context"
 	"fmt"
+	"log"
+	"time"
 
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/pagination"
+	"go.uber.org/zap"
 )
 
 func (r *AdvertisementRepository) GetAdvertisements(ctx context.Context, limit, offset int) ([]domain.Advertisement, int, error) {
+	start := time.Now()
 	ctx, cancel := context.WithTimeout(ctx, r.pool.OpTimeout())
 	defer cancel()
 
@@ -54,6 +58,6 @@ func (r *AdvertisementRepository) GetAdvertisements(ctx context.Context, limit, 
 	if err := rows.Err(); err != nil {
 		return nil, 0, fmt.Errorf("rows error: %w", err)
 	}
-
+	log.Println("DB query time", zap.Duration("duration", time.Since(start)))
 	return advertisements, total, nil
 }
