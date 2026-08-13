@@ -26,6 +26,7 @@ func CORS() Middleware {
 				"http://localhost:5050":            {},
 				"http://127.0.0.1:8080":            {},
 				"https://tir-komi-site.vercel.app": {},
+				"https://tir-komi.vercel.app":      {},
 			}
 			origin := r.Header.Get("Origin")
 
