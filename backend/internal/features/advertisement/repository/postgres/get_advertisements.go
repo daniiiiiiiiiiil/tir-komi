@@ -25,11 +25,11 @@ func (r *AdvertisementRepository) GetAdvertisements(ctx context.Context, limit, 
 	}
 
 	query := `
-		SELECT id, title, description, image, pdf, url, created_at
-		FROM advertisement
-		ORDER BY created_at DESC
-		LIMIT $1 OFFSET $2
-	`
+        SELECT id, title, description, url, created_at
+        FROM advertisement
+        ORDER BY created_at DESC
+        LIMIT $1 OFFSET $2
+    `
 
 	rows, err := r.pool.Query(ctx, query, limit, offset)
 	if err != nil {
