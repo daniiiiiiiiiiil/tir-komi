@@ -38,6 +38,10 @@ import (
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/features/web/webService"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/features/web/webTransport/webHttp"
 
+	postgres_media "github.com/daniiiiiiiiiiil/tir-komi/internal/features/media/repository/postgres"
+	media_service "github.com/daniiiiiiiiiiil/tir-komi/internal/features/media/service"
+	media_http "github.com/daniiiiiiiiiiil/tir-komi/internal/features/media/transport/http"
+
 	"go.uber.org/zap"
 )
 
@@ -91,6 +95,11 @@ func main() {
 	materialSvc := methodologicalService.NewMethodologicalMaterialService(materialRepo)
 	materialHandler := methodologicalHttp.NewMaterialHandler(materialSvc)
 
+	log.Debug("Initializing feature", zap.String("feature", "media"))
+	mediaRepo := postgres_media.NewMediaRepository(pool)
+	mediaSvc := media_service.NewMediaService(mediaRepo)
+	mediaHandler := media_http.NewMediaHandler(mediaSvc)
+
 	log.Debug("Initializing file handler")
 	fileHandler := api.NewFileHandler(adSvc, materialSvc)
 
@@ -117,9 +126,8 @@ func main() {
 	apiRouter.RegisterRouters(reviewHandler.Routers()...)
 	apiRouter.RegisterRouters(vacantHandler.Routers()...)
 	apiRouter.RegisterRouters(materialHandler.Routers()...)
+	apiRouter.RegisterRouters(mediaHandler.Routers()...)
 
-	// ========== РЕГИСТРИРУЕМ МАРШРУТЫ ДЛЯ ФАЙЛОВ ==========
-	// Добавляем напрямую в apiRouter
 	apiRouter.RegisterRouters(server.Route{
 		Method:  "GET",
 		Path:    "/advertisements/{id}/image",
