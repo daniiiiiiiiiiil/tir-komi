@@ -17,6 +17,9 @@ import (
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/server"
 	postgres_advertisement "github.com/daniiiiiiiiiiil/tir-komi/internal/features/advertisement/repository/postgres"
 	postgres_methodological_material "github.com/daniiiiiiiiiiil/tir-komi/internal/features/methodological_material/repository/postgres"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/features/posts/repository/postgres"
+	service2 "github.com/daniiiiiiiiiiil/tir-komi/internal/features/posts/service"
+	http2 "github.com/daniiiiiiiiiiil/tir-komi/internal/features/posts/transport/http"
 	postgres_review "github.com/daniiiiiiiiiiil/tir-komi/internal/features/reviews/repository/postgres"
 	review_service "github.com/daniiiiiiiiiiil/tir-komi/internal/features/reviews/service"
 	reviews_http "github.com/daniiiiiiiiiiil/tir-komi/internal/features/reviews/transport/http"
@@ -100,6 +103,11 @@ func main() {
 	mediaSvc := media_service.NewMediaService(mediaRepo)
 	mediaHandler := media_http.NewMediaHandler(mediaSvc)
 
+	log.Debug("Initializing feature", zap.String("feature", "post"))
+	postRepo := postgres.NewPostRepository(pool)
+	postSvc := service2.NewPostService(postRepo)
+	postHandler := http2.NewPostHandler(postSvc)
+
 	log.Debug("Initializing file handler")
 	fileHandler := api.NewFileHandler(adSvc, materialSvc)
 
@@ -127,6 +135,7 @@ func main() {
 	apiRouter.RegisterRouters(vacantHandler.Routers()...)
 	apiRouter.RegisterRouters(materialHandler.Routers()...)
 	apiRouter.RegisterRouters(mediaHandler.Routers()...)
+	apiRouter.RegisterRouters(postHandler.Routers()...)
 
 	apiRouter.RegisterRouters(server.Route{
 		Method:  "GET",

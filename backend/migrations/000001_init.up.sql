@@ -57,6 +57,30 @@ CREATE TABLE users
     CONSTRAINT PK_users_id PRIMARY KEY (id)
 );
 
+CREATE TABLE posts(
+    id          INT GENERATED ALWAYS AS IDENTITY NOT NULL,
+    title       VARCHAR(1000),
+    description TEXT,
+    pdf         BYTEA,
+    image       BYTEA,
+    date        TIMESTAMPTZ,
+    type        VARCHAR(50) NOT NULL,
+    CONSTRAINT valid_type CHECK (type IN (
+                                                            'information',
+                                                            'structures_and_bodies',
+                                                            'document',
+                                                            'education',
+                                                            'educational_standards',
+                                                            'management',
+                                                            'materials',
+                                                            'scholarships',
+                                                            'paid_services',
+                                                            'financial_and_economic',
+                                                            'accessible_environment',
+                                                            'international_cooperation'
+                          ))
+);
+
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_advertisement_created_at ON advertisement(created_at DESC);
 CREATE INDEX idx_reviews_rating ON reviews(rating);
