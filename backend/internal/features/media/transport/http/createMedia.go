@@ -3,6 +3,7 @@ package http
 import (
 	"io"
 	"net/http"
+	"path/filepath"
 
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/logger"
@@ -53,10 +54,21 @@ func (handler *MediaHandler) CreateMedia(rw http.ResponseWriter, r *http.Request
 	}
 
 	mimeType := header.Header.Get("Content-Type")
-	if mimeType == "" {
-		mimeType = http.DetectContentType(fileData)
+	if mimeType == "" || mimeType == "application/octet-stream" {
+		ext := filepath.Ext(header.Filename)
+		switch ext {
+		case ".png":
+			mimeType = "image/png"
+		case ".jpg", ".jpeg":
+			mimeType = "image/jpeg"
+		case ".gif":
+			mimeType = "image/gif"
+		case ".mp4":
+			mimeType = "video/mp4"
+		case ".webm":
+			mimeType = "video/webm"
+		}
 	}
-
 	mediaTypeRaw := r.FormValue("type")
 
 	var title *string
