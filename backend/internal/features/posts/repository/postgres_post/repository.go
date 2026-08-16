@@ -1,4 +1,4 @@
-package postgres
+package postgres_post
 
 import "github.com/daniiiiiiiiiiil/tir-komi/internal/core/repository/pool/postgres"
 

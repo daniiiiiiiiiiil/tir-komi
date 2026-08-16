@@ -1,11 +1,11 @@
-package http
+package http_post
 
 import (
 	"context"
 
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/domain"
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/server"
-	service2 "github.com/daniiiiiiiiiiil/tir-komi/internal/features/posts/service"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/features/posts/service_post"
 )
 
 type PostHandler struct {
@@ -16,11 +16,11 @@ type PostService interface {
 	CreatePost(ctx context.Context, post domain.Post) (domain.Post, error)
 	DeletePost(ctx context.Context, id int) error
 	GetPost(ctx context.Context, id int) (domain.Post, error)
-	GetPosts(ctx context.Context, limit, offset int) ([]domain.Post, error)
+	GetPostsByType(ctx context.Context, postType domain.PostType) ([]domain.Post, error)
 	UpdatePost(ctx context.Context, id int, patch domain.PostPatch) (domain.Post, error)
 }
 
-func NewPostHandler(postService *service2.PostService) *PostHandler {
+func NewPostHandler(postService *service_post.PostService) *PostHandler {
 	return &PostHandler{
 		postService: postService,
 	}
@@ -35,8 +35,8 @@ func (handler *PostHandler) Routers() []server.Route {
 		},
 		{
 			Method:  "GET",
-			Path:    "/posts",
-			Handler: handler.GetPosts,
+			Path:    "/posts/{}",
+			Handler: handler.GetPostsByType,
 		},
 		{
 			Method:  "GET",

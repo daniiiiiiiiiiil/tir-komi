@@ -1,4 +1,4 @@
-package http
+package http_post
 
 import (
 	"fmt"
@@ -31,33 +31,14 @@ func (r *UpdatePostRequest) Validate() error {
 		}
 	}
 
-	if r.Description.Set {
-		if r.Description.Value != nil {
-			descriptionLen := len([]rune(*r.Description.Value))
-			if descriptionLen > 10000 {
-				return fmt.Errorf("description length must not exceed 10000")
-			}
-		}
-	}
-
-	if r.Type.Set {
-		if r.Type.Value == nil {
-			return fmt.Errorf("type cannot be NULL")
-		}
-		postType := domain.PostType(*r.Type.Value)
-		if !domain.ValidPostTypes[postType] {
-			return fmt.Errorf("invalid post type: %s", *r.Type.Value)
-		}
-	}
-
 	if r.Pdf.Set && r.Pdf.Value != nil {
-		if len(r.Pdf.Value) > 50*1024*1024 { // 50 MB
+		if len(*r.Pdf.Value) > 50*1024*1024 { // 50 MB
 			return fmt.Errorf("pdf size must not exceed 50 MB")
 		}
 	}
 
 	if r.Image.Set && r.Image.Value != nil {
-		if len(r.Image.Value) > 10*1024*1024 { // 10 MB
+		if len(*r.Image.Value) > 10*1024*1024 { // 10 MB
 			return fmt.Errorf("image size must not exceed 10 MB")
 		}
 	}
@@ -105,10 +86,12 @@ func (handler *PostHandler) UpdatePost(rw http.ResponseWriter, r *http.Request) 
 	var typeNullable domain.Nullable[*domain.PostType]
 	if req.Type.Set {
 		if req.Type.Value != nil {
-			postType := domain.PostType(*req.Type.Value)
-			typeNullable = domain.Nullable[*domain.PostType]{Set: true, Value: &postType}
+			pt := domain.PostType(**req.Type.Value)
+			ptr := &pt
+			typeNullable = domain.Nullable[*domain.PostType]{Set: true, Value: &ptr}
 		} else {
-			typeNullable = domain.Nullable[*domain.PostType]{Set: true, Value: nil}
+			var nilPtr *domain.PostType
+			typeNullable = domain.Nullable[*domain.PostType]{Set: true, Value: &nilPtr}
 		}
 	}
 

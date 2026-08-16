@@ -1,4 +1,4 @@
-package http
+package http_post
 
 import (
 	"time"

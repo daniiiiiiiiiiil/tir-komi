@@ -86,3 +86,4 @@ CREATE INDEX idx_advertisement_created_at ON advertisement(created_at DESC);
 CREATE INDEX idx_reviews_rating ON reviews(rating);
 CREATE INDEX idx_vacant_positions_date ON vacant_positions(date DESC);
 CREATE INDEX idx_methodological_material_date ON methodological_material(date DESC);
+CREATE INDEX idx_post_type ON posts(type);

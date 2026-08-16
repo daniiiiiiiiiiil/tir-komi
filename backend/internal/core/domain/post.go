@@ -142,29 +142,30 @@ func (p *Post) ApplyPatch(patch PostPatch) error {
 	}
 
 	if patch.Description.Set {
-		p.Description = patch.Description.Value
+		p.Description = *patch.Description.Value
 	}
 
 	if patch.Pdf.Set {
-		p.Pdf = patch.Pdf.Value
+		p.Pdf = *patch.Pdf.Value
 	}
 
 	if patch.Image.Set {
-		p.Image = patch.Image.Value
+		p.Image = *patch.Image.Value
 	}
 
 	if patch.Date.Set {
-		p.Date = patch.Date.Value
+		p.Date = *patch.Date.Value
 	}
 
 	if patch.Type.Set {
 		if patch.Type.Value == nil {
 			return errors.New("type cannot be null")
 		}
-		if !ValidPostTypes[*patch.Type.Value] {
+		if !ValidPostTypes[**patch.Type.Value] {
 			return fmt.Errorf("invalid post type: %s", *patch.Type.Value)
 		}
-		p.Type = *patch.Type.Value
+		rd := *patch.Type.Value
+		p.Type = *rd
 	}
 
 	return nil

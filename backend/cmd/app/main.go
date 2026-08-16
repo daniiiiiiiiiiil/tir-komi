@@ -17,9 +17,9 @@ import (
 	"github.com/daniiiiiiiiiiil/tir-komi/internal/core/transport/http/server"
 	postgres_advertisement "github.com/daniiiiiiiiiiil/tir-komi/internal/features/advertisement/repository/postgres"
 	postgres_methodological_material "github.com/daniiiiiiiiiiil/tir-komi/internal/features/methodological_material/repository/postgres"
-	"github.com/daniiiiiiiiiiil/tir-komi/internal/features/posts/repository/postgres"
-	service2 "github.com/daniiiiiiiiiiil/tir-komi/internal/features/posts/service"
-	http2 "github.com/daniiiiiiiiiiil/tir-komi/internal/features/posts/transport/http"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/features/posts/repository/postgres_post"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/features/posts/service_post"
+	"github.com/daniiiiiiiiiiil/tir-komi/internal/features/posts/transport/http_post"
 	postgres_review "github.com/daniiiiiiiiiiil/tir-komi/internal/features/reviews/repository/postgres"
 	review_service "github.com/daniiiiiiiiiiil/tir-komi/internal/features/reviews/service"
 	reviews_http "github.com/daniiiiiiiiiiil/tir-komi/internal/features/reviews/transport/http"
@@ -104,9 +104,9 @@ func main() {
 	mediaHandler := media_http.NewMediaHandler(mediaSvc)
 
 	log.Debug("Initializing feature", zap.String("feature", "post"))
-	postRepo := postgres.NewPostRepository(pool)
-	postSvc := service2.NewPostService(postRepo)
-	postHandler := http2.NewPostHandler(postSvc)
+	postRepo := postgres_post.NewPostRepository(pool)
+	postSvc := service_post.NewPostService(postRepo)
+	postHandler := http_post.NewPostHandler(postSvc)
 
 	log.Debug("Initializing file handler")
 	fileHandler := api.NewFileHandler(adSvc, materialSvc)
