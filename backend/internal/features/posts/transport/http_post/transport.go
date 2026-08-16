@@ -35,7 +35,7 @@ func (handler *PostHandler) Routers() []server.Route {
 		},
 		{
 			Method:  "GET",
-			Path:    "/posts/{}",
+			Path:    "/posts/{id}",
 			Handler: handler.GetPostsByType,
 		},
 		{
