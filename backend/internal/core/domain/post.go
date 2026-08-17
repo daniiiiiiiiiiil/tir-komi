@@ -22,6 +22,7 @@ const (
 	PostTypeFinancialAndEconomic     PostType = "financial_and_economic"
 	PostTypeAccessibleEnvironment    PostType = "accessible_environment"
 	PostTypeInternationalCooperation PostType = "international_cooperation"
+	PostTypeAbout                    PostType = "about"
 )
 
 // ValidPostTypes - валидные типы постов
@@ -38,6 +39,7 @@ var ValidPostTypes = map[PostType]bool{
 	PostTypeFinancialAndEconomic:     true,
 	PostTypeAccessibleEnvironment:    true,
 	PostTypeInternationalCooperation: true,
+	PostTypeAbout:                    true,
 }
 
 // Post - доменная модель поста
