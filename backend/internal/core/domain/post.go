@@ -88,11 +88,11 @@ func (p *Post) Validate() error {
 		return errors.New("description length must not exceed 10000 characters")
 	}
 
-	if len(p.Pdf) > 50*1024*1024 { // 50 MB
+	if len(p.Pdf) > 100*1024*1024 { // 50 MB
 		return errors.New("pdf size must not exceed 50 MB")
 	}
 
-	if len(p.Image) > 10*1024*1024 { // 10 MB
+	if len(p.Image) > 100*1024*1024 { // 10 MB
 		return errors.New("image size must not exceed 10 MB")
 	}
 

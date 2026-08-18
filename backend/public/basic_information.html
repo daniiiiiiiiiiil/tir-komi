@@ -1,1426 +1,1426 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Основные сведения — Институт международных связей и делового сотрудничества</title>
-    <link rel="canonical" href="https://example.com/basic_information.html">
-    <meta name="robots" content="index, follow">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Oswald:wght@400;500;600;700&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
-
-        :root{
-            --bg-0:#0e0f0a;
-            --bg-1:#15160f;
-            --bg-2:#1c1d15;
-            --bg-3:#24261b;
-            --olive:#454a2f;
-            --olive-deep:#2b2e1d;
-            --brass:#c69a4a;
-            --brass-bright:#e6bb6a;
-            --brass-dim:#8a6c34;
-            --steel:#9a9c8f;
-            --steel-dim:#6c6e61;
-            --paper:#eee7d6;
-            --ink:#efe9da;
-            --ink-dim:#c9c4b2;
-            --danger:#a3392c;
-            --line:rgba(198,154,74,.22);
-            --line-soft:rgba(238,231,214,.10);
-
-            --f-display:'Russo One', 'Oswald', sans-serif;
-            --f-head:'Oswald', sans-serif;
-            --f-body:'PT Sans', sans-serif;
-            --f-mono:'JetBrains Mono', monospace;
-
-            --radius:2px;
-            --ease:cubic-bezier(.16,.8,.2,1);
-            --shadow-lg:0 30px 60px -20px rgba(0,0,0,.6);
-            --container:1240px;
-        }
-
-        *,*::before,*::after{box-sizing:border-box;}
-        html{scroll-behavior:smooth;}
-        @media (prefers-reduced-motion:reduce){
-            html{scroll-behavior:auto;}
-            *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
-        }
-
-        body{
-            margin:0;
-            padding-top: 70px;
-            background:var(--bg-0);
-            color:var(--ink);
-            font-family:var(--f-body);
-            font-size:16px;
-            line-height:1.6;
-            -webkit-font-smoothing:antialiased;
-            overflow-x:hidden;
-        }
-
-        img{max-width:100%;display:block;}
-        a{color:inherit;text-decoration:none;}
-        ul{margin:0;padding:0;list-style:none;}
-        button{font-family:inherit;cursor:pointer;}
-        input,textarea,select{font-family:inherit;}
-
-        :focus-visible{outline:2px solid var(--brass-bright);outline-offset:3px;}
-
-        .container{
-            width:100%;
-            max-width:var(--container);
-            margin:0 auto;
-            padding:0 24px;
-        }
-
-        h1,h2,h3,.h1,.h2,.h3{
-            font-family:var(--f-display);
-            font-weight:400;
-            letter-spacing:.01em;
-            margin:0;
-            color:var(--paper);
-            text-transform:uppercase;
-        }
-        h1,.h1{font-size:clamp(2.6rem,7vw,5.6rem);line-height:.98;}
-        h2,.h2{font-size:clamp(1.9rem,4.4vw,3.2rem);line-height:1.02;}
-        h3,.h3{font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.15;}
-
-        p{margin:0 0 1em;color:var(--ink-dim);}
-        p:last-child{margin-bottom:0;}
-
-        .eyebrow{
-            font-family:var(--f-mono);
-            font-size:.78rem;
-            letter-spacing:.24em;
-            text-transform:uppercase;
-            color:var(--brass);
-            display:inline-flex;
-            align-items:center;
-            gap:.6em;
-            margin-bottom:1em;
-        }
-        .eyebrow::before{
-            content:'';
-            width:26px;height:1px;
-            background:var(--brass);
-            display:inline-block;
-        }
-
-        .lede{
-            font-family:var(--f-head);
-            font-weight:400;
-            font-size:1.15rem;
-            color:var(--steel);
-            max-width:56ch;
-        }
-
-        .btn{
-            --btn-fg:var(--bg-0);
-            --btn-bg:var(--brass);
-            display:inline-flex;
-            align-items:center;
-            gap:.6em;
-            font-family:var(--f-head);
-            font-weight:600;
-            font-size:.92rem;
-            letter-spacing:.06em;
-            text-transform:uppercase;
-            padding:.95em 1.7em;
-            background:var(--btn-bg);
-            color:var(--btn-fg);
-            border:1px solid var(--btn-bg);
-            border-radius:var(--radius);
-            transition:transform .25s var(--ease), background .25s, color .25s, box-shadow .25s;
-            position:relative;
-        }
-        .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(198,154,74,.45);}
-        .btn:active{transform:translateY(0);}
-        .btn svg{width:1em;height:1em;transition:transform .3s var(--ease);}
-        .btn:hover svg{transform:translateX(3px);}
-
-        .btn--ghost{
-            --btn-bg:transparent;
-            --btn-fg:var(--paper);
-            border-color:var(--line);
-        }
-        .btn--ghost:hover{border-color:var(--brass);background:rgba(198,154,74,.08);box-shadow:none;}
-
-        .btn--line{
-            --btn-bg:transparent;
-            --btn-fg:var(--brass);
-            border:none;
-            padding:.3em 0;
-            border-bottom:1px solid var(--brass-dim);
-            border-radius:0;
-        }
-        .btn--line:hover{border-color:var(--brass-bright);box-shadow:none;transform:none;color:var(--brass-bright);}
-
-        .btn--sm{padding:.6em 1.1em;font-size:.78rem;}
-        .btn--danger{--btn-bg:var(--danger);border-color:var(--danger);}
-        .btn[disabled]{opacity:.45;pointer-events:none;}
-
-        .frame{
-            position:relative;
-            background:
-                    linear-gradient(var(--brass),var(--brass)) top left / 22px 2px no-repeat,
-                    linear-gradient(var(--brass),var(--brass)) top left / 2px 22px no-repeat,
-                    linear-gradient(var(--brass),var(--brass)) top right / 22px 2px no-repeat,
-                    linear-gradient(var(--brass),var(--brass)) top right / 2px 22px no-repeat,
-                    linear-gradient(var(--brass),var(--brass)) bottom left / 22px 2px no-repeat,
-                    linear-gradient(var(--brass),var(--brass)) bottom left / 2px 22px no-repeat,
-                    linear-gradient(var(--brass),var(--brass)) bottom right / 22px 2px no-repeat,
-                    linear-gradient(var(--brass),var(--brass)) bottom right / 2px 22px no-repeat;
-            background-color:transparent;
-            padding:2px;
-        }
-        .frame > *{padding:1.4em;}
-        .frame--dim{opacity:.55;}
-
-
-        .site-header{
-            position:fixed;
-            inset:0 0 auto 0;
-            z-index:100;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            padding:16px 28px;
-            transition:background .35s var(--ease), padding .35s var(--ease), border-color .35s;
-            border-bottom:1px solid transparent;
-            min-height:70px;
-            background:rgba(14,15,10,.95);
-            backdrop-filter:blur(10px);
-        }
-        .site-header.is-scrolled{
-            padding:10px 28px;
-            border-color:var(--line);
-        }
-
-        .logo{
-            display:flex;
-            align-items:center;
-            gap:.6em;
-            font-family:var(--f-display);
-            font-size:clamp(1rem, 2.5vw, 1.35rem);
-            letter-spacing:.04em;
-            color:var(--paper);
-            flex-shrink:0;
-        }
-        .logo .logo-mark{
-            width:clamp(28px, 4vw, 34px);
-            height:clamp(28px, 4vw, 34px);
-            display:grid;
-            place-items:center;
-            border:1px solid var(--brass);
-            border-radius:50%;
-            position:relative;
-            flex:none;
-        }
-        .logo .logo-mark::before,.logo .logo-mark::after{
-            content:'';position:absolute;background:var(--brass);
-        }
-        .logo .logo-mark::before{width:50%;height:1px;top:50%;left:50%;transform:translate(-50%,-50%);}
-        .logo .logo-mark::after{width:1px;height:50%;top:50%;left:50%;transform:translate(-50%,-50%);}
-        .logo .logo-mark i{width:4px;height:4px;border-radius:50%;background:var(--brass-bright);}
-        .logo small{
-            display:block;
-            font-family:var(--f-mono);
-            font-size:.5rem;
-            letter-spacing:.18em;
-            color:var(--steel-dim);
-            text-transform:uppercase;
-            margin-top:2px;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: var(--bg-1);
-            min-width: 260px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--line);
-            z-index: 1000;
-            padding: 8px 0;
-            top: 100%;
-            left: 0;
-        }
-        .dropdown-content a {
-            color: var(--ink-dim);
-            padding: 10px 20px;
-            text-decoration: none;
-            display: block;
-            font-family: var(--f-head);
-            font-size: .86rem;
-            letter-spacing: .05em;
-            text-transform:uppercase;
-            transition: background .2s, color .2s;
-        }
-        .dropdown-content a:hover {
-            background: var(--bg-2);
-            color: var(--paper);
-        }
-        .dropdown-content a.is-current {
-            color: var(--brass-bright);
-        }
-        .nav-desktop .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .nav-desktop{
-            display:flex;
-            align-items:center;
-            gap:clamp(0.8em, 2vw, 2.2em);
-        }
-        .nav-desktop > a, .nav-desktop .dropdown > span {
-            font-family:var(--f-head);
-            font-size:clamp(.72rem, 1.2vw, .86rem);
-            letter-spacing:.05em;
-            text-transform:uppercase;
-            color:var(--ink-dim);
-            position:relative;
-            padding:.3em 0;
-            transition:color .25s;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-        .nav-desktop > a::after, .nav-desktop .dropdown > span::after {
-            content:'';position:absolute;left:0;right:100%;bottom:-2px;height:1px;background:var(--brass);
-            transition:right .3s var(--ease);
-        }
-        .nav-desktop > a:hover, .nav-desktop .dropdown:hover > span {
-            color:var(--paper);
-        }
-        .nav-desktop > a:hover::after, .nav-desktop .dropdown:hover > span::after {
-            right:0;
-        }
-        .nav-desktop > a.is-current, .nav-desktop .dropdown > span.is-current {
-            color:var(--brass-bright);
-        }
-        .nav-desktop > a.is-current::after, .nav-desktop .dropdown > span.is-current::after {
-            right:0;
-        }
-
-        .header-cta{
-            display:flex;
-            align-items:center;
-            gap:1em;
-            flex-shrink:0;
-        }
-        .admin-link{
-            font-family:var(--f-mono);
-            font-size:.72rem;
-            letter-spacing:.1em;
-            color:var(--steel-dim);
-            display:flex;align-items:center;gap:.4em;
-            transition:color .25s;
-        }
-        .admin-link:hover{color:var(--brass);}
-
-        .burger{
-            display:none;
-            width:42px;height:42px;
-            border:1px solid var(--line);
-            background:transparent;
-            border-radius:var(--radius);
-            position:relative;
-            flex:none;
-            cursor:pointer;
-        }
-        .burger span,.burger span::before,.burger span::after{
-            content:'';position:absolute;left:11px;right:11px;height:1px;background:var(--paper);transition:transform .3s var(--ease),opacity .2s;
-        }
-        .burger span{top:50%;transform:translateY(-50%);}
-        .burger span::before{top:-7px;}
-        .burger span::after{top:7px;}
-        .burger.is-open span{background:transparent;}
-        .burger.is-open span::before{top:0;transform:rotate(45deg);}
-        .burger.is-open span::after{top:0;transform:rotate(-45deg);}
-
-        .nav-mobile{
-            position:fixed;
-            inset:0;
-            background:var(--bg-0);
-            z-index:99;
-            display:flex;
-            flex-direction:column;
-            justify-content:flex-start;
-            padding:90px 24px 40px;
-            transform:translateY(-100%);
-            transition:transform .45s var(--ease);
-            overflow-y:auto;
-        }
-        .nav-mobile.is-open{transform:translateY(0);}
-        .nav-mobile > a {
-            font-family:var(--f-display);
-            font-size:clamp(1.4rem, 4vw, 1.8rem);
-            color:var(--paper);
-            padding:.4em 0;
-            border-bottom:1px solid var(--line-soft);
-            text-transform:uppercase;
-            cursor:pointer;
-            transition:color .2s;
-        }
-        .nav-mobile > a:hover {
-            color:var(--brass-bright);
-        }
-
-        .nav-mobile .has-children {
-            cursor: pointer;
-            user-select: none;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            font-family:var(--f-display);
-            font-size:clamp(1.4rem, 4vw, 1.8rem);
-            color:var(--paper);
-            padding:.4em 0;
-            border-bottom:1px solid var(--line-soft);
-            text-transform:uppercase;
-            transition:color .2s;
-        }
-        .nav-mobile .has-children:hover {
-            color:var(--brass-bright);
-        }
-        .nav-mobile .has-children .toggle-icon {
-            font-size:1.2rem;
-            transition:transform .3s ease;
-            display:inline-block;
-            padding-left:10px;
-            flex-shrink:0;
-        }
-        .nav-mobile .has-children.is-open .toggle-icon {
-            transform:rotate(180deg);
-        }
-
-        .mobile-submenu {
-            display: none;
-            flex-direction: column;
-            width: 100%;
-            padding: 8px 0 12px 0;
-            border-bottom: 1px solid var(--line-soft);
-            margin-bottom: 4px;
-        }
-
-        .nav-mobile.is-open .mobile-submenu.is-open {
-            display: flex;
-        }
-
-        .mobile-submenu a {
-            font-size: 0.85rem !important;
-            font-family: var(--f-head);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 6px 0 6px 16px !important;
-            border-bottom: none !important;
-            color: var(--ink-dim);
-            transition: color .2s, padding-left .2s;
-        }
-
-        .mobile-submenu a:hover,
-        .mobile-submenu a.is-current {
-            color: var(--brass-bright) !important;
-            padding-left: 24px !important;
-        }
-
-        .mobile-submenu a:first-child {
-            padding-top: 8px !important;
-        }
-
-        .mobile-submenu a:last-child {
-            padding-bottom: 4px !important;
-        }
-
-        @media (max-width: 900px){
-            .nav-desktop, .header-cta { display: none; }
-            .burger { display: block; }
-            .site-header{
-                padding: 12px 16px;
-                min-height: 64px;
-            }
-            body{
-                padding-top: 64px;
-            }
-            .logo{
-                max-width: calc(100vw - 90px);
-                font-size: clamp(0.85rem, 2.5vw, 1.1rem);
-            }
-            .logo .logo-mark {
-                width: clamp(24px, 4vw, 30px);
-                height: clamp(24px, 4vw, 30px);
-            }
-            .info-section {
-                padding: 80px 0 60px;
-            }
-            .info-block {
-                padding: 16px 18px;
-            }
-            .info-block .value {
-                font-size: 0.92rem;
-            }
-            .facility-images {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-                gap: 8px;
-            }
-            .container {
-                padding: 0 16px;
-            }
-            h1, .h1 {
-                font-size: clamp(2rem, 5vw, 3rem);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo small {
-                font-size: 0.4rem;
-            }
-            .info-block {
-                padding: 12px 14px;
-            }
-            .info-block .label {
-                font-size: 0.65rem;
-            }
-            .info-block .value {
-                font-size: 0.85rem;
-            }
-            .facility-images {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            }
-            .mobile-submenu a {
-                font-size: 0.75rem !important;
-                padding: 5px 0 5px 12px !important;
-            }
-            .mobile-submenu a:hover,
-            .mobile-submenu a.is-current {
-                padding-left: 18px !important;
-            }
-            .nav-mobile {
-                padding: 80px 16px 30px;
-            }
-            .nav-mobile > a,
-            .nav-mobile .has-children {
-                font-size: clamp(1.1rem, 3.5vw, 1.4rem);
-            }
-        }
-
-        .info-section { padding: 120px 0 80px; }
-        .info-grid { display: grid; gap: 16px; }
-        .info-block {
-            background: var(--bg-1);
-            border: 1px solid var(--line);
-            padding: 20px 24px;
-            overflow-wrap: break-word;
-            word-break: break-word;
-        }
-        .info-block .label {
-            font-family: var(--f-mono);
-            font-size: .72rem;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-            color: var(--brass);
-            display: block;
-            margin-bottom: 6px;
-        }
-        .info-block .value {
-            font-size: 1rem;
-            color: var(--paper);
-            margin: 0;
-        }
-        .info-block .value a {
-            color: var(--brass-bright);
-            transition: color .2s;
-        }
-        .info-block .value a:hover { color: var(--paper); }
-        .info-block hr {
-            border: 0;
-            border-top: 1px solid var(--line-soft);
-            margin: 12px 0;
-        }
-        @media (max-width: 700px) { .info-section { padding: 80px 0 50px; } }
-        .eyebrow + h2 { margin-top: -0.2em; }
-
-        .info-page { display: none; }
-        .info-page.is-active { display: block; }
-
-        .pdf-link {
-            display: inline-block;
-            margin-top: 8px;
-            font-family: var(--f-mono);
-            font-size: .78rem;
-            color: var(--brass);
-            border-bottom: 1px solid var(--brass-dim);
-            padding-bottom: 2px;
-            transition: color .2s, border-color .2s;
-        }
-        .pdf-link:hover {
-            color: var(--brass-bright);
-            border-color: var(--brass-bright);
-        }
-
-        .inn-img {
-            max-width: 100%;
-            border: 1px solid var(--line-soft);
-            margin-top: 8px;
-            border-radius: var(--radius);
-        }
-
-        .doc-sublist {
-            margin-top: 10px;
-            padding-left: 12px;
-            border-left: 1px solid var(--brass-dim);
-        }
-        .doc-sublist li {
-            margin-bottom: 10px;
-        }
-        .doc-sublist li .label {
-            color: var(--steel);
-            font-size: .82rem;
-            margin-bottom: 2px;
-        }
-        .doc-sublist li .value {
-            font-size: .92rem;
-            color: var(--paper);
-        }
-        .doc-sublist li .value a {
-            color: var(--brass-bright);
-        }
-        .doc-sublist li .value a:hover {
-            color: var(--paper);
-        }
-        .doc-sublist li .pdf-link {
-            margin-top: 4px;
-        }
-
-        .facility-images {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 12px;
-            margin-top: 12px;
-        }
-        .facility-images img {
-            width: 100%;
-            height: auto;
-            border: 1px solid var(--line-soft);
-            border-radius: var(--radius);
-            object-fit: cover;
-            aspect-ratio: 4/3;
-        }
-        @media (max-width: 500px) {
-            .facility-images {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
-        }
-
-        .info-page .container-limited {
-            max-width: 1000px;
-            margin-left: 24px;
-            margin-right: auto;
-        }
-        @media (max-width: 700px) {
-            .info-page .container-limited {
-                margin-left: 0;
-                margin-right: 0;
-            }
-        }
-    </style>
-</head>
-<body>
-
-<header class="site-header" id="siteHeader">
-    <a href="/" class="logo">
-        <span class="logo-mark"><i></i></span>
-        <span>Институт международных связей и делового сотрудничества<small>· Сыктывкар</small></span>
-    </a>
-
-    <nav class="nav-desktop">
-        <a href="/">Объявления</a>
-
-        <div class="dropdown">
-            <span class="is-current">Основные сведения</span>
-            <div class="dropdown-content">
-                <a href="#page-main" data-page="page-main">Основные сведения</a>
-                <a href="#page-structure" data-page="page-structure">Структура и органы управления</a>
-                <a href="#page-docs" data-page="page-docs">Документы</a>
-                <a href="#page-education" data-page="page-education">Образование</a>
-                <a href="#page-standards" data-page="page-standards">Образовательные стандарты</a>
-                <a href="#page-staff" data-page="page-staff">Руководство. Педагогический состав</a>
-                <a href="#page-facilities" data-page="page-facilities">Материально-техническое обеспечение</a>
-                <a href="#page-scholarships" data-page="page-scholarships">Стипендии и иные виды материальной поддержки</a>
-                <a href="#page-paid-services" data-page="page-paid-services">Платные образовательные услуги</a>
-                <a href="#page-finance" data-page="page-finance">Финансово-хозяйственная деятельность</a>
-                <a href="#page-accessible" data-page="page-accessible">Доступная среда</a>
-                <a href="#page-international" data-page="page-international">Международное сотрудничество</a>
-            </div>
-        </div>
-
-        <a href="/#page-about">О нас</a>
-        <a href="/#page-materials">Методички</a>
-        <a href="/#page-vacancies">Вакансии</a>
-        <a href="/#page-reviews">Отзывы</a>
-    </nav>
-
-    <div class="header-cta">
-        <a href="/admin" class="admin-link">Панель</a>
-        <a href="/#page-about" class="btn btn--ghost btn--sm">Записаться</a>
-    </div>
-
-    <button class="burger" id="burger" aria-label="Меню"><span></span></button>
-</header>
-
-<nav class="nav-mobile" id="navMobile">
-    <div class="has-children" id="mobileMainLink">
-        <span>Основные сведения</span>
-        <span class="toggle-icon">▾</span>
-    </div>
-    <div class="mobile-submenu" id="mobileSubmenu">
-        <a href="#page-main" data-page="page-main">Основные сведения</a>
-        <a href="#page-structure" data-page="page-structure">Структура и органы управления</a>
-        <a href="#page-docs" data-page="page-docs">Документы</a>
-        <a href="#page-education" data-page="page-education">Образование</a>
-        <a href="#page-standards" data-page="page-standards">Образовательные стандарты</a>
-        <a href="#page-staff" data-page="page-staff">Руководство. Педагогический состав</a>
-        <a href="#page-facilities" data-page="page-facilities">Материально-техническое обеспечение</a>
-        <a href="#page-scholarships" data-page="page-scholarships">Стипендии и иные виды материальной поддержки</a>
-        <a href="#page-paid-services" data-page="page-paid-services">Платные образовательные услуги</a>
-        <a href="#page-finance" data-page="page-finance">Финансово-хозяйственная деятельность</a>
-        <a href="#page-accessible" data-page="page-accessible">Доступная среда</a>
-        <a href="#page-international" data-page="page-international">Международное сотрудничество</a>
-    </div>
-
-    <a href="/">Объявления</a>
-    <a href="/#page-about">О нас</a>
-    <a href="/#page-materials">Методички</a>
-    <a href="/#page-vacancies">Вакансии</a>
-    <a href="/#page-reviews">Отзывы</a>
-</nav>
-
-<main>
-    <section class="info-section">
-        <div class="container">
-            <div class="eyebrow">Сведения об организации</div>
-            <h1 id="pageTitle">Основные сведения</h1>
-
-            <!-- ================= СТРАНИЦА 1: ОСНОВНЫЕ СВЕДЕНИЯ ================= -->
-            <div id="page-main" class="info-page is-active">
-                <div class="info-grid" style="margin-top: 40px;">
-                    <div class="info-block">
-                        <span class="label">Полное наименование</span>
-                        <p class="value">Частное учреждение дополнительного профессионального образования "Институт международных связей и делового сотрудничества"</p>
-                    </div>
-                    <div class="info-block">
-                        <span class="label">Сокращенное наименование</span>
-                        <p class="value">ЧУ ДПО ИМДС</p>
-                    </div>
-                    <div class="info-block">
-                        <span class="label">Дата создания</span>
-                        <p class="value">Частное учреждение дополнительного профессионального образования «Институт международных связей и делового сотрудничества» создано в 10.01.2008г.</p>
-                    </div>
-                    <div class="info-block">
-                        <span class="label">Учредители</span>
-                        <p class="value">Учреждение создано:  Обществом с ограниченной ответственностью «Институт международных связей и делового сотрудничества».</p>
-                        <hr>
-                        <span class="label">Собственник учреждения</span>
-                        <p class="value">Теплова Тамара Александровна</p>
-                    </div>
-                    <div class="info-block">
-                        <span class="label">Представительства и филиалы</span>
-                        <p class="value">Учреждение не имеет представительств и филиалов</p>
-                    </div>
-                    <div class="info-block">
-                        <span class="label">Место нахождения, контакты</span>
-                        <p class="value">Юридический адрес: 167004, Республика Коми, г. Сыктывкар, ул.Карла Маркса д. 228\3</p>
-                        <hr>
-                        <p class="value">Адрес места нахождения: г. Сыктывкар, ул. Карла Маркса, д 228\3</p>
-                        <hr>
-                        <p class="value">Телефон: 8-8212-314060</p>
-                        <hr>
-                        <p class="value">Адрес электронной почты: tirkomi@yandex.ru</p>
-                        <hr>
-                        <p class="value">Адрес официального сайта: <a href="https://tir-komi.onrender.com" target="_blank">http:\\tirkomi.ucoz.org</a></p>
-                    </div>
-                    <div class="info-block">
-                        <span class="label">График работы</span>
-                        <p class="value">Понедельник - пятница с 9 час. 00 мин до 17 час. 00 мин</p>
-                    </div>
-                    <div class="info-block">
-                        <span class="label">Места осуществления образовательной деятельности</span>
-                        <p class="value">Образовательная деятельность по основным программам профессионального обучения, а также по дополнительным образовательным программам осуществляется по адресу: Республика Коми, г. Сыктывкар, ул. Карла Маркса, д. 228\3</p>
-                        <hr>
-                        <p class="value">Практические занятия проводятся по месту осуществления образовательной деятельности. Практическая подготовка проходит на базе учреждения.</p>
-                        <hr>
-                        <p class="value">Сетевая форма реализации образовательных программ не используется. Учреждение осуществляет образовательный процесс самостоятельно.</p>
-                        <hr>
-                        <p class="value">Государственная итоговая аттестация реализуемых учреждением программ не предусмотрена.</p>
-                    </div>
-                    <div class="info-block">
-                        <span class="label">О лицензии на образовательную деятельность</span>
-                        <p class="value">Образовательная деятельность осуществляется на основании Лицензии</p>
-                        <hr>
-                        <p class="value">Выдана: Министерство образования, науки и молодежной политики Республики Коми № 1838-П от 17 февраля 2020 г.</p>
-                        <hr>
-                        <p class="value">Серия 11 Л 01 № 0002183 Срок действия: бессрочно</p>
-                    </div>
-                    <div class="info-block">
-                        <span class="label">Режим учебных занятий</span>
-                        <p class="value">Занятия проводятся в группах по расписанию каждой группы (устанавливается отдельно) в режиме работы учреждения. Академический час учебных занятий – 45 мин.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================= СТРАНИЦА 2: СТРУКТУРА И ОРГАНЫ УПРАВЛЕНИЯ ================= -->
-            <div id="page-structure" class="info-page">
-                <div class="info-grid" style="margin-top: 40px;">
-                    <div class="info-block">
-                        <span class="label">Руководство</span>
-                        <p class="value">Руководство Учреждением осуществляет Собственник.</p>
-                        <hr>
-                        <p class="value">Исполнительным органом Учреждения является Директор. Директор действует от имени Учреждения без доверенности, осуществляет текущее руководство деятельностью Учреждения и подотчётен Собственнику.</p>
-                    </div>
-                    <div class="info-block">
-                        <span class="label">Коллегиальные органы управления</span>
-                        <p class="value">В Учреждении формируются коллегиальные органы управления: педагогический совет из штатных педагогических работников и общее собрание работников образовательной организации, имеющие статус совещательных органов.</p>
-                        <hr>
-                        <p class="value" style="margin-bottom: 4px;">Положение о педагогическом совете</p>
-                        <a href="/assets/polozhenie_o_pedagogicheskom_sovete.pdf" target="_blank" class="pdf-link">Скачать PDF</a>
-                        <hr>
-                        <p class="value" style="margin-bottom: 4px;">Положение об Общем собрании</p>
-                        <a href="/assets/polozh_obshhee_sobr.pdf" target="_blank" class="pdf-link">Скачать PDF</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================= СТРАНИЦА 3: ДОКУМЕНТЫ ================= -->
-            <div id="page-docs" class="info-page">
-                <div class="info-grid" style="margin-top: 40px;">
-
-                    <div class="info-block">
-                        <span class="label">Документы</span>
-                        <p class="value">Федеральный закон "Об образовании в Российской Федерации" - <a href="https://www.consultant.ru/document/cons_doc_LAW_140174/" target="_blank">перейти на страницу</a></p>
-                        <hr>
-                        <p class="value">Федеральный закон "О некоммерческих организациях" - <a href="https://www.consultant.ru/document/cons_doc_LAW_8824/" target="_blank">перейти на страницу</a></p>
-                        <hr>
-                        <p class="value">Федеральный закон "Об оружии" - <a href="https://www.consultant.ru/document/Cons_doc_LAW_12679/" target="_blank">перейти на страницу</a></p>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Устав</span>
-                        <p class="value">Устав образовательной организации</p>
-                        <a href="/assets/podpisannyj_ustav_chu_dpo_imds.pdf" target="_blank" class="pdf-link">Скачать Устав</a>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Лицензия</span>
-                        <p class="value">Лицензия на осуществление образовательной деятельности (с приложениями)</p>
-                        <a href="/assets/licenzija_2020_goda.pdf" target="_blank" class="pdf-link">Скачать Лицензию</a>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Выписка ЕГРЮЛ</span>
-                        <p class="value">Выписка из Единого государственного реестра юридических лиц</p>
-                        <a href="/assets/egrjul_mart_2024.pdf" target="_blank" class="pdf-link">Скачать ЕГРЮЛ</a>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">ИНН Учредителя</span>
-                        <p class="value">ИНН Учредителя</p>
-                        <img src="/assets/98723580.jpg" alt="ИНН Учредителя" class="inn-img" style="max-height: 1000px; width: auto;">
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Свидетельства об аккредитации</span>
-                        <p class="value">Свидетельства об аккредитации нет, т.к. данный вид деятельности не аккредитуется (учреждение не выдаёт документы государственного образца).</p>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Локальные нормативные акты</span>
-
-                        <p class="value" style="margin-bottom: 4px;">Приказ об экзаменационной комиссии 2023</p>
-                        <a href="/assets/izmenenie_v_ehkz_komis_nojabr_2023.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-
-                        <p class="value" style="margin-bottom: 4px;">Правила внутреннего распорядка</p>
-                        <a href="/assets/pravila_vnutr_raspor_obuchajushhikhsja.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-
-                        <p class="value" style="margin-bottom: 4px;">Положение о профессиональном и дополнительном профессиональном образовании</p>
-                        <a href="/assets/polozhenie_o_po_i_dpo_2023.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-
-                        <p class="value" style="margin-bottom: 4px;">Положение о режиме занятий</p>
-                        <a href="/assets/polozhenie_o_rezhime_zanjatij.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-
-                        <p class="value" style="margin-bottom: 4px;">Положение о режиме обучения</p>
-                        <a href="/assets/polozhenie_o_rezhime_obuchenija.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-
-                        <p class="value" style="margin-bottom: 4px;">Правила внутреннего трудового распорядка</p>
-                        <a href="/assets/pravila_vnutrennego_trudovogo_rasporjadka.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-
-                        <p class="value" style="margin-bottom: 4px;">Правила приёма на обучение</p>
-                        <a href="/assets/podpis_pravila_priema_2023.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-
-                        <p class="value" style="margin-bottom: 4px;">Формы, периодичность и порядок текущего контроля успеваемости, промежуточной аттестации, итоговой аттестации обучающихся</p>
-                        <a href="/assets/polozh_o_formakh_tekushh_kontr_attestacii.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-
-                        <p class="value" style="margin-bottom: 4px;">Порядок и основания возникновения образовательных отношений, отчисления, восстановления</p>
-                        <a href="/assets/polozh_o_voznikn_i_prekrashh_obrazovat_otnosh.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-
-                        <p class="value" style="margin-bottom: 4px;">Положение о доступе к информационным сетям и др</p>
-                        <a href="/assets/polozh_o_dostupe_k_inf-setjam_mat_tekh_sredstvam.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-
-                        <p class="value" style="margin-bottom: 4px;">Положение о комиссии по урегулированию споров между участниками образовательных отношений</p>
-                        <a href="/assets/polozhenie_o_komissii.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-
-                        <p class="value" style="margin-bottom: 4px;">Положение об охране труда</p>
-                        <a href="/assets/polozhenie_ob_okhrane_truda.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-
-                        <p class="value" style="margin-bottom: 4px;">Инструкция по охране труда при проведении соревнований</p>
-                        <a href="/assets/okhr_tr_pri_sorevnovanijakh.pdf" target="_blank" class="pdf-link">Скачать</a>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Отчёт о результатах самообследования</span>
-                        <p class="value" style="margin-bottom: 4px;">Отчёт о результатах самообследования за 2024 г</p>
-                        <a href="/assets/akt_samoobsl_2024.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-                        <p class="value" style="margin-bottom: 4px;">Отчёт о результатах самообследования за 2025 г</p>
-                        <a href="/assets/akt_samoobsledovanija_za_2025_god_podpisan.pdf" target="_blank" class="pdf-link">Скачать</a>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Документы о порядке оказания платных образовательных услуг</span>
-                        <p class="value">Документы о порядке оказания платных образовательных услуг, в том числе: образец договора об оказании платных образовательных услуг, приказ об утверждении стоимости обучения по каждой образовательной программе</p>
-
-                        <ul class="doc-sublist" style="margin-top: 12px; list-style: none;">
-                            <li>
-                                <div class="label">Платные образовательные услуги</div>
-                                <div class="value">Платные образовательные услуги</div>
-                            </li>
-                            <li>
-                                <div class="label">Постановление Правительства РФ</div>
-                                <div class="value">Постановление Правительства Российской Федерации от 15 августа 2013 г. №706 "Об утверждении Правил оказания платных образовательных услуг" - <a href="https://www.rg.ru/printable/2013/08/23/uslugi-dok.html" target="_blank">перейти по ссылке</a></div>
-                            </li>
-                            <li>
-                                <div class="label">Образец договора об оказании платных образовательных услуг</div>
-                                <div class="value"><a href="/assets/tipovoj.pdf" target="_blank" class="pdf-link">Скачать</a></div>
-                            </li>
-                            <li>
-                                <div class="label">Положение об оказании платных образовательных услуг</div>
-                                <div class="value"><a href="/assets/polozhenie_o_platnykh_obrazovatelnykh_uslugakh.pdf" target="_blank" class="pdf-link">Скачать</a></div>
-                            </li>
-                            <li>
-                                <div class="label">Прайс лист на 2024 год</div>
-                                <div class="value"><a href="/assets/prajs_2024.pdf" target="_blank" class="pdf-link">Скачать</a></div>
-                            </li>
-                            <li>
-                                <div class="label">Прайс лист на образовательные услуги в 2025 году</div>
-                                <div class="value"><a href="/assets/prajs_2025.pdf" target="_blank" class="pdf-link">Скачать</a></div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Предписания органов, осуществляющих государственный контроль (надзор) в сфере образования </span>
-                        <p class="value">Предписаний органов, осуществляющих государственный контроль (надзор) в сфере образования на дату 01.11.2023г. нет</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- ================= СТРАНИЦА 4: ОБРАЗОВАНИЕ ================= -->
-            <div id="page-education" class="info-page">
-                <div class="info-grid" style="margin-top: 40px;">
-
-                    <div class="info-block">
-                        <span class="label">Образование</span>
-                        <p class="value">Уровни образования</p>
-                        <hr>
-                        <p class="value">В учреждении создаются условия для реализации конституционного права граждан на профессиональное образование. Подвид – дополнительное профессиональное образование.</p>
-                        <hr>
-                        <p class="value">В учреждении созданы условия для дополнительного образования.</p>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Формы обучения</span>
-                        <p class="value">Обучение осуществляется в очной форме.</p>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Нормативный срок освоения</span>
-                        <p class="value">По программе профессиональной подготовки:</p>
-                        <p class="value">охранников 6 разряда - 80 часов;</p>
-                        <p class="value">охранников 5 разряда - 60 часа;</p>
-                        <p class="value">охранников 4 разряда - 40 часов;</p>
-                        <hr>
-                        <p class="value">По программе повышения квалификации:</p>
-                        <p class="value">охранников 6 разряда - 20 часов;</p>
-                        <p class="value">охранников 5 разряда - 16 часов;</p>
-                        <p class="value">охранников 4 разряда - 8 часов;</p>
-                        <hr>
-                        <p class="value">По программе дополнительного образования</p>
-                        <p class="value">Обучение, проверка знаний правил безопасного обращения с оружием - 6 часов</p>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Срок действия государственной аккредитации</span>
-                        <p class="value">Свидетельства об аккредитации нет, т.к. данный вид деятельности не аккредитуется (учреждение не выдаёт документы государственного образца).</p>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Об языках, на которых осуществляется обучение</span>
-                        <p class="value">Обучение осуществляется на русском языке</p>
-                        <hr>
-                        <p class="value" style="margin-bottom: 4px;">Положение о языке обучения</p>
-                        <a href="/assets/polozhenie_o_jazykakh_obuchenija.pdf" target="_blank" class="pdf-link">Скачать</a>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">О направлениях и результатах научно-исследовательской деятельности</span>
-                        <p class="value">Сотрудники учреждения научно-исследовательскую деятельность не осуществляют.</p>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Описание образовательной программы</span>
-                        <p class="value">Учреждение реализует программы дополнительного образования, программы повышения квалификации, программы профессиональной подготовки.</p>
-                        <hr>
-                        <p class="value">Повышение квалификации:</p>
-                        <p class="value">приобретение профессиональных навыков, самостоятельное обучение по индивидуальным программам, дистанционное обучение, обучение с помощью новейших достижений науки и техники, в том числе в области информационных технологий;повышение квалификации может осуществляться как тематическое обучение, тематические и проблемные семинары, длительное обучение для углубленного изучения актуальных проблем или</p>
-                        <p class="value">повышение квалификации заканчивается сдачей соответствующего экзамена, защитой реферата или итоговой работы;</p>
-                        <p class="value">после окончания повышения квалификации выдается удостоверение о краткосрочном повышении квалификации или свидетельство о повышении квалификации.</p>
-                        <hr>
-                        <p class="value">Профессиональная подготовка:</p>
-                        <p class="value">длительное обучение по учебным программам, необходимым специалисту для выполнения нового вида профессиональной деятельности. Форма и сроки обучения устанавливаются в соответствии с целями обучения. Уровень образования специалистов, проходящих профессиональную подготовку, переподготовку должен быть не ниже уровня образования требуемого для нового вида профессиональной деятельности;</p>
-                        <p class="value">профессиональная подготовка, переподготовка завершается итоговой аттестацией и выдачей документа о присвоении квалификации.</p>
-                        <hr>
-                        <p class="value">Дополнительное образование:</p>
-                        <p class="value">удовлетворение образовательных потребностей граждан для расширения умений и навыков для личных потребностей</p>
-                        <hr>
-                        <p class="value">Учебные предметы, курсы, дисциплины: правовая подготовка, тактико-специальная подготовка, техническая подготовка, использование специальных средств, оказание первой помощи, психологическая подготовка, огневая подготовка, физическая подготовка.</p>
-                        <hr>
-                        <p class="value">Образовательными программами предусмотрены практические занятия по стрельбе, практическое применение специальных средств, отработка приемов самообороны, отработка приемов и способов ведения наблюдения, выявления действий противоправной направленности, в том числе террористических угроз; освоение приемов оказания первой помощи. Виды и описание практики изложены в соответствующих разделах образовательных программ.</p>
-                        <hr>
-                        <p class="value">Учебные планы, календарные учебные графики, аннотации изложены в программах (прилагаются ниже)</p>
-                        <hr>
-                        <p class="value">В процессе обучения используется электронное обучение.</p>
-                        <hr>
-                        <p class="value">Дистанционные образовательные технологии не применяются.</p>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Учебный план и реализуемые образовательные программы</span>
-                        <p class="value" style="margin-bottom: 4px;">Программа "Повышение квалификации охранников" (4,5,6 разряды)</p>
-                        <a href="/assets/progr_pov_kval_okhr_2024.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-                        <p class="value" style="margin-bottom: 4px;">Программа "Профессиональная подготовка охранников" (4,5,6 разряды)</p>
-                        <a href="/assets/progr_obuch_okhr_2024.pdf" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-                        <p class="value" style="margin-bottom: 4px;">Дополнительная образовательная программа подготовки лиц в целях изучения правил безопасного обращения с оружием и приобретения навыков безопасного обращения с оружием</p>
-                        <a href="/assets/bezop_obrashh_s_oruzh_2023.pdf" target="_blank" class="pdf-link">Скачать</a>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Перечень документов</span>
-                        <p class="value" style="margin-bottom: 4px;">Перечень документов, необходимых для прохождения обучения по программе профессиональной подготовки по профессии "Охранник" (4, 5, 6 разряды) : заявление; анкета, копия паспорта; копия СНИЛС; медицинское заключение об отсутствии медицинских противопоказаний к исполнению обязанностей частного охранника формы № 002-ЧО\у; справка об отсутствии судимости</p>
-                        <a href="/assets/perechen_dokumentov.docx" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-                        <p class="value" style="margin-bottom: 4px;">Перечень документов, необходимых для прохождения обучения по программе повышения квалификации по профессии "Охранник" (4, 5, 6 разряды) : заявление; анкета, копия паспорта ; копия СНИЛС; копия действующего удостоверения охранника, медицинское заключение об отсутствии медицинских противопоказаний к исполнению обязанностей частного охранника формы № 002-ЧО\у; медицинское заключение об отсутствии противопоказаний для работы с оружием; справка об отсутствии судимости.</p>
-                        <a href="/assets/perechen_dokumentov.docx" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-                        <p class="value" style="margin-bottom: 4px;">Перечень документов, необходимых для прохождения обучения по программе подготовки граждан РФ в целях безопасного обращения с оружием и приобретения навыков безопасного обращения с оружием:</p>
-                        <a href="/assets/perechen_dokumentov.docx" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-                        <p class="value">- заявление; паспорт; СНИЛС; медицинское заключение об отсутствии медицинских противопоказаний к владению оружием форма №002-О\у; справка об отсутствии судимости; две фотографии размером 3х4 см матовые</p>
-                        <hr>
-                        <p class="value" style="margin-bottom: 4px;">Перечень документов, необходимых для прохождения проверки знаний граждан РФ правил безопасного обращения с оружием (один раз в пять лет):</p>
-                        <a href="/assets/perechen_dokumentov.docx" target="_blank" class="pdf-link">Скачать</a>
-                        <hr>
-                        <p class="value">- заявление; паспорт; СНИЛС; медицинское заключение об отсутствии медицинских противопоказаний к владению оружием форма №002-О\у; разрешение (лицензия) на хранение (хранение и ношение) оружия срок действия которого продлевается; две фотографии размером 3х4 см матовые</p>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Календарный учебный график</span>
-                        <p class="value" style="margin-bottom: 4px;">График учебных занятий на 2026 г.</p>
-                        <a href="/assets/grafik_obuchenija_na_2026_god_podp.pdf" target="_blank" class="pdf-link">Скачать</a>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">Численность учащихся по каждой реализуемой программе</span>
-                        <p class="value">Количество обученных за 2025 год по программам начального профессионального образования - 166 чел. Обучение осуществлялось по договорам платных образовательных услуг за счет средств учащихся.</p>
-                        <hr>
-                        <p class="value">Количество обученных за 2025 год по программам повышения квалификации рабочих и служащих - 162 чел. Обучение осуществлялось по договорам платных образовательных услуг за счет средств учащихся.</p>
-                        <hr>
-                        <p class="value">По программе дополнительного образования с учетом лиц, прошедших проверку знаний, обучено в 2025 году 76 человек. Все обучались по договорам платных образовательных услуг за счет своих средств.</p>
-                        <hr>
-                        <p class="value">Иностранные граждане в учреждении в 2025 году не обучались.</p>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">О результатах приема</span>
-                        <p class="value">Все граждане, изъявившие желание обучаться в ЧУ ДПО ИМДС, приняты в число учащихся. Зачисление осуществляется на основании поступивших заявлений без вступительных испытаний.</p>
-                    </div>
-
-                    <div class="info-block">
-                        <span class="label">О трудоустройстве выпускников</span>
-                        <p class="value">Все выпускники трудоустроены в охранные структуры Республики Коми.</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- ================= СТРАНИЦА 5: ОБРАЗОВАТЕЛЬНЫЕ СТАНДАРТЫ ================= -->
-            <div id="page-standards" class="info-page">
-                <div class="info-grid" style="margin-top: 40px;">
-                    <div class="info-block">
-                        <span class="label">Образовательные стандарты</span>
-                        <p class="value">Профессиональный стандарт – это характеристика квалификации, необходимой работнику для осуществления определенного вида профессиональной деятельности (ст. 195.1 Трудового кодекса Российской Федерации). Профессиональные стандарты должны применяться образовательными организациями профессионального образования при разработке профессиональных образовательных программ.</p>
-                        <hr>
-                        <p class="value">Профессиональный стандарт Работник по обеспечению охраны образовательных организаций</p>
-                        <p class="value">(утв. приказом Министерства труда и социальной защиты РФ от 11 декабря 2015 г. N 1010н)</p>
-                        <a href="/assets/ob_utverzhdenii_professionalnogo_standarta.pdf" target="_blank" class="pdf-link">Скачать</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================= СТРАНИЦА 6: РУКОВОДСТВО. ПЕДАГОГИЧЕСКИЙ СОСТАВ ================= -->
-            <div id="page-staff" class="info-page">
-                <div class="info-grid" style="margin-top: 40px;">
-                    <div class="info-block">
-                        <span class="label">Руководство. Педагогический состав</span>
-                        <p class="value">Директор ЧУ ДПО ИМДС - Теплова Тамара Александровна (образование высшее педагогическое, высшее юридическое).</p>
-                        <hr>
-                        <p class="value">Телефон: 8(922)2724450</p>
-                        <hr>
-                        <p class="value">Адрес электронной почты: tomateplowa@yandex.ru</p>
-                        <hr>
-                        <p class="value">График работы:</p>
-                        <p class="value">Понедельник - пятница с 9 час. 00 мин до 17 час. 00 мин</p>
-                        <hr>
-                        <p class="value">Адрес электронной почты: tirkomi@yandex.ru</p>
-                        <hr>
-                        <p class="value" style="margin-bottom: 4px;">Преподаватели ЧУ ДПО ИМДС</p>
-                        <a href="/assets/kadry_na_nojabr_2023.pdf" target="_blank" class="pdf-link">Скачать</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================= СТРАНИЦА 7: МАТЕРИАЛЬНО-ТЕХНИЧЕСКОЕ ОБЕСПЕЧЕНИЕ ================= -->
-            <div id="page-facilities" class="info-page">
-                <div class="info-grid" style="margin-top: 40px;">
-                    <div class="info-block">
-                        <span class="label">Материально-техническое обеспечение образовательной деятельности</span>
-                        <p class="value">Информация о наличии оборудованных учебных кабинетов, объектов для проведения практических занятий, средств обучения и воспитания</p>
-                        <hr>
-                        <p class="value">Для успешной реализации программ повышения квалификации и профессиональной подготовки имеются аудитории более чем на 60 учебных мест, 5 компьютеризированных мест для обучения с использованием электронных программ, сдачи экзаменов и зачетов; стенды с образцами приборов охранно-пожарной сигнализации, средств пожаротушения, палки резиновые, изделия БР, бронежилеты, шлемы защитные, манекены человека в полный рост, модели пистолетов для учебных упражнений кобуры, плакаты по огневой подготовке (ПМ, АКС-74У, видам боеприпасов и мерам безопасности при стрельбах), плакаты и образцы средств доврачебной помощи (шины, жгуты, бинты, тампоны, средства обработки ран, и т.п.), пистолеты служебные огнестрельные, пневматические и травматического действия, ружья служебные, комплекты снаряжения для рукопашного боя (накладки на руки и голени, шлемы, перчатки), макеты ножей и пистолетов. Две галереи стрелкового тира на 8 направлений стрельбы с мишенными установками, наушниками, столиками для заряжения-разряжения, две оружейные комнаты, постоянно пополняемый запас боеприпасов. Офисные помещения оборудованы компьютерами, сканерами, принтерами.</p>
-                        <hr>
-                        <p class="value">Информация об условиях охраны здоровья</p>
-                        <p class="value">Обеспечены условия противопожарной и антитеррористической защиты.</p>
-                        <hr>
-                        <p class="value">Информация о доступе к информационным системам и информационно-телекоммуникационным сетям</p>
-                        <p class="value">Обеспечен доступ к сети Интернет (скорость 2,5 Мбит/сек).</p>
-                        <hr>
-                        <p class="value">Информация об учебно-методическом обеспечении, электронных образовательных ресурсах</p>
-                        <p class="value">Учебно-методическое и учебно-информационное обеспечение учреждения соответствует требованиям современных образовательных программ дополнительного профессионального образования.</p>
-
-                        <div class="facility-images">
-                            <img src="/assets/82521243.jpg" alt="Фото 1">
-                            <img src="/assets/44605353.jpg" alt="Фото 2">
-                            <img src="/assets/45646296.jpg" alt="Фото 3">
-                            <img src="/assets/00974069.jpg" alt="Фото 4">
-                            <img src="/assets/56025204.jpg" alt="Фото 5">
-                            <img src="/assets/62107098.jpg" alt="Фото 6">
-                            <img src="/assets/84287994.jpg" alt="Фото 7">
-                            <img src="/assets/78665224.jpg" alt="Фото 8">
-                            <img src="/assets/64042338.jpg" alt="Фото 9">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================= СТРАНИЦА 8: СТИПЕНДИИ ================= -->
-            <div id="page-scholarships" class="info-page">
-                <div class="info-grid" style="margin-top: 40px;">
-                    <div class="info-block">
-                        <span class="label">Стипендии и иные виды материальной поддержки</span>
-                        <p class="value">Стипендиальные выплаты и иные виды материальной поддержки учреждение не предоставляет.</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- ================= СТРАНИЦА 9: ПЛАТНЫЕ ОБРАЗОВАТЕЛЬНЫЕ УСЛУГИ ================= -->
-        <div id="page-paid-services" class="info-page">
-            <div class="container-limited" style="margin-top: 40px; max-width: 1000px; margin-left: auto; margin-right: auto;">
-                <div class="info-grid" style="margin-top: 0;">
-                    <div class="info-block">
-                        <span class="label">Платные образовательные услуги</span>
-                        <p class="value">Постановление Правительства Российской Федерации от 15 августа 2013 г. №706 "Об утверждении Правил оказания платных образовательных услуг" - <a href="http://www.rg.ru/printable/2013/08/23/uslugi-dok.html" target="_blank">перейти на сайт</a></p>
-
-                        <div style="border-top: 1px solid var(--line-soft); margin: 16px 0;"></div>
-
-                        <p class="value" style="margin-bottom: 4px;">Образец договора об оказании платных образовательных услуг</p>
-                        <a href="/assets/tipovoj.pdf" target="_blank" class="pdf-link">Скачать</a>
-
-                        <div style="border-top: 1px solid var(--line-soft); margin: 16px 0;"></div>
-
-                        <p class="value" style="margin-bottom: 4px;">Положение об оказании платных образовательных услуг</p>
-                        <a href="/assets/polozhenie_o_platnykh_obrazovatelnykh_uslugakh.pdf" target="_blank" class="pdf-link">Скачать</a>
-
-                        <div style="border-top: 1px solid var(--line-soft); margin: 16px 0;"></div>
-
-                        <p class="value" style="margin-bottom: 4px;">Прайс лист на 2024 год</p>
-                        <a href="/assets/prajs_2024.pdf" target="_blank" class="pdf-link">Скачать</a>
-
-                        <div style="border-top: 1px solid var(--line-soft); margin: 16px 0;"></div>
-
-                        <p class="value" style="margin-bottom: 4px;">Прайс лист на образовательные услуги в 2025 году</p>
-                        <a href="/assets/prajs_2025.pdf" target="_blank" class="pdf-link">Скачать</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= СТРАНИЦА 10: ФИНАНСОВО-ХОЗЯЙСТВЕННАЯ ДЕЯТЕЛЬНОСТЬ ================= -->
-        <div id="page-finance" class="info-page">
-            <div class="container-limited" style="margin-top: 40px; max-width: 1000px; margin-left: auto; margin-right: auto;">
-                <div class="info-grid" style="margin-top: 0;">
-                    <div class="info-block">
-                        <span class="label">Финансово-хозяйственная деятельность</span>
-                        <p class="value">Частное учреждение дополнительного профессионального образования «Институт международных связей и делового сотрудничества» оказывает платные образовательные услуги. Средства, получаемые за счет этой деятельности, являются базой для формирования финансовых и материальных ресурсов.</p>
-                        <hr>
-                        <p class="value">В соответствии с действующим Уставом организация осуществляет хозяйственную деятельность самостоятельно. Имеющиеся доходы и финансовые средства распределяются согласно решениям учредителя в соответствии с уставными целями.</p>
-                        <hr>
-                        <p class="value">Обновление и усовершенствование материальной и технической базы осуществляются в пределах имеющихся в распоряжении организации средств с учетом официальной сметы, которая утверждается директором.</p>
-                        <hr>
-                        <p class="value" style="margin-bottom: 4px;">Акт самообследования</p>
-                        <a href="/assets/akt_samoobsl_2023.pdf" target="_blank" class="pdf-link">Скачать</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= СТРАНИЦА 11: ДОСТУПНАЯ СРЕДА ================= -->
-        <div id="page-accessible" class="info-page">
-            <div class="container-limited" style="margin-top: 40px; max-width: 1000px; margin-left: auto; margin-right: auto;">
-                <div class="info-grid" style="margin-top: 0;">
-                    <div class="info-block">
-                        <span class="label">Доступная среда</span>
-                        <p class="value">Учебный центр расположен в отдельно стоящем 2-х этажном здании. В шаговой доступности остановки городского транспорта, магазины, аптека.</p>
-                        <hr>
-                        <p class="value">На первом этаже есть все необходимое для обучения: класс, раздевалка, туалеты.</p>
-                        <hr>
-                        <p class="value">Помещения оснащены видеокамерами. Уголок потребителя расположен в месте, удобном для просмотра.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= СТРАНИЦА 12: МЕЖДУНАРОДНОЕ СОТРУДНИЧЕСТВО ================= -->
-        <div id="page-international" class="info-page">
-            <div class="container-limited" style="margin-top: 40px; max-width: 1000px; margin-left: auto; margin-right: auto;">
-                <div class="info-grid" style="margin-top: 0;">
-                    <div class="info-block">
-                        <span class="label">Международное сотрудничество</span>
-                        <p class="value">Международное сотрудничество не осуществляется.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section>
-</main>
-
-<script>
-    (() => {
-        'use strict';
-
-        const burger = document.getElementById('burger');
-        const navMobile = document.getElementById('navMobile');
-        const submenu = document.getElementById('mobileSubmenu');
-        const menuTitle = document.getElementById('mobileMainLink');
-        const toggleIcon = menuTitle ? menuTitle.querySelector('.toggle-icon') : null;
-
-        function closeMenu() {
-            burger.classList.remove('is-open');
-            navMobile.classList.remove('is-open');
-            document.body.style.overflow = '';
-            if (submenu) submenu.classList.remove('is-open');
-            if (menuTitle) menuTitle.classList.remove('is-open');
-            if (toggleIcon) toggleIcon.textContent = '▾';
-        }
-
-        burger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const open = burger.classList.toggle('is-open');
-            navMobile.classList.toggle('is-open', open);
-            document.body.style.overflow = open ? 'hidden' : '';
-            if (!open) {
-                if (submenu) submenu.classList.remove('is-open');
-                if (menuTitle) menuTitle.classList.remove('is-open');
-                if (toggleIcon) toggleIcon.textContent = '▾';
-            }
-        });
-
-        navMobile.addEventListener('click', (e) => {
-            if (e.target === navMobile) {
-                closeMenu();
-            }
-        });
-
-        if (menuTitle) {
-            menuTitle.addEventListener('click', (e) => {
-                const target = e.target.closest('.has-children') || e.target;
-                if (e.target.classList.contains('toggle-icon')) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    const isOpen = submenu.classList.toggle('is-open');
-                    menuTitle.classList.toggle('is-open', isOpen);
-                    toggleIcon.textContent = isOpen ? '▴' : '▾';
-                    return;
-                }
-                window.location.href = '/basic_information';
-            });
-        }
-
-        navMobile.querySelectorAll('a').forEach((a) => {
-            a.addEventListener('click', (e) => {
-                const href = a.getAttribute('href');
-
-                if (href && href.startsWith('/basic_information')) {
-                    closeMenu();
-                    if (href.includes('#') && window.location.pathname === '/basic_information') {
-                        e.preventDefault();
-                        const targetId = href.split('#')[1];
-                        const target = document.getElementById(targetId);
-                        if (target) {
-                            target.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }
-                    return;
-                }
-
-                if (href && href.startsWith('#')) {
-                    e.preventDefault();
-                    closeMenu();
-                    const targetId = href.replace('#', '');
-                    const target = document.getElementById(targetId);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                        const pageId = a.dataset.page;
-                        if (pageId) switchPage(pageId);
-                    }
-                    return;
-                }
-
-                closeMenu();
-            });
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navMobile.classList.contains('is-open')) {
-                closeMenu();
-            }
-        });
-
-        const menuLinks = document.querySelectorAll('.dropdown-content a[data-page], .mobile-submenu a[data-page]');
-        const pages = {
-            'page-main': document.getElementById('page-main'),
-            'page-structure': document.getElementById('page-structure'),
-            'page-docs': document.getElementById('page-docs'),
-            'page-education': document.getElementById('page-education'),
-            'page-standards': document.getElementById('page-standards'),
-            'page-staff': document.getElementById('page-staff'),
-            'page-facilities': document.getElementById('page-facilities'),
-            'page-scholarships': document.getElementById('page-scholarships'),
-            'page-paid-services': document.getElementById('page-paid-services'),
-            'page-finance': document.getElementById('page-finance'),
-            'page-accessible': document.getElementById('page-accessible'),
-            'page-international': document.getElementById('page-international')
-        };
-        const pageTitle = document.getElementById('pageTitle');
-
-        const titles = {
-            'page-main': 'Основные сведения',
-            'page-structure': 'Структура и органы управления',
-            'page-docs': 'Документы',
-            'page-education': 'Образование',
-            'page-standards': 'Образовательные стандарты',
-            'page-staff': 'Руководство. Педагогический состав',
-            'page-facilities': 'Материально-техническое обеспечение',
-            'page-scholarships': 'Стипендии и иные виды материальной поддержки',
-            'page-paid-services': 'Платные образовательные услуги',
-            'page-finance': 'Финансово-хозяйственная деятельность',
-            'page-accessible': 'Доступная среда',
-            'page-international': 'Международное сотрудничество'
-        };
-
-        function switchPage(pageId) {
-            if (!pageId || !pages[pageId]) return;
-
-            Object.values(pages).forEach(p => {
-                if (p) p.classList.remove('is-active');
-            });
-            if (pages[pageId]) pages[pageId].classList.add('is-active');
-
-            if (titles[pageId]) pageTitle.textContent = titles[pageId];
-
-            document.querySelectorAll('.dropdown-content a, .mobile-submenu a').forEach(l => {
-                l.classList.toggle('is-current', l.dataset.page === pageId);
-            });
-
-            if (history.pushState) {
-                history.pushState(null, '', '#' + pageId);
-            }
-        }
-
-        menuLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const pageId = link.dataset.page;
-                if (pageId) {
-                    switchPage(pageId);
-                    if (navMobile.classList.contains('is-open')) {
-                        closeMenu();
-                    }
-                }
-            });
-        });
-
-        function restoreFromHash() {
-            const hash = window.location.hash.replace('#', '');
-            if (hash && pages[hash]) {
-                switchPage(hash);
-            } else {
-                switchPage('page-main');
-            }
-        }
-
-        window.addEventListener('popstate', restoreFromHash);
-        restoreFromHash();
-
-        const header = document.getElementById('siteHeader');
-        const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
-        onScroll();
-        window.addEventListener('scroll', onScroll, { passive: true });
-
-    })();
-</script>
-
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">-->
+<!--    <title>Основные сведения — Институт международных связей и делового сотрудничества</title>-->
+<!--    <link rel="canonical" href="https://example.com/basic_information.html">-->
+<!--    <meta name="robots" content="index, follow">-->
+
+<!--    <link rel="preconnect" href="https://fonts.googleapis.com">-->
+<!--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
+
+<!--    <style>-->
+<!--        @import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Oswald:wght@400;500;600;700&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');-->
+
+<!--        :root{-->
+<!--            &#45;&#45;bg-0:#0e0f0a;-->
+<!--            &#45;&#45;bg-1:#15160f;-->
+<!--            &#45;&#45;bg-2:#1c1d15;-->
+<!--            &#45;&#45;bg-3:#24261b;-->
+<!--            &#45;&#45;olive:#454a2f;-->
+<!--            &#45;&#45;olive-deep:#2b2e1d;-->
+<!--            &#45;&#45;brass:#c69a4a;-->
+<!--            &#45;&#45;brass-bright:#e6bb6a;-->
+<!--            &#45;&#45;brass-dim:#8a6c34;-->
+<!--            &#45;&#45;steel:#9a9c8f;-->
+<!--            &#45;&#45;steel-dim:#6c6e61;-->
+<!--            &#45;&#45;paper:#eee7d6;-->
+<!--            &#45;&#45;ink:#efe9da;-->
+<!--            &#45;&#45;ink-dim:#c9c4b2;-->
+<!--            &#45;&#45;danger:#a3392c;-->
+<!--            &#45;&#45;line:rgba(198,154,74,.22);-->
+<!--            &#45;&#45;line-soft:rgba(238,231,214,.10);-->
+
+<!--            &#45;&#45;f-display:'Russo One', 'Oswald', sans-serif;-->
+<!--            &#45;&#45;f-head:'Oswald', sans-serif;-->
+<!--            &#45;&#45;f-body:'PT Sans', sans-serif;-->
+<!--            &#45;&#45;f-mono:'JetBrains Mono', monospace;-->
+
+<!--            &#45;&#45;radius:2px;-->
+<!--            &#45;&#45;ease:cubic-bezier(.16,.8,.2,1);-->
+<!--            &#45;&#45;shadow-lg:0 30px 60px -20px rgba(0,0,0,.6);-->
+<!--            &#45;&#45;container:1240px;-->
+<!--        }-->
+
+<!--        *,*::before,*::after{box-sizing:border-box;}-->
+<!--        html{scroll-behavior:smooth;}-->
+<!--        @media (prefers-reduced-motion:reduce){-->
+<!--            html{scroll-behavior:auto;}-->
+<!--            *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}-->
+<!--        }-->
+
+<!--        body{-->
+<!--            margin:0;-->
+<!--            padding-top: 70px;-->
+<!--            background:var(&#45;&#45;bg-0);-->
+<!--            color:var(&#45;&#45;ink);-->
+<!--            font-family:var(&#45;&#45;f-body);-->
+<!--            font-size:16px;-->
+<!--            line-height:1.6;-->
+<!--            -webkit-font-smoothing:antialiased;-->
+<!--            overflow-x:hidden;-->
+<!--        }-->
+
+<!--        img{max-width:100%;display:block;}-->
+<!--        a{color:inherit;text-decoration:none;}-->
+<!--        ul{margin:0;padding:0;list-style:none;}-->
+<!--        button{font-family:inherit;cursor:pointer;}-->
+<!--        input,textarea,select{font-family:inherit;}-->
+
+<!--        :focus-visible{outline:2px solid var(&#45;&#45;brass-bright);outline-offset:3px;}-->
+
+<!--        .container{-->
+<!--            width:100%;-->
+<!--            max-width:var(&#45;&#45;container);-->
+<!--            margin:0 auto;-->
+<!--            padding:0 24px;-->
+<!--        }-->
+
+<!--        h1,h2,h3,.h1,.h2,.h3{-->
+<!--            font-family:var(&#45;&#45;f-display);-->
+<!--            font-weight:400;-->
+<!--            letter-spacing:.01em;-->
+<!--            margin:0;-->
+<!--            color:var(&#45;&#45;paper);-->
+<!--            text-transform:uppercase;-->
+<!--        }-->
+<!--        h1,.h1{font-size:clamp(2.6rem,7vw,5.6rem);line-height:.98;}-->
+<!--        h2,.h2{font-size:clamp(1.9rem,4.4vw,3.2rem);line-height:1.02;}-->
+<!--        h3,.h3{font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.15;}-->
+
+<!--        p{margin:0 0 1em;color:var(&#45;&#45;ink-dim);}-->
+<!--        p:last-child{margin-bottom:0;}-->
+
+<!--        .eyebrow{-->
+<!--            font-family:var(&#45;&#45;f-mono);-->
+<!--            font-size:.78rem;-->
+<!--            letter-spacing:.24em;-->
+<!--            text-transform:uppercase;-->
+<!--            color:var(&#45;&#45;brass);-->
+<!--            display:inline-flex;-->
+<!--            align-items:center;-->
+<!--            gap:.6em;-->
+<!--            margin-bottom:1em;-->
+<!--        }-->
+<!--        .eyebrow::before{-->
+<!--            content:'';-->
+<!--            width:26px;height:1px;-->
+<!--            background:var(&#45;&#45;brass);-->
+<!--            display:inline-block;-->
+<!--        }-->
+
+<!--        .lede{-->
+<!--            font-family:var(&#45;&#45;f-head);-->
+<!--            font-weight:400;-->
+<!--            font-size:1.15rem;-->
+<!--            color:var(&#45;&#45;steel);-->
+<!--            max-width:56ch;-->
+<!--        }-->
+
+<!--        .btn{-->
+<!--            &#45;&#45;btn-fg:var(&#45;&#45;bg-0);-->
+<!--            &#45;&#45;btn-bg:var(&#45;&#45;brass);-->
+<!--            display:inline-flex;-->
+<!--            align-items:center;-->
+<!--            gap:.6em;-->
+<!--            font-family:var(&#45;&#45;f-head);-->
+<!--            font-weight:600;-->
+<!--            font-size:.92rem;-->
+<!--            letter-spacing:.06em;-->
+<!--            text-transform:uppercase;-->
+<!--            padding:.95em 1.7em;-->
+<!--            background:var(&#45;&#45;btn-bg);-->
+<!--            color:var(&#45;&#45;btn-fg);-->
+<!--            border:1px solid var(&#45;&#45;btn-bg);-->
+<!--            border-radius:var(&#45;&#45;radius);-->
+<!--            transition:transform .25s var(&#45;&#45;ease), background .25s, color .25s, box-shadow .25s;-->
+<!--            position:relative;-->
+<!--        }-->
+<!--        .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(198,154,74,.45);}-->
+<!--        .btn:active{transform:translateY(0);}-->
+<!--        .btn svg{width:1em;height:1em;transition:transform .3s var(&#45;&#45;ease);}-->
+<!--        .btn:hover svg{transform:translateX(3px);}-->
+
+<!--        .btn&#45;&#45;ghost{-->
+<!--            &#45;&#45;btn-bg:transparent;-->
+<!--            &#45;&#45;btn-fg:var(&#45;&#45;paper);-->
+<!--            border-color:var(&#45;&#45;line);-->
+<!--        }-->
+<!--        .btn&#45;&#45;ghost:hover{border-color:var(&#45;&#45;brass);background:rgba(198,154,74,.08);box-shadow:none;}-->
+
+<!--        .btn&#45;&#45;line{-->
+<!--            &#45;&#45;btn-bg:transparent;-->
+<!--            &#45;&#45;btn-fg:var(&#45;&#45;brass);-->
+<!--            border:none;-->
+<!--            padding:.3em 0;-->
+<!--            border-bottom:1px solid var(&#45;&#45;brass-dim);-->
+<!--            border-radius:0;-->
+<!--        }-->
+<!--        .btn&#45;&#45;line:hover{border-color:var(&#45;&#45;brass-bright);box-shadow:none;transform:none;color:var(&#45;&#45;brass-bright);}-->
+
+<!--        .btn&#45;&#45;sm{padding:.6em 1.1em;font-size:.78rem;}-->
+<!--        .btn&#45;&#45;danger{&#45;&#45;btn-bg:var(&#45;&#45;danger);border-color:var(&#45;&#45;danger);}-->
+<!--        .btn[disabled]{opacity:.45;pointer-events:none;}-->
+
+<!--        .frame{-->
+<!--            position:relative;-->
+<!--            background:-->
+<!--                    linear-gradient(var(&#45;&#45;brass),var(&#45;&#45;brass)) top left / 22px 2px no-repeat,-->
+<!--                    linear-gradient(var(&#45;&#45;brass),var(&#45;&#45;brass)) top left / 2px 22px no-repeat,-->
+<!--                    linear-gradient(var(&#45;&#45;brass),var(&#45;&#45;brass)) top right / 22px 2px no-repeat,-->
+<!--                    linear-gradient(var(&#45;&#45;brass),var(&#45;&#45;brass)) top right / 2px 22px no-repeat,-->
+<!--                    linear-gradient(var(&#45;&#45;brass),var(&#45;&#45;brass)) bottom left / 22px 2px no-repeat,-->
+<!--                    linear-gradient(var(&#45;&#45;brass),var(&#45;&#45;brass)) bottom left / 2px 22px no-repeat,-->
+<!--                    linear-gradient(var(&#45;&#45;brass),var(&#45;&#45;brass)) bottom right / 22px 2px no-repeat,-->
+<!--                    linear-gradient(var(&#45;&#45;brass),var(&#45;&#45;brass)) bottom right / 2px 22px no-repeat;-->
+<!--            background-color:transparent;-->
+<!--            padding:2px;-->
+<!--        }-->
+<!--        .frame > *{padding:1.4em;}-->
+<!--        .frame&#45;&#45;dim{opacity:.55;}-->
+
+
+<!--        .site-header{-->
+<!--            position:fixed;-->
+<!--            inset:0 0 auto 0;-->
+<!--            z-index:100;-->
+<!--            display:flex;-->
+<!--            align-items:center;-->
+<!--            justify-content:space-between;-->
+<!--            padding:16px 28px;-->
+<!--            transition:background .35s var(&#45;&#45;ease), padding .35s var(&#45;&#45;ease), border-color .35s;-->
+<!--            border-bottom:1px solid transparent;-->
+<!--            min-height:70px;-->
+<!--            background:rgba(14,15,10,.95);-->
+<!--            backdrop-filter:blur(10px);-->
+<!--        }-->
+<!--        .site-header.is-scrolled{-->
+<!--            padding:10px 28px;-->
+<!--            border-color:var(&#45;&#45;line);-->
+<!--        }-->
+
+<!--        .logo{-->
+<!--            display:flex;-->
+<!--            align-items:center;-->
+<!--            gap:.6em;-->
+<!--            font-family:var(&#45;&#45;f-display);-->
+<!--            font-size:clamp(1rem, 2.5vw, 1.35rem);-->
+<!--            letter-spacing:.04em;-->
+<!--            color:var(&#45;&#45;paper);-->
+<!--            flex-shrink:0;-->
+<!--        }-->
+<!--        .logo .logo-mark{-->
+<!--            width:clamp(28px, 4vw, 34px);-->
+<!--            height:clamp(28px, 4vw, 34px);-->
+<!--            display:grid;-->
+<!--            place-items:center;-->
+<!--            border:1px solid var(&#45;&#45;brass);-->
+<!--            border-radius:50%;-->
+<!--            position:relative;-->
+<!--            flex:none;-->
+<!--        }-->
+<!--        .logo .logo-mark::before,.logo .logo-mark::after{-->
+<!--            content:'';position:absolute;background:var(&#45;&#45;brass);-->
+<!--        }-->
+<!--        .logo .logo-mark::before{width:50%;height:1px;top:50%;left:50%;transform:translate(-50%,-50%);}-->
+<!--        .logo .logo-mark::after{width:1px;height:50%;top:50%;left:50%;transform:translate(-50%,-50%);}-->
+<!--        .logo .logo-mark i{width:4px;height:4px;border-radius:50%;background:var(&#45;&#45;brass-bright);}-->
+<!--        .logo small{-->
+<!--            display:block;-->
+<!--            font-family:var(&#45;&#45;f-mono);-->
+<!--            font-size:.5rem;-->
+<!--            letter-spacing:.18em;-->
+<!--            color:var(&#45;&#45;steel-dim);-->
+<!--            text-transform:uppercase;-->
+<!--            margin-top:2px;-->
+<!--        }-->
+
+<!--        .dropdown {-->
+<!--            position: relative;-->
+<!--            display: inline-block;-->
+<!--        }-->
+<!--        .dropdown-content {-->
+<!--            display: none;-->
+<!--            position: absolute;-->
+<!--            background-color: var(&#45;&#45;bg-1);-->
+<!--            min-width: 260px;-->
+<!--            box-shadow: var(&#45;&#45;shadow-lg);-->
+<!--            border: 1px solid var(&#45;&#45;line);-->
+<!--            z-index: 1000;-->
+<!--            padding: 8px 0;-->
+<!--            top: 100%;-->
+<!--            left: 0;-->
+<!--        }-->
+<!--        .dropdown-content a {-->
+<!--            color: var(&#45;&#45;ink-dim);-->
+<!--            padding: 10px 20px;-->
+<!--            text-decoration: none;-->
+<!--            display: block;-->
+<!--            font-family: var(&#45;&#45;f-head);-->
+<!--            font-size: .86rem;-->
+<!--            letter-spacing: .05em;-->
+<!--            text-transform:uppercase;-->
+<!--            transition: background .2s, color .2s;-->
+<!--        }-->
+<!--        .dropdown-content a:hover {-->
+<!--            background: var(&#45;&#45;bg-2);-->
+<!--            color: var(&#45;&#45;paper);-->
+<!--        }-->
+<!--        .dropdown-content a.is-current {-->
+<!--            color: var(&#45;&#45;brass-bright);-->
+<!--        }-->
+<!--        .nav-desktop .dropdown:hover .dropdown-content {-->
+<!--            display: block;-->
+<!--        }-->
+
+<!--        .nav-desktop{-->
+<!--            display:flex;-->
+<!--            align-items:center;-->
+<!--            gap:clamp(0.8em, 2vw, 2.2em);-->
+<!--        }-->
+<!--        .nav-desktop > a, .nav-desktop .dropdown > span {-->
+<!--            font-family:var(&#45;&#45;f-head);-->
+<!--            font-size:clamp(.72rem, 1.2vw, .86rem);-->
+<!--            letter-spacing:.05em;-->
+<!--            text-transform:uppercase;-->
+<!--            color:var(&#45;&#45;ink-dim);-->
+<!--            position:relative;-->
+<!--            padding:.3em 0;-->
+<!--            transition:color .25s;-->
+<!--            cursor: pointer;-->
+<!--            background: none;-->
+<!--            border: none;-->
+<!--        }-->
+<!--        .nav-desktop > a::after, .nav-desktop .dropdown > span::after {-->
+<!--            content:'';position:absolute;left:0;right:100%;bottom:-2px;height:1px;background:var(&#45;&#45;brass);-->
+<!--            transition:right .3s var(&#45;&#45;ease);-->
+<!--        }-->
+<!--        .nav-desktop > a:hover, .nav-desktop .dropdown:hover > span {-->
+<!--            color:var(&#45;&#45;paper);-->
+<!--        }-->
+<!--        .nav-desktop > a:hover::after, .nav-desktop .dropdown:hover > span::after {-->
+<!--            right:0;-->
+<!--        }-->
+<!--        .nav-desktop > a.is-current, .nav-desktop .dropdown > span.is-current {-->
+<!--            color:var(&#45;&#45;brass-bright);-->
+<!--        }-->
+<!--        .nav-desktop > a.is-current::after, .nav-desktop .dropdown > span.is-current::after {-->
+<!--            right:0;-->
+<!--        }-->
+
+<!--        .header-cta{-->
+<!--            display:flex;-->
+<!--            align-items:center;-->
+<!--            gap:1em;-->
+<!--            flex-shrink:0;-->
+<!--        }-->
+<!--        .admin-link{-->
+<!--            font-family:var(&#45;&#45;f-mono);-->
+<!--            font-size:.72rem;-->
+<!--            letter-spacing:.1em;-->
+<!--            color:var(&#45;&#45;steel-dim);-->
+<!--            display:flex;align-items:center;gap:.4em;-->
+<!--            transition:color .25s;-->
+<!--        }-->
+<!--        .admin-link:hover{color:var(&#45;&#45;brass);}-->
+
+<!--        .burger{-->
+<!--            display:none;-->
+<!--            width:42px;height:42px;-->
+<!--            border:1px solid var(&#45;&#45;line);-->
+<!--            background:transparent;-->
+<!--            border-radius:var(&#45;&#45;radius);-->
+<!--            position:relative;-->
+<!--            flex:none;-->
+<!--            cursor:pointer;-->
+<!--        }-->
+<!--        .burger span,.burger span::before,.burger span::after{-->
+<!--            content:'';position:absolute;left:11px;right:11px;height:1px;background:var(&#45;&#45;paper);transition:transform .3s var(&#45;&#45;ease),opacity .2s;-->
+<!--        }-->
+<!--        .burger span{top:50%;transform:translateY(-50%);}-->
+<!--        .burger span::before{top:-7px;}-->
+<!--        .burger span::after{top:7px;}-->
+<!--        .burger.is-open span{background:transparent;}-->
+<!--        .burger.is-open span::before{top:0;transform:rotate(45deg);}-->
+<!--        .burger.is-open span::after{top:0;transform:rotate(-45deg);}-->
+
+<!--        .nav-mobile{-->
+<!--            position:fixed;-->
+<!--            inset:0;-->
+<!--            background:var(&#45;&#45;bg-0);-->
+<!--            z-index:99;-->
+<!--            display:flex;-->
+<!--            flex-direction:column;-->
+<!--            justify-content:flex-start;-->
+<!--            padding:90px 24px 40px;-->
+<!--            transform:translateY(-100%);-->
+<!--            transition:transform .45s var(&#45;&#45;ease);-->
+<!--            overflow-y:auto;-->
+<!--        }-->
+<!--        .nav-mobile.is-open{transform:translateY(0);}-->
+<!--        .nav-mobile > a {-->
+<!--            font-family:var(&#45;&#45;f-display);-->
+<!--            font-size:clamp(1.4rem, 4vw, 1.8rem);-->
+<!--            color:var(&#45;&#45;paper);-->
+<!--            padding:.4em 0;-->
+<!--            border-bottom:1px solid var(&#45;&#45;line-soft);-->
+<!--            text-transform:uppercase;-->
+<!--            cursor:pointer;-->
+<!--            transition:color .2s;-->
+<!--        }-->
+<!--        .nav-mobile > a:hover {-->
+<!--            color:var(&#45;&#45;brass-bright);-->
+<!--        }-->
+
+<!--        .nav-mobile .has-children {-->
+<!--            cursor: pointer;-->
+<!--            user-select: none;-->
+<!--            display:flex;-->
+<!--            align-items:center;-->
+<!--            justify-content:space-between;-->
+<!--            font-family:var(&#45;&#45;f-display);-->
+<!--            font-size:clamp(1.4rem, 4vw, 1.8rem);-->
+<!--            color:var(&#45;&#45;paper);-->
+<!--            padding:.4em 0;-->
+<!--            border-bottom:1px solid var(&#45;&#45;line-soft);-->
+<!--            text-transform:uppercase;-->
+<!--            transition:color .2s;-->
+<!--        }-->
+<!--        .nav-mobile .has-children:hover {-->
+<!--            color:var(&#45;&#45;brass-bright);-->
+<!--        }-->
+<!--        .nav-mobile .has-children .toggle-icon {-->
+<!--            font-size:1.2rem;-->
+<!--            transition:transform .3s ease;-->
+<!--            display:inline-block;-->
+<!--            padding-left:10px;-->
+<!--            flex-shrink:0;-->
+<!--        }-->
+<!--        .nav-mobile .has-children.is-open .toggle-icon {-->
+<!--            transform:rotate(180deg);-->
+<!--        }-->
+
+<!--        .mobile-submenu {-->
+<!--            display: none;-->
+<!--            flex-direction: column;-->
+<!--            width: 100%;-->
+<!--            padding: 8px 0 12px 0;-->
+<!--            border-bottom: 1px solid var(&#45;&#45;line-soft);-->
+<!--            margin-bottom: 4px;-->
+<!--        }-->
+
+<!--        .nav-mobile.is-open .mobile-submenu.is-open {-->
+<!--            display: flex;-->
+<!--        }-->
+
+<!--        .mobile-submenu a {-->
+<!--            font-size: 0.85rem !important;-->
+<!--            font-family: var(&#45;&#45;f-head);-->
+<!--            text-transform: uppercase;-->
+<!--            letter-spacing: 0.06em;-->
+<!--            padding: 6px 0 6px 16px !important;-->
+<!--            border-bottom: none !important;-->
+<!--            color: var(&#45;&#45;ink-dim);-->
+<!--            transition: color .2s, padding-left .2s;-->
+<!--        }-->
+
+<!--        .mobile-submenu a:hover,-->
+<!--        .mobile-submenu a.is-current {-->
+<!--            color: var(&#45;&#45;brass-bright) !important;-->
+<!--            padding-left: 24px !important;-->
+<!--        }-->
+
+<!--        .mobile-submenu a:first-child {-->
+<!--            padding-top: 8px !important;-->
+<!--        }-->
+
+<!--        .mobile-submenu a:last-child {-->
+<!--            padding-bottom: 4px !important;-->
+<!--        }-->
+
+<!--        @media (max-width: 900px){-->
+<!--            .nav-desktop, .header-cta { display: none; }-->
+<!--            .burger { display: block; }-->
+<!--            .site-header{-->
+<!--                padding: 12px 16px;-->
+<!--                min-height: 64px;-->
+<!--            }-->
+<!--            body{-->
+<!--                padding-top: 64px;-->
+<!--            }-->
+<!--            .logo{-->
+<!--                max-width: calc(100vw - 90px);-->
+<!--                font-size: clamp(0.85rem, 2.5vw, 1.1rem);-->
+<!--            }-->
+<!--            .logo .logo-mark {-->
+<!--                width: clamp(24px, 4vw, 30px);-->
+<!--                height: clamp(24px, 4vw, 30px);-->
+<!--            }-->
+<!--            .info-section {-->
+<!--                padding: 80px 0 60px;-->
+<!--            }-->
+<!--            .info-block {-->
+<!--                padding: 16px 18px;-->
+<!--            }-->
+<!--            .info-block .value {-->
+<!--                font-size: 0.92rem;-->
+<!--            }-->
+<!--            .facility-images {-->
+<!--                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));-->
+<!--                gap: 8px;-->
+<!--            }-->
+<!--            .container {-->
+<!--                padding: 0 16px;-->
+<!--            }-->
+<!--            h1, .h1 {-->
+<!--                font-size: clamp(2rem, 5vw, 3rem);-->
+<!--            }-->
+<!--        }-->
+
+<!--        @media (max-width: 480px) {-->
+<!--            .logo small {-->
+<!--                font-size: 0.4rem;-->
+<!--            }-->
+<!--            .info-block {-->
+<!--                padding: 12px 14px;-->
+<!--            }-->
+<!--            .info-block .label {-->
+<!--                font-size: 0.65rem;-->
+<!--            }-->
+<!--            .info-block .value {-->
+<!--                font-size: 0.85rem;-->
+<!--            }-->
+<!--            .facility-images {-->
+<!--                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));-->
+<!--            }-->
+<!--            .mobile-submenu a {-->
+<!--                font-size: 0.75rem !important;-->
+<!--                padding: 5px 0 5px 12px !important;-->
+<!--            }-->
+<!--            .mobile-submenu a:hover,-->
+<!--            .mobile-submenu a.is-current {-->
+<!--                padding-left: 18px !important;-->
+<!--            }-->
+<!--            .nav-mobile {-->
+<!--                padding: 80px 16px 30px;-->
+<!--            }-->
+<!--            .nav-mobile > a,-->
+<!--            .nav-mobile .has-children {-->
+<!--                font-size: clamp(1.1rem, 3.5vw, 1.4rem);-->
+<!--            }-->
+<!--        }-->
+
+<!--        .info-section { padding: 120px 0 80px; }-->
+<!--        .info-grid { display: grid; gap: 16px; }-->
+<!--        .info-block {-->
+<!--            background: var(&#45;&#45;bg-1);-->
+<!--            border: 1px solid var(&#45;&#45;line);-->
+<!--            padding: 20px 24px;-->
+<!--            overflow-wrap: break-word;-->
+<!--            word-break: break-word;-->
+<!--        }-->
+<!--        .info-block .label {-->
+<!--            font-family: var(&#45;&#45;f-mono);-->
+<!--            font-size: .72rem;-->
+<!--            letter-spacing: .1em;-->
+<!--            text-transform: uppercase;-->
+<!--            color: var(&#45;&#45;brass);-->
+<!--            display: block;-->
+<!--            margin-bottom: 6px;-->
+<!--        }-->
+<!--        .info-block .value {-->
+<!--            font-size: 1rem;-->
+<!--            color: var(&#45;&#45;paper);-->
+<!--            margin: 0;-->
+<!--        }-->
+<!--        .info-block .value a {-->
+<!--            color: var(&#45;&#45;brass-bright);-->
+<!--            transition: color .2s;-->
+<!--        }-->
+<!--        .info-block .value a:hover { color: var(&#45;&#45;paper); }-->
+<!--        .info-block hr {-->
+<!--            border: 0;-->
+<!--            border-top: 1px solid var(&#45;&#45;line-soft);-->
+<!--            margin: 12px 0;-->
+<!--        }-->
+<!--        @media (max-width: 700px) { .info-section { padding: 80px 0 50px; } }-->
+<!--        .eyebrow + h2 { margin-top: -0.2em; }-->
+
+<!--        .info-page { display: none; }-->
+<!--        .info-page.is-active { display: block; }-->
+
+<!--        .pdf-link {-->
+<!--            display: inline-block;-->
+<!--            margin-top: 8px;-->
+<!--            font-family: var(&#45;&#45;f-mono);-->
+<!--            font-size: .78rem;-->
+<!--            color: var(&#45;&#45;brass);-->
+<!--            border-bottom: 1px solid var(&#45;&#45;brass-dim);-->
+<!--            padding-bottom: 2px;-->
+<!--            transition: color .2s, border-color .2s;-->
+<!--        }-->
+<!--        .pdf-link:hover {-->
+<!--            color: var(&#45;&#45;brass-bright);-->
+<!--            border-color: var(&#45;&#45;brass-bright);-->
+<!--        }-->
+
+<!--        .inn-img {-->
+<!--            max-width: 100%;-->
+<!--            border: 1px solid var(&#45;&#45;line-soft);-->
+<!--            margin-top: 8px;-->
+<!--            border-radius: var(&#45;&#45;radius);-->
+<!--        }-->
+
+<!--        .doc-sublist {-->
+<!--            margin-top: 10px;-->
+<!--            padding-left: 12px;-->
+<!--            border-left: 1px solid var(&#45;&#45;brass-dim);-->
+<!--        }-->
+<!--        .doc-sublist li {-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+<!--        .doc-sublist li .label {-->
+<!--            color: var(&#45;&#45;steel);-->
+<!--            font-size: .82rem;-->
+<!--            margin-bottom: 2px;-->
+<!--        }-->
+<!--        .doc-sublist li .value {-->
+<!--            font-size: .92rem;-->
+<!--            color: var(&#45;&#45;paper);-->
+<!--        }-->
+<!--        .doc-sublist li .value a {-->
+<!--            color: var(&#45;&#45;brass-bright);-->
+<!--        }-->
+<!--        .doc-sublist li .value a:hover {-->
+<!--            color: var(&#45;&#45;paper);-->
+<!--        }-->
+<!--        .doc-sublist li .pdf-link {-->
+<!--            margin-top: 4px;-->
+<!--        }-->
+
+<!--        .facility-images {-->
+<!--            display: grid;-->
+<!--            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));-->
+<!--            gap: 12px;-->
+<!--            margin-top: 12px;-->
+<!--        }-->
+<!--        .facility-images img {-->
+<!--            width: 100%;-->
+<!--            height: auto;-->
+<!--            border: 1px solid var(&#45;&#45;line-soft);-->
+<!--            border-radius: var(&#45;&#45;radius);-->
+<!--            object-fit: cover;-->
+<!--            aspect-ratio: 4/3;-->
+<!--        }-->
+<!--        @media (max-width: 500px) {-->
+<!--            .facility-images {-->
+<!--                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));-->
+<!--            }-->
+<!--        }-->
+
+<!--        .info-page .container-limited {-->
+<!--            max-width: 1000px;-->
+<!--            margin-left: 24px;-->
+<!--            margin-right: auto;-->
+<!--        }-->
+<!--        @media (max-width: 700px) {-->
+<!--            .info-page .container-limited {-->
+<!--                margin-left: 0;-->
+<!--                margin-right: 0;-->
+<!--            }-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<header class="site-header" id="siteHeader">-->
+<!--    <a href="/" class="logo">-->
+<!--        <span class="logo-mark"><i></i></span>-->
+<!--        <span>Институт международных связей и делового сотрудничества<small>· Сыктывкар</small></span>-->
+<!--    </a>-->
+
+<!--    <nav class="nav-desktop">-->
+<!--        <a href="/">Объявления</a>-->
+
+<!--        <div class="dropdown">-->
+<!--            <span class="is-current">Основные сведения</span>-->
+<!--            <div class="dropdown-content">-->
+<!--                <a href="#page-main" data-page="page-main">Основные сведения</a>-->
+<!--                <a href="#page-structure" data-page="page-structure">Структура и органы управления</a>-->
+<!--                <a href="#page-docs" data-page="page-docs">Документы</a>-->
+<!--                <a href="#page-education" data-page="page-education">Образование</a>-->
+<!--                <a href="#page-standards" data-page="page-standards">Образовательные стандарты</a>-->
+<!--                <a href="#page-staff" data-page="page-staff">Руководство. Педагогический состав</a>-->
+<!--                <a href="#page-facilities" data-page="page-facilities">Материально-техническое обеспечение</a>-->
+<!--                <a href="#page-scholarships" data-page="page-scholarships">Стипендии и иные виды материальной поддержки</a>-->
+<!--                <a href="#page-paid-services" data-page="page-paid-services">Платные образовательные услуги</a>-->
+<!--                <a href="#page-finance" data-page="page-finance">Финансово-хозяйственная деятельность</a>-->
+<!--                <a href="#page-accessible" data-page="page-accessible">Доступная среда</a>-->
+<!--                <a href="#page-international" data-page="page-international">Международное сотрудничество</a>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <a href="/#page-about">О нас</a>-->
+<!--        <a href="/#page-materials">Методички</a>-->
+<!--        <a href="/#page-vacancies">Вакансии</a>-->
+<!--        <a href="/#page-reviews">Отзывы</a>-->
+<!--    </nav>-->
+
+<!--    <div class="header-cta">-->
+<!--        <a href="/admin" class="admin-link">Панель</a>-->
+<!--        <a href="/#page-about" class="btn btn&#45;&#45;ghost btn&#45;&#45;sm">Записаться</a>-->
+<!--    </div>-->
+
+<!--    <button class="burger" id="burger" aria-label="Меню"><span></span></button>-->
+<!--</header>-->
+
+<!--<nav class="nav-mobile" id="navMobile">-->
+<!--    <div class="has-children" id="mobileMainLink">-->
+<!--        <span>Основные сведения</span>-->
+<!--        <span class="toggle-icon">▾</span>-->
+<!--    </div>-->
+<!--    <div class="mobile-submenu" id="mobileSubmenu">-->
+<!--        <a href="#page-main" data-page="page-main">Основные сведения</a>-->
+<!--        <a href="#page-structure" data-page="page-structure">Структура и органы управления</a>-->
+<!--        <a href="#page-docs" data-page="page-docs">Документы</a>-->
+<!--        <a href="#page-education" data-page="page-education">Образование</a>-->
+<!--        <a href="#page-standards" data-page="page-standards">Образовательные стандарты</a>-->
+<!--        <a href="#page-staff" data-page="page-staff">Руководство. Педагогический состав</a>-->
+<!--        <a href="#page-facilities" data-page="page-facilities">Материально-техническое обеспечение</a>-->
+<!--        <a href="#page-scholarships" data-page="page-scholarships">Стипендии и иные виды материальной поддержки</a>-->
+<!--        <a href="#page-paid-services" data-page="page-paid-services">Платные образовательные услуги</a>-->
+<!--        <a href="#page-finance" data-page="page-finance">Финансово-хозяйственная деятельность</a>-->
+<!--        <a href="#page-accessible" data-page="page-accessible">Доступная среда</a>-->
+<!--        <a href="#page-international" data-page="page-international">Международное сотрудничество</a>-->
+<!--    </div>-->
+
+<!--    <a href="/">Объявления</a>-->
+<!--    <a href="/#page-about">О нас</a>-->
+<!--    <a href="/#page-materials">Методички</a>-->
+<!--    <a href="/#page-vacancies">Вакансии</a>-->
+<!--    <a href="/#page-reviews">Отзывы</a>-->
+<!--</nav>-->
+
+<!--<main>-->
+<!--    <section class="info-section">-->
+<!--        <div class="container">-->
+<!--            <div class="eyebrow">Сведения об организации</div>-->
+<!--            <h1 id="pageTitle">Основные сведения</h1>-->
+
+<!--            &lt;!&ndash; ================= СТРАНИЦА 1: ОСНОВНЫЕ СВЕДЕНИЯ ================= &ndash;&gt;-->
+<!--            <div id="page-main" class="info-page is-active">-->
+<!--                <div class="info-grid" style="margin-top: 40px;">-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Полное наименование</span>-->
+<!--                        <p class="value">Частное учреждение дополнительного профессионального образования "Институт международных связей и делового сотрудничества"</p>-->
+<!--                    </div>-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Сокращенное наименование</span>-->
+<!--                        <p class="value">ЧУ ДПО ИМДС</p>-->
+<!--                    </div>-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Дата создания</span>-->
+<!--                        <p class="value">Частное учреждение дополнительного профессионального образования «Институт международных связей и делового сотрудничества» создано в 10.01.2008г.</p>-->
+<!--                    </div>-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Учредители</span>-->
+<!--                        <p class="value">Учреждение создано:  Обществом с ограниченной ответственностью «Институт международных связей и делового сотрудничества».</p>-->
+<!--                        <hr>-->
+<!--                        <span class="label">Собственник учреждения</span>-->
+<!--                        <p class="value">Теплова Тамара Александровна</p>-->
+<!--                    </div>-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Представительства и филиалы</span>-->
+<!--                        <p class="value">Учреждение не имеет представительств и филиалов</p>-->
+<!--                    </div>-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Место нахождения, контакты</span>-->
+<!--                        <p class="value">Юридический адрес: 167004, Республика Коми, г. Сыктывкар, ул.Карла Маркса д. 228\3</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Адрес места нахождения: г. Сыктывкар, ул. Карла Маркса, д 228\3</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Телефон: 8-8212-314060</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Адрес электронной почты: tirkomi@yandex.ru</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Адрес официального сайта: <a href="https://tir-komi.onrender.com" target="_blank">http:\\tirkomi.ucoz.org</a></p>-->
+<!--                    </div>-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">График работы</span>-->
+<!--                        <p class="value">Понедельник - пятница с 9 час. 00 мин до 17 час. 00 мин</p>-->
+<!--                    </div>-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Места осуществления образовательной деятельности</span>-->
+<!--                        <p class="value">Образовательная деятельность по основным программам профессионального обучения, а также по дополнительным образовательным программам осуществляется по адресу: Республика Коми, г. Сыктывкар, ул. Карла Маркса, д. 228\3</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Практические занятия проводятся по месту осуществления образовательной деятельности. Практическая подготовка проходит на базе учреждения.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Сетевая форма реализации образовательных программ не используется. Учреждение осуществляет образовательный процесс самостоятельно.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Государственная итоговая аттестация реализуемых учреждением программ не предусмотрена.</p>-->
+<!--                    </div>-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">О лицензии на образовательную деятельность</span>-->
+<!--                        <p class="value">Образовательная деятельность осуществляется на основании Лицензии</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Выдана: Министерство образования, науки и молодежной политики Республики Коми № 1838-П от 17 февраля 2020 г.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Серия 11 Л 01 № 0002183 Срок действия: бессрочно</p>-->
+<!--                    </div>-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Режим учебных занятий</span>-->
+<!--                        <p class="value">Занятия проводятся в группах по расписанию каждой группы (устанавливается отдельно) в режиме работы учреждения. Академический час учебных занятий – 45 мин.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; ================= СТРАНИЦА 2: СТРУКТУРА И ОРГАНЫ УПРАВЛЕНИЯ ================= &ndash;&gt;-->
+<!--            <div id="page-structure" class="info-page">-->
+<!--                <div class="info-grid" style="margin-top: 40px;">-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Руководство</span>-->
+<!--                        <p class="value">Руководство Учреждением осуществляет Собственник.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Исполнительным органом Учреждения является Директор. Директор действует от имени Учреждения без доверенности, осуществляет текущее руководство деятельностью Учреждения и подотчётен Собственнику.</p>-->
+<!--                    </div>-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Коллегиальные органы управления</span>-->
+<!--                        <p class="value">В Учреждении формируются коллегиальные органы управления: педагогический совет из штатных педагогических работников и общее собрание работников образовательной организации, имеющие статус совещательных органов.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Положение о педагогическом совете</p>-->
+<!--                        <a href="/assets/polozhenie_o_pedagogicheskom_sovete.pdf" target="_blank" class="pdf-link">Скачать PDF</a>-->
+<!--                        <hr>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Положение об Общем собрании</p>-->
+<!--                        <a href="/assets/polozh_obshhee_sobr.pdf" target="_blank" class="pdf-link">Скачать PDF</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; ================= СТРАНИЦА 3: ДОКУМЕНТЫ ================= &ndash;&gt;-->
+<!--            <div id="page-docs" class="info-page">-->
+<!--                <div class="info-grid" style="margin-top: 40px;">-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Документы</span>-->
+<!--                        <p class="value">Федеральный закон "Об образовании в Российской Федерации" - <a href="https://www.consultant.ru/document/cons_doc_LAW_140174/" target="_blank">перейти на страницу</a></p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Федеральный закон "О некоммерческих организациях" - <a href="https://www.consultant.ru/document/cons_doc_LAW_8824/" target="_blank">перейти на страницу</a></p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Федеральный закон "Об оружии" - <a href="https://www.consultant.ru/document/Cons_doc_LAW_12679/" target="_blank">перейти на страницу</a></p>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Устав</span>-->
+<!--                        <p class="value">Устав образовательной организации</p>-->
+<!--                        <a href="/assets/podpisannyj_ustav_chu_dpo_imds.pdf" target="_blank" class="pdf-link">Скачать Устав</a>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Лицензия</span>-->
+<!--                        <p class="value">Лицензия на осуществление образовательной деятельности (с приложениями)</p>-->
+<!--                        <a href="/assets/licenzija_2020_goda.pdf" target="_blank" class="pdf-link">Скачать Лицензию</a>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Выписка ЕГРЮЛ</span>-->
+<!--                        <p class="value">Выписка из Единого государственного реестра юридических лиц</p>-->
+<!--                        <a href="/assets/egrjul_mart_2024.pdf" target="_blank" class="pdf-link">Скачать ЕГРЮЛ</a>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">ИНН Учредителя</span>-->
+<!--                        <p class="value">ИНН Учредителя</p>-->
+<!--                        <img src="/assets/98723580.jpg" alt="ИНН Учредителя" class="inn-img" style="max-height: 1000px; width: auto;">-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Свидетельства об аккредитации</span>-->
+<!--                        <p class="value">Свидетельства об аккредитации нет, т.к. данный вид деятельности не аккредитуется (учреждение не выдаёт документы государственного образца).</p>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Локальные нормативные акты</span>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Приказ об экзаменационной комиссии 2023</p>-->
+<!--                        <a href="/assets/izmenenie_v_ehkz_komis_nojabr_2023.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Правила внутреннего распорядка</p>-->
+<!--                        <a href="/assets/pravila_vnutr_raspor_obuchajushhikhsja.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Положение о профессиональном и дополнительном профессиональном образовании</p>-->
+<!--                        <a href="/assets/polozhenie_o_po_i_dpo_2023.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Положение о режиме занятий</p>-->
+<!--                        <a href="/assets/polozhenie_o_rezhime_zanjatij.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Положение о режиме обучения</p>-->
+<!--                        <a href="/assets/polozhenie_o_rezhime_obuchenija.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Правила внутреннего трудового распорядка</p>-->
+<!--                        <a href="/assets/pravila_vnutrennego_trudovogo_rasporjadka.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Правила приёма на обучение</p>-->
+<!--                        <a href="/assets/podpis_pravila_priema_2023.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Формы, периодичность и порядок текущего контроля успеваемости, промежуточной аттестации, итоговой аттестации обучающихся</p>-->
+<!--                        <a href="/assets/polozh_o_formakh_tekushh_kontr_attestacii.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Порядок и основания возникновения образовательных отношений, отчисления, восстановления</p>-->
+<!--                        <a href="/assets/polozh_o_voznikn_i_prekrashh_obrazovat_otnosh.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Положение о доступе к информационным сетям и др</p>-->
+<!--                        <a href="/assets/polozh_o_dostupe_k_inf-setjam_mat_tekh_sredstvam.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Положение о комиссии по урегулированию споров между участниками образовательных отношений</p>-->
+<!--                        <a href="/assets/polozhenie_o_komissii.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Положение об охране труда</p>-->
+<!--                        <a href="/assets/polozhenie_ob_okhrane_truda.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Инструкция по охране труда при проведении соревнований</p>-->
+<!--                        <a href="/assets/okhr_tr_pri_sorevnovanijakh.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Отчёт о результатах самообследования</span>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Отчёт о результатах самообследования за 2024 г</p>-->
+<!--                        <a href="/assets/akt_samoobsl_2024.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Отчёт о результатах самообследования за 2025 г</p>-->
+<!--                        <a href="/assets/akt_samoobsledovanija_za_2025_god_podpisan.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Документы о порядке оказания платных образовательных услуг</span>-->
+<!--                        <p class="value">Документы о порядке оказания платных образовательных услуг, в том числе: образец договора об оказании платных образовательных услуг, приказ об утверждении стоимости обучения по каждой образовательной программе</p>-->
+
+<!--                        <ul class="doc-sublist" style="margin-top: 12px; list-style: none;">-->
+<!--                            <li>-->
+<!--                                <div class="label">Платные образовательные услуги</div>-->
+<!--                                <div class="value">Платные образовательные услуги</div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <div class="label">Постановление Правительства РФ</div>-->
+<!--                                <div class="value">Постановление Правительства Российской Федерации от 15 августа 2013 г. №706 "Об утверждении Правил оказания платных образовательных услуг" - <a href="https://www.rg.ru/printable/2013/08/23/uslugi-dok.html" target="_blank">перейти по ссылке</a></div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <div class="label">Образец договора об оказании платных образовательных услуг</div>-->
+<!--                                <div class="value"><a href="/assets/tipovoj.pdf" target="_blank" class="pdf-link">Скачать</a></div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <div class="label">Положение об оказании платных образовательных услуг</div>-->
+<!--                                <div class="value"><a href="/assets/polozhenie_o_platnykh_obrazovatelnykh_uslugakh.pdf" target="_blank" class="pdf-link">Скачать</a></div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <div class="label">Прайс лист на 2024 год</div>-->
+<!--                                <div class="value"><a href="/assets/prajs_2024.pdf" target="_blank" class="pdf-link">Скачать</a></div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <div class="label">Прайс лист на образовательные услуги в 2025 году</div>-->
+<!--                                <div class="value"><a href="/assets/prajs_2025.pdf" target="_blank" class="pdf-link">Скачать</a></div>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Предписания органов, осуществляющих государственный контроль (надзор) в сфере образования </span>-->
+<!--                        <p class="value">Предписаний органов, осуществляющих государственный контроль (надзор) в сфере образования на дату 01.11.2023г. нет</p>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; ================= СТРАНИЦА 4: ОБРАЗОВАНИЕ ================= &ndash;&gt;-->
+<!--            <div id="page-education" class="info-page">-->
+<!--                <div class="info-grid" style="margin-top: 40px;">-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Образование</span>-->
+<!--                        <p class="value">Уровни образования</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">В учреждении создаются условия для реализации конституционного права граждан на профессиональное образование. Подвид – дополнительное профессиональное образование.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">В учреждении созданы условия для дополнительного образования.</p>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Формы обучения</span>-->
+<!--                        <p class="value">Обучение осуществляется в очной форме.</p>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Нормативный срок освоения</span>-->
+<!--                        <p class="value">По программе профессиональной подготовки:</p>-->
+<!--                        <p class="value">охранников 6 разряда - 80 часов;</p>-->
+<!--                        <p class="value">охранников 5 разряда - 60 часа;</p>-->
+<!--                        <p class="value">охранников 4 разряда - 40 часов;</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">По программе повышения квалификации:</p>-->
+<!--                        <p class="value">охранников 6 разряда - 20 часов;</p>-->
+<!--                        <p class="value">охранников 5 разряда - 16 часов;</p>-->
+<!--                        <p class="value">охранников 4 разряда - 8 часов;</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">По программе дополнительного образования</p>-->
+<!--                        <p class="value">Обучение, проверка знаний правил безопасного обращения с оружием - 6 часов</p>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Срок действия государственной аккредитации</span>-->
+<!--                        <p class="value">Свидетельства об аккредитации нет, т.к. данный вид деятельности не аккредитуется (учреждение не выдаёт документы государственного образца).</p>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Об языках, на которых осуществляется обучение</span>-->
+<!--                        <p class="value">Обучение осуществляется на русском языке</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Положение о языке обучения</p>-->
+<!--                        <a href="/assets/polozhenie_o_jazykakh_obuchenija.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">О направлениях и результатах научно-исследовательской деятельности</span>-->
+<!--                        <p class="value">Сотрудники учреждения научно-исследовательскую деятельность не осуществляют.</p>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Описание образовательной программы</span>-->
+<!--                        <p class="value">Учреждение реализует программы дополнительного образования, программы повышения квалификации, программы профессиональной подготовки.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Повышение квалификации:</p>-->
+<!--                        <p class="value">приобретение профессиональных навыков, самостоятельное обучение по индивидуальным программам, дистанционное обучение, обучение с помощью новейших достижений науки и техники, в том числе в области информационных технологий;повышение квалификации может осуществляться как тематическое обучение, тематические и проблемные семинары, длительное обучение для углубленного изучения актуальных проблем или</p>-->
+<!--                        <p class="value">повышение квалификации заканчивается сдачей соответствующего экзамена, защитой реферата или итоговой работы;</p>-->
+<!--                        <p class="value">после окончания повышения квалификации выдается удостоверение о краткосрочном повышении квалификации или свидетельство о повышении квалификации.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Профессиональная подготовка:</p>-->
+<!--                        <p class="value">длительное обучение по учебным программам, необходимым специалисту для выполнения нового вида профессиональной деятельности. Форма и сроки обучения устанавливаются в соответствии с целями обучения. Уровень образования специалистов, проходящих профессиональную подготовку, переподготовку должен быть не ниже уровня образования требуемого для нового вида профессиональной деятельности;</p>-->
+<!--                        <p class="value">профессиональная подготовка, переподготовка завершается итоговой аттестацией и выдачей документа о присвоении квалификации.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Дополнительное образование:</p>-->
+<!--                        <p class="value">удовлетворение образовательных потребностей граждан для расширения умений и навыков для личных потребностей</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Учебные предметы, курсы, дисциплины: правовая подготовка, тактико-специальная подготовка, техническая подготовка, использование специальных средств, оказание первой помощи, психологическая подготовка, огневая подготовка, физическая подготовка.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Образовательными программами предусмотрены практические занятия по стрельбе, практическое применение специальных средств, отработка приемов самообороны, отработка приемов и способов ведения наблюдения, выявления действий противоправной направленности, в том числе террористических угроз; освоение приемов оказания первой помощи. Виды и описание практики изложены в соответствующих разделах образовательных программ.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Учебные планы, календарные учебные графики, аннотации изложены в программах (прилагаются ниже)</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">В процессе обучения используется электронное обучение.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Дистанционные образовательные технологии не применяются.</p>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Учебный план и реализуемые образовательные программы</span>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Программа "Повышение квалификации охранников" (4,5,6 разряды)</p>-->
+<!--                        <a href="/assets/progr_pov_kval_okhr_2024.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Программа "Профессиональная подготовка охранников" (4,5,6 разряды)</p>-->
+<!--                        <a href="/assets/progr_obuch_okhr_2024.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Дополнительная образовательная программа подготовки лиц в целях изучения правил безопасного обращения с оружием и приобретения навыков безопасного обращения с оружием</p>-->
+<!--                        <a href="/assets/bezop_obrashh_s_oruzh_2023.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Перечень документов</span>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Перечень документов, необходимых для прохождения обучения по программе профессиональной подготовки по профессии "Охранник" (4, 5, 6 разряды) : заявление; анкета, копия паспорта; копия СНИЛС; медицинское заключение об отсутствии медицинских противопоказаний к исполнению обязанностей частного охранника формы № 002-ЧО\у; справка об отсутствии судимости</p>-->
+<!--                        <a href="/assets/perechen_dokumentov.docx" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Перечень документов, необходимых для прохождения обучения по программе повышения квалификации по профессии "Охранник" (4, 5, 6 разряды) : заявление; анкета, копия паспорта ; копия СНИЛС; копия действующего удостоверения охранника, медицинское заключение об отсутствии медицинских противопоказаний к исполнению обязанностей частного охранника формы № 002-ЧО\у; медицинское заключение об отсутствии противопоказаний для работы с оружием; справка об отсутствии судимости.</p>-->
+<!--                        <a href="/assets/perechen_dokumentov.docx" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Перечень документов, необходимых для прохождения обучения по программе подготовки граждан РФ в целях безопасного обращения с оружием и приобретения навыков безопасного обращения с оружием:</p>-->
+<!--                        <a href="/assets/perechen_dokumentov.docx" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+<!--                        <p class="value">- заявление; паспорт; СНИЛС; медицинское заключение об отсутствии медицинских противопоказаний к владению оружием форма №002-О\у; справка об отсутствии судимости; две фотографии размером 3х4 см матовые</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Перечень документов, необходимых для прохождения проверки знаний граждан РФ правил безопасного обращения с оружием (один раз в пять лет):</p>-->
+<!--                        <a href="/assets/perechen_dokumentov.docx" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                        <hr>-->
+<!--                        <p class="value">- заявление; паспорт; СНИЛС; медицинское заключение об отсутствии медицинских противопоказаний к владению оружием форма №002-О\у; разрешение (лицензия) на хранение (хранение и ношение) оружия срок действия которого продлевается; две фотографии размером 3х4 см матовые</p>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Календарный учебный график</span>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">График учебных занятий на 2026 г.</p>-->
+<!--                        <a href="/assets/grafik_obuchenija_na_2026_god_podp.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Численность учащихся по каждой реализуемой программе</span>-->
+<!--                        <p class="value">Количество обученных за 2025 год по программам начального профессионального образования - 166 чел. Обучение осуществлялось по договорам платных образовательных услуг за счет средств учащихся.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Количество обученных за 2025 год по программам повышения квалификации рабочих и служащих - 162 чел. Обучение осуществлялось по договорам платных образовательных услуг за счет средств учащихся.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">По программе дополнительного образования с учетом лиц, прошедших проверку знаний, обучено в 2025 году 76 человек. Все обучались по договорам платных образовательных услуг за счет своих средств.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Иностранные граждане в учреждении в 2025 году не обучались.</p>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">О результатах приема</span>-->
+<!--                        <p class="value">Все граждане, изъявившие желание обучаться в ЧУ ДПО ИМДС, приняты в число учащихся. Зачисление осуществляется на основании поступивших заявлений без вступительных испытаний.</p>-->
+<!--                    </div>-->
+
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">О трудоустройстве выпускников</span>-->
+<!--                        <p class="value">Все выпускники трудоустроены в охранные структуры Республики Коми.</p>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; ================= СТРАНИЦА 5: ОБРАЗОВАТЕЛЬНЫЕ СТАНДАРТЫ ================= &ndash;&gt;-->
+<!--            <div id="page-standards" class="info-page">-->
+<!--                <div class="info-grid" style="margin-top: 40px;">-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Образовательные стандарты</span>-->
+<!--                        <p class="value">Профессиональный стандарт – это характеристика квалификации, необходимой работнику для осуществления определенного вида профессиональной деятельности (ст. 195.1 Трудового кодекса Российской Федерации). Профессиональные стандарты должны применяться образовательными организациями профессионального образования при разработке профессиональных образовательных программ.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Профессиональный стандарт Работник по обеспечению охраны образовательных организаций</p>-->
+<!--                        <p class="value">(утв. приказом Министерства труда и социальной защиты РФ от 11 декабря 2015 г. N 1010н)</p>-->
+<!--                        <a href="/assets/ob_utverzhdenii_professionalnogo_standarta.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; ================= СТРАНИЦА 6: РУКОВОДСТВО. ПЕДАГОГИЧЕСКИЙ СОСТАВ ================= &ndash;&gt;-->
+<!--            <div id="page-staff" class="info-page">-->
+<!--                <div class="info-grid" style="margin-top: 40px;">-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Руководство. Педагогический состав</span>-->
+<!--                        <p class="value">Директор ЧУ ДПО ИМДС - Теплова Тамара Александровна (образование высшее педагогическое, высшее юридическое).</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Телефон: 8(922)2724450</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Адрес электронной почты: tomateplowa@yandex.ru</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">График работы:</p>-->
+<!--                        <p class="value">Понедельник - пятница с 9 час. 00 мин до 17 час. 00 мин</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Адрес электронной почты: tirkomi@yandex.ru</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Преподаватели ЧУ ДПО ИМДС</p>-->
+<!--                        <a href="/assets/kadry_na_nojabr_2023.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; ================= СТРАНИЦА 7: МАТЕРИАЛЬНО-ТЕХНИЧЕСКОЕ ОБЕСПЕЧЕНИЕ ================= &ndash;&gt;-->
+<!--            <div id="page-facilities" class="info-page">-->
+<!--                <div class="info-grid" style="margin-top: 40px;">-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Материально-техническое обеспечение образовательной деятельности</span>-->
+<!--                        <p class="value">Информация о наличии оборудованных учебных кабинетов, объектов для проведения практических занятий, средств обучения и воспитания</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Для успешной реализации программ повышения квалификации и профессиональной подготовки имеются аудитории более чем на 60 учебных мест, 5 компьютеризированных мест для обучения с использованием электронных программ, сдачи экзаменов и зачетов; стенды с образцами приборов охранно-пожарной сигнализации, средств пожаротушения, палки резиновые, изделия БР, бронежилеты, шлемы защитные, манекены человека в полный рост, модели пистолетов для учебных упражнений кобуры, плакаты по огневой подготовке (ПМ, АКС-74У, видам боеприпасов и мерам безопасности при стрельбах), плакаты и образцы средств доврачебной помощи (шины, жгуты, бинты, тампоны, средства обработки ран, и т.п.), пистолеты служебные огнестрельные, пневматические и травматического действия, ружья служебные, комплекты снаряжения для рукопашного боя (накладки на руки и голени, шлемы, перчатки), макеты ножей и пистолетов. Две галереи стрелкового тира на 8 направлений стрельбы с мишенными установками, наушниками, столиками для заряжения-разряжения, две оружейные комнаты, постоянно пополняемый запас боеприпасов. Офисные помещения оборудованы компьютерами, сканерами, принтерами.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Информация об условиях охраны здоровья</p>-->
+<!--                        <p class="value">Обеспечены условия противопожарной и антитеррористической защиты.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Информация о доступе к информационным системам и информационно-телекоммуникационным сетям</p>-->
+<!--                        <p class="value">Обеспечен доступ к сети Интернет (скорость 2,5 Мбит/сек).</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Информация об учебно-методическом обеспечении, электронных образовательных ресурсах</p>-->
+<!--                        <p class="value">Учебно-методическое и учебно-информационное обеспечение учреждения соответствует требованиям современных образовательных программ дополнительного профессионального образования.</p>-->
+
+<!--                        <div class="facility-images">-->
+<!--                            <img src="/assets/82521243.jpg" alt="Фото 1">-->
+<!--                            <img src="/assets/44605353.jpg" alt="Фото 2">-->
+<!--                            <img src="/assets/45646296.jpg" alt="Фото 3">-->
+<!--                            <img src="/assets/00974069.jpg" alt="Фото 4">-->
+<!--                            <img src="/assets/56025204.jpg" alt="Фото 5">-->
+<!--                            <img src="/assets/62107098.jpg" alt="Фото 6">-->
+<!--                            <img src="/assets/84287994.jpg" alt="Фото 7">-->
+<!--                            <img src="/assets/78665224.jpg" alt="Фото 8">-->
+<!--                            <img src="/assets/64042338.jpg" alt="Фото 9">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; ================= СТРАНИЦА 8: СТИПЕНДИИ ================= &ndash;&gt;-->
+<!--            <div id="page-scholarships" class="info-page">-->
+<!--                <div class="info-grid" style="margin-top: 40px;">-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Стипендии и иные виды материальной поддержки</span>-->
+<!--                        <p class="value">Стипендиальные выплаты и иные виды материальной поддержки учреждение не предоставляет.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+
+<!--        &lt;!&ndash; ================= СТРАНИЦА 9: ПЛАТНЫЕ ОБРАЗОВАТЕЛЬНЫЕ УСЛУГИ ================= &ndash;&gt;-->
+<!--        <div id="page-paid-services" class="info-page">-->
+<!--            <div class="container-limited" style="margin-top: 40px; max-width: 1000px; margin-left: auto; margin-right: auto;">-->
+<!--                <div class="info-grid" style="margin-top: 0;">-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Платные образовательные услуги</span>-->
+<!--                        <p class="value">Постановление Правительства Российской Федерации от 15 августа 2013 г. №706 "Об утверждении Правил оказания платных образовательных услуг" - <a href="http://www.rg.ru/printable/2013/08/23/uslugi-dok.html" target="_blank">перейти на сайт</a></p>-->
+
+<!--                        <div style="border-top: 1px solid var(&#45;&#45;line-soft); margin: 16px 0;"></div>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Образец договора об оказании платных образовательных услуг</p>-->
+<!--                        <a href="/assets/tipovoj.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+
+<!--                        <div style="border-top: 1px solid var(&#45;&#45;line-soft); margin: 16px 0;"></div>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Положение об оказании платных образовательных услуг</p>-->
+<!--                        <a href="/assets/polozhenie_o_platnykh_obrazovatelnykh_uslugakh.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+
+<!--                        <div style="border-top: 1px solid var(&#45;&#45;line-soft); margin: 16px 0;"></div>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Прайс лист на 2024 год</p>-->
+<!--                        <a href="/assets/prajs_2024.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+
+<!--                        <div style="border-top: 1px solid var(&#45;&#45;line-soft); margin: 16px 0;"></div>-->
+
+<!--                        <p class="value" style="margin-bottom: 4px;">Прайс лист на образовательные услуги в 2025 году</p>-->
+<!--                        <a href="/assets/prajs_2025.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; ================= СТРАНИЦА 10: ФИНАНСОВО-ХОЗЯЙСТВЕННАЯ ДЕЯТЕЛЬНОСТЬ ================= &ndash;&gt;-->
+<!--        <div id="page-finance" class="info-page">-->
+<!--            <div class="container-limited" style="margin-top: 40px; max-width: 1000px; margin-left: auto; margin-right: auto;">-->
+<!--                <div class="info-grid" style="margin-top: 0;">-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Финансово-хозяйственная деятельность</span>-->
+<!--                        <p class="value">Частное учреждение дополнительного профессионального образования «Институт международных связей и делового сотрудничества» оказывает платные образовательные услуги. Средства, получаемые за счет этой деятельности, являются базой для формирования финансовых и материальных ресурсов.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">В соответствии с действующим Уставом организация осуществляет хозяйственную деятельность самостоятельно. Имеющиеся доходы и финансовые средства распределяются согласно решениям учредителя в соответствии с уставными целями.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Обновление и усовершенствование материальной и технической базы осуществляются в пределах имеющихся в распоряжении организации средств с учетом официальной сметы, которая утверждается директором.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value" style="margin-bottom: 4px;">Акт самообследования</p>-->
+<!--                        <a href="/assets/akt_samoobsl_2023.pdf" target="_blank" class="pdf-link">Скачать</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; ================= СТРАНИЦА 11: ДОСТУПНАЯ СРЕДА ================= &ndash;&gt;-->
+<!--        <div id="page-accessible" class="info-page">-->
+<!--            <div class="container-limited" style="margin-top: 40px; max-width: 1000px; margin-left: auto; margin-right: auto;">-->
+<!--                <div class="info-grid" style="margin-top: 0;">-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Доступная среда</span>-->
+<!--                        <p class="value">Учебный центр расположен в отдельно стоящем 2-х этажном здании. В шаговой доступности остановки городского транспорта, магазины, аптека.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">На первом этаже есть все необходимое для обучения: класс, раздевалка, туалеты.</p>-->
+<!--                        <hr>-->
+<!--                        <p class="value">Помещения оснащены видеокамерами. Уголок потребителя расположен в месте, удобном для просмотра.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; ================= СТРАНИЦА 12: МЕЖДУНАРОДНОЕ СОТРУДНИЧЕСТВО ================= &ndash;&gt;-->
+<!--        <div id="page-international" class="info-page">-->
+<!--            <div class="container-limited" style="margin-top: 40px; max-width: 1000px; margin-left: auto; margin-right: auto;">-->
+<!--                <div class="info-grid" style="margin-top: 0;">-->
+<!--                    <div class="info-block">-->
+<!--                        <span class="label">Международное сотрудничество</span>-->
+<!--                        <p class="value">Международное сотрудничество не осуществляется.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--</main>-->
+
+<!--<script>-->
+<!--    (() => {-->
+<!--        'use strict';-->
+
+<!--        const burger = document.getElementById('burger');-->
+<!--        const navMobile = document.getElementById('navMobile');-->
+<!--        const submenu = document.getElementById('mobileSubmenu');-->
+<!--        const menuTitle = document.getElementById('mobileMainLink');-->
+<!--        const toggleIcon = menuTitle ? menuTitle.querySelector('.toggle-icon') : null;-->
+
+<!--        function closeMenu() {-->
+<!--            burger.classList.remove('is-open');-->
+<!--            navMobile.classList.remove('is-open');-->
+<!--            document.body.style.overflow = '';-->
+<!--            if (submenu) submenu.classList.remove('is-open');-->
+<!--            if (menuTitle) menuTitle.classList.remove('is-open');-->
+<!--            if (toggleIcon) toggleIcon.textContent = '▾';-->
+<!--        }-->
+
+<!--        burger.addEventListener('click', (e) => {-->
+<!--            e.stopPropagation();-->
+<!--            const open = burger.classList.toggle('is-open');-->
+<!--            navMobile.classList.toggle('is-open', open);-->
+<!--            document.body.style.overflow = open ? 'hidden' : '';-->
+<!--            if (!open) {-->
+<!--                if (submenu) submenu.classList.remove('is-open');-->
+<!--                if (menuTitle) menuTitle.classList.remove('is-open');-->
+<!--                if (toggleIcon) toggleIcon.textContent = '▾';-->
+<!--            }-->
+<!--        });-->
+
+<!--        navMobile.addEventListener('click', (e) => {-->
+<!--            if (e.target === navMobile) {-->
+<!--                closeMenu();-->
+<!--            }-->
+<!--        });-->
+
+<!--        if (menuTitle) {-->
+<!--            menuTitle.addEventListener('click', (e) => {-->
+<!--                const target = e.target.closest('.has-children') || e.target;-->
+<!--                if (e.target.classList.contains('toggle-icon')) {-->
+<!--                    e.preventDefault();-->
+<!--                    e.stopPropagation();-->
+<!--                    const isOpen = submenu.classList.toggle('is-open');-->
+<!--                    menuTitle.classList.toggle('is-open', isOpen);-->
+<!--                    toggleIcon.textContent = isOpen ? '▴' : '▾';-->
+<!--                    return;-->
+<!--                }-->
+<!--                window.location.href = '/basic_information';-->
+<!--            });-->
+<!--        }-->
+
+<!--        navMobile.querySelectorAll('a').forEach((a) => {-->
+<!--            a.addEventListener('click', (e) => {-->
+<!--                const href = a.getAttribute('href');-->
+
+<!--                if (href && href.startsWith('/basic_information')) {-->
+<!--                    closeMenu();-->
+<!--                    if (href.includes('#') && window.location.pathname === '/basic_information') {-->
+<!--                        e.preventDefault();-->
+<!--                        const targetId = href.split('#')[1];-->
+<!--                        const target = document.getElementById(targetId);-->
+<!--                        if (target) {-->
+<!--                            target.scrollIntoView({ behavior: 'smooth' });-->
+<!--                        }-->
+<!--                    }-->
+<!--                    return;-->
+<!--                }-->
+
+<!--                if (href && href.startsWith('#')) {-->
+<!--                    e.preventDefault();-->
+<!--                    closeMenu();-->
+<!--                    const targetId = href.replace('#', '');-->
+<!--                    const target = document.getElementById(targetId);-->
+<!--                    if (target) {-->
+<!--                        target.scrollIntoView({ behavior: 'smooth' });-->
+<!--                        const pageId = a.dataset.page;-->
+<!--                        if (pageId) switchPage(pageId);-->
+<!--                    }-->
+<!--                    return;-->
+<!--                }-->
+
+<!--                closeMenu();-->
+<!--            });-->
+<!--        });-->
+
+<!--        document.addEventListener('keydown', (e) => {-->
+<!--            if (e.key === 'Escape' && navMobile.classList.contains('is-open')) {-->
+<!--                closeMenu();-->
+<!--            }-->
+<!--        });-->
+
+<!--        const menuLinks = document.querySelectorAll('.dropdown-content a[data-page], .mobile-submenu a[data-page]');-->
+<!--        const pages = {-->
+<!--            'page-main': document.getElementById('page-main'),-->
+<!--            'page-structure': document.getElementById('page-structure'),-->
+<!--            'page-docs': document.getElementById('page-docs'),-->
+<!--            'page-education': document.getElementById('page-education'),-->
+<!--            'page-standards': document.getElementById('page-standards'),-->
+<!--            'page-staff': document.getElementById('page-staff'),-->
+<!--            'page-facilities': document.getElementById('page-facilities'),-->
+<!--            'page-scholarships': document.getElementById('page-scholarships'),-->
+<!--            'page-paid-services': document.getElementById('page-paid-services'),-->
+<!--            'page-finance': document.getElementById('page-finance'),-->
+<!--            'page-accessible': document.getElementById('page-accessible'),-->
+<!--            'page-international': document.getElementById('page-international')-->
+<!--        };-->
+<!--        const pageTitle = document.getElementById('pageTitle');-->
+
+<!--        const titles = {-->
+<!--            'page-main': 'Основные сведения',-->
+<!--            'page-structure': 'Структура и органы управления',-->
+<!--            'page-docs': 'Документы',-->
+<!--            'page-education': 'Образование',-->
+<!--            'page-standards': 'Образовательные стандарты',-->
+<!--            'page-staff': 'Руководство. Педагогический состав',-->
+<!--            'page-facilities': 'Материально-техническое обеспечение',-->
+<!--            'page-scholarships': 'Стипендии и иные виды материальной поддержки',-->
+<!--            'page-paid-services': 'Платные образовательные услуги',-->
+<!--            'page-finance': 'Финансово-хозяйственная деятельность',-->
+<!--            'page-accessible': 'Доступная среда',-->
+<!--            'page-international': 'Международное сотрудничество'-->
+<!--        };-->
+
+<!--        function switchPage(pageId) {-->
+<!--            if (!pageId || !pages[pageId]) return;-->
+
+<!--            Object.values(pages).forEach(p => {-->
+<!--                if (p) p.classList.remove('is-active');-->
+<!--            });-->
+<!--            if (pages[pageId]) pages[pageId].classList.add('is-active');-->
+
+<!--            if (titles[pageId]) pageTitle.textContent = titles[pageId];-->
+
+<!--            document.querySelectorAll('.dropdown-content a, .mobile-submenu a').forEach(l => {-->
+<!--                l.classList.toggle('is-current', l.dataset.page === pageId);-->
+<!--            });-->
+
+<!--            if (history.pushState) {-->
+<!--                history.pushState(null, '', '#' + pageId);-->
+<!--            }-->
+<!--        }-->
+
+<!--        menuLinks.forEach(link => {-->
+<!--            link.addEventListener('click', (e) => {-->
+<!--                e.preventDefault();-->
+<!--                const pageId = link.dataset.page;-->
+<!--                if (pageId) {-->
+<!--                    switchPage(pageId);-->
+<!--                    if (navMobile.classList.contains('is-open')) {-->
+<!--                        closeMenu();-->
+<!--                    }-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+
+<!--        function restoreFromHash() {-->
+<!--            const hash = window.location.hash.replace('#', '');-->
+<!--            if (hash && pages[hash]) {-->
+<!--                switchPage(hash);-->
+<!--            } else {-->
+<!--                switchPage('page-main');-->
+<!--            }-->
+<!--        }-->
+
+<!--        window.addEventListener('popstate', restoreFromHash);-->
+<!--        restoreFromHash();-->
+
+<!--        const header = document.getElementById('siteHeader');-->
+<!--        const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 40);-->
+<!--        onScroll();-->
+<!--        window.addEventListener('scroll', onScroll, { passive: true });-->
+
+<!--    })();-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->

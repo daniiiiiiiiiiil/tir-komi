@@ -32,13 +32,13 @@ func (r *UpdatePostRequest) Validate() error {
 	}
 
 	if r.Pdf.Set && r.Pdf.Value != nil {
-		if len(*r.Pdf.Value) > 50*1024*1024 { // 50 MB
+		if len(*r.Pdf.Value) > 100*1024*1024 { // 50 MB
 			return fmt.Errorf("pdf size must not exceed 50 MB")
 		}
 	}
 
 	if r.Image.Set && r.Image.Value != nil {
-		if len(*r.Image.Value) > 10*1024*1024 { // 10 MB
+		if len(*r.Image.Value) > 100*1024*1024 { // 10 MB
 			return fmt.Errorf("image size must not exceed 10 MB")
 		}
 	}
