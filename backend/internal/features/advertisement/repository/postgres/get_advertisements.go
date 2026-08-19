@@ -25,7 +25,7 @@ func (r *AdvertisementRepository) GetAdvertisements(ctx context.Context, limit, 
 	}
 
 	query := `
-        SELECT id, title, description, url, created_at
+        SELECT id, title, description, image, pdf, url, created_at  
         FROM advertisement
         ORDER BY created_at DESC
         LIMIT $1 OFFSET $2
@@ -44,6 +44,8 @@ func (r *AdvertisementRepository) GetAdvertisements(ctx context.Context, limit, 
 			&model.ID,
 			&model.Title,
 			&model.Description,
+			&model.Image,
+			&model.Pdf,
 			&model.Url,
 			&model.CreatedAt,
 		)
